@@ -1,0 +1,33 @@
+HORARIOS DE IVÁN — PWA INSTALABLE V1.3.5
+
+Este paquete contiene una PWA lista para publicar en GitHub Pages.
+Conserva exactamente el diseño y los horarios fijos de V1.3.5.
+
+ARCHIVOS OBLIGATORIOS: index.html, manifest.webmanifest,
+service-worker.js, icon-192.png, icon-512.png, apple-touch-icon.png,
+qr-horario.png, version.json.
+
+PUBLICAR EN GITHUB PAGES:
+1. Extraer el ZIP.
+2. Subir LOS ARCHIVOS (no el ZIP) al nivel raíz del repositorio.
+3. GitHub → Settings → Pages → Build and deployment → Deploy from a branch.
+4. Elegir main y / (root), luego Save.
+5. Abrir la URL HTTPS de GitHub Pages en Chrome o Safari.
+   La dirección suele ser https://USUARIO.github.io/REPOSITORIO/
+
+INSTALAR EN ANDROID:
+Abrir la URL en Chrome → menú de tres puntos → Instalar aplicación
+(o Agregar a pantalla principal, según navegador).
+
+INSTALAR EN IPHONE:
+Abrir la URL en Safari → Compartir → Añadir a pantalla de inicio → Añadir.
+
+IMPORTANTE:
+- Un archivo HTML abierto desde Descargas NO se instala como PWA:
+  hay que publicarlo en HTTPS.
+- Después de una primera visita en línea, se guarda la app para
+  utilizarla sin conexión.
+- El QR para compartir enlaces funciona una vez publicada con URL HTTPS;
+  puede requerir Internet para generar el QR del enlace.
+- Mantener el mismo enlace de GitHub Pages en futuras actualizaciones.
+- La app no permite editar los horarios.

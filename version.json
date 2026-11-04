@@ -1,0 +1,6 @@
+{
+  "app": "Horarios de Iván",
+  "version": "1.3.5",
+  "released": "2026-11-04",
+  "notes": "Jueves y Viernes centran automáticamente su tarjeta al desplegarse; mantiene el scroll natural sin recortes, cinco tarjetas horizontales, horarios fijos, 3 temas, WhatsApp y QR."
+}

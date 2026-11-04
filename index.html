@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071020">
+<meta name="description" content="Horario fijo de materias y recreos de Iván, de lunes a viernes.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Horarios Iván">
+<link rel="icon" type="image/png" href="./icon-192.png">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<link rel="manifest" href="./manifest.webmanifest">
+<title>Horarios de Iván</title>
+<style>
+:root{color-scheme:dark;--bg:#0b101c;--surface:#171d2a;--surface-alt:#1e2636;--border:#313b4e;--text:#f7f9fd;--muted:#acb9cc;--accent:#78b6ff;--shade:#27354b;--shadow:0 6px 22px #0003}
+body.theme-blue{color-scheme:dark;--bg:#071122;--surface:#111f38;--surface-alt:#172b4a;--border:#30486b;--text:#f7faff;--muted:#abc1de;--accent:#78c5ff;--shade:#203b61;--shadow:0 6px 22px #0003}
+body.theme-light{color-scheme:light;--bg:#f0f4fb;--surface:#fff;--surface-alt:#f0f5fd;--border:#d5e0ef;--text:#192943;--muted:#627792;--accent:#116cb3;--shade:#e1edfc;--shadow:0 6px 18px #15325912}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;overscroll-behavior:none}body{height:100dvh;overflow:hidden;background:var(--bg);color:var(--text);font:14px/1.3 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}[hidden]{display:none!important}
+.app{height:100%;max-width:700px;margin:0 auto;padding:max(9px,env(safe-area-inset-top)) 12px max(9px,env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:9px;min-height:0}
+.header{flex:0 0 auto;display:flex;gap:10px;align-items:center;min-height:54px}.mark{width:43px;height:43px;display:grid;place-items:center;flex-shrink:0;border-radius:13px;background:linear-gradient(135deg,#4788f9,#8670ef);font-size:22px}.header-text{min-width:0;flex:1}.header h1{font-size:19px;letter-spacing:-.035em;margin:0;line-height:1.12}.header p{font-size:11px;color:var(--muted);margin:4px 0 0}.actions{flex-shrink:0;display:flex;gap:7px}.square{width:44px;height:44px;border-radius:13px;background:var(--surface);border:1px solid var(--border);color:var(--text);display:grid;place-items:center;font-size:21px;box-shadow:var(--shadow)}
+.hint{color:var(--muted);font-size:11px;font-weight:650;display:flex;justify-content:space-between;align-items:center;gap:8px;flex:0 0 auto;padding:0 3px}.hint em{font-style:normal;font-weight:800;color:var(--accent)}
+.week{flex:1;min-height:0;display:flex;flex-direction:column;gap:8px;--closed-h:clamp(48px,9.4dvh,74px)}
+.day{flex:1 1 0;min-height:0;display:flex;flex-direction:column;overflow:hidden;background:var(--surface);border:1px solid var(--border);border-radius:17px;box-shadow:var(--shadow)}
+.day-button{list-style:none;width:100%;height:100%;min-height:0;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;padding:9px 14px;background:transparent;border:0;color:var(--text)}.day-button::-webkit-details-marker{display:none}.day-button::marker{content:""}.day-title{font-size:clamp(17px,4.4vw,21px);font-weight:850;letter-spacing:-.035em}.day-desc{font-size:11px;color:var(--muted);margin-top:2px;font-variant-numeric:tabular-nums}.day-meta{display:flex;align-items:center;gap:8px;flex-shrink:0}.day-pill{background:var(--shade);color:var(--accent);border-radius:20px;padding:6px 9px;font-weight:850;font-size:10px}.chevron{font-size:23px;color:var(--muted);width:12px;display:inline-flex;align-items:center;justify-content:center;transition:transform .18s ease}
+.day.today{border-color:var(--accent)}.day[open]{border-color:var(--accent);box-shadow:0 0 0 1px color-mix(in srgb,var(--accent),transparent 50%),var(--shadow)}
+.week.expanded .day:not([open]){flex:0 0 var(--closed-h)}.week.expanded .day[open]{flex:1 1 auto}.week.expanded .day .day-button{height:var(--closed-h)}.week .day[open] .day-button{height:var(--closed-h)}.week.expanded .day[open] .chevron{transform:rotate(90deg)}
+.detail{height:calc(100% - var(--closed-h));min-height:0;overflow-y:auto;overscroll-behavior:contain;border-top:1px solid var(--border);padding:7px 9px 10px;scrollbar-width:thin;scrollbar-color:var(--border) transparent}.lesson{display:grid;grid-template-columns:66px 4px minmax(0,1fr);align-items:center;gap:9px;min-height:46px;padding:6px 9px;border-radius:11px;background:var(--surface-alt);margin-bottom:5px}.lesson .hours{font-size:11px;line-height:1.38;color:var(--accent);font-weight:800;font-variant-numeric:tabular-nums}.lesson .bar{align-self:stretch;border-radius:7px;background:var(--materia)}.lesson .info{min-width:0}.lesson strong{display:block;font-size:12.5px;line-height:1.2;overflow-wrap:anywhere}.lesson small{color:var(--muted);font-size:10px}.recreo{text-align:center;font-size:11px;color:var(--muted);font-weight:750;padding:6px 4px;margin:1px 0 6px;border-top:1px dashed var(--border);border-bottom:1px dashed var(--border)}
+.overlay{position:fixed;inset:0;background:#020712b3;z-index:8;display:flex;justify-content:center;align-items:flex-end;padding:12px max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom))}.share-panel{width:min(100%,520px);max-height:90dvh;overflow:auto;border-radius:20px;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:17px;box-shadow:0 26px 75px #0008}.share-head{display:flex;justify-content:space-between;gap:8px}.share-head h2{font-size:18px;line-height:1.2;margin:0 0 5px}.share-head p{font-size:12px;color:var(--muted);margin:0 0 12px}.close{width:38px;height:38px;border-radius:11px;border:1px solid var(--border);background:var(--surface-alt);color:var(--text);font-size:20px}.share-buttons{display:flex;gap:9px;margin-bottom:13px}.share-action{display:grid;place-items:center;flex:1;min-height:44px;padding:9px;border:1px solid var(--border);border-radius:12px;text-decoration:none;color:var(--text);font-weight:800;background:var(--surface-alt)}.share-action.whatsapp{background:#167b48;color:#fff;border-color:#18834d}.qr-frame{background:#fff;border-radius:15px;padding:12px;display:grid;place-items:center;width:fit-content;margin:auto}.qr-frame img{display:block;max-width:calc(100vw - 95px);width:min(225px,54dvh);aspect-ratio:1;object-fit:contain}.qr-note{text-align:center;color:var(--muted);font-size:12px;margin:11px 0 0}
+@media(max-height:600px){.app{gap:6px;padding-top:max(6px,env(safe-area-inset-top));padding-bottom:max(6px,env(safe-area-inset-bottom))}.header{min-height:45px}.mark,.square{width:40px;height:40px}.header h1{font-size:17px}.header p{font-size:10px}.hint{font-size:10px}.week{gap:5px;--closed-h:clamp(43px,9.4dvh,59px)}.day-button{padding:5px 12px}.day-button::-webkit-details-marker{display:none}.day-button::marker{content:""}.day-title{font-size:17px}.day-desc{font-size:10px}.day-pill{font-size:9px;padding:4px 7px}.lesson{min-height:39px;padding:5px 7px}.recreo{padding:4px}}
+@media(max-width:350px){.app{padding-left:9px;padding-right:9px}.header{gap:7px}.header h1{font-size:17px}.header p{font-size:10px}.actions{gap:5px}.square{width:39px;height:39px}.mark{width:39px;height:39px}.day-button{padding-left:10px;padding-right:10px}.day-meta{gap:6px}.day-pill{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.chevron{transition:none}}
+
+/* V1.3.3: cinco tarjetas apiladas con altura natural.
+   La página completa se desplaza cuando se abre un día;
+   el contenido del día no tiene límite de alto ni recortes. */
+html, body{min-height:100%;height:auto;overscroll-behavior-y:auto}
+body{height:auto;min-height:100vh;min-height:100dvh;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.app{height:auto;min-height:100vh;min-height:100dvh}
+.week{flex:none;min-height:auto;--closed-h:62px}
+.day,.week.expanded .day:not([open]),.week.expanded .day[open]{flex:none;min-height:0;overflow:visible}
+.day-button,.week.expanded .day .day-button,.week .day[open] .day-button{height:auto;min-height:62px}
+.day[open] .detail{height:auto;max-height:none;overflow:visible;overscroll-behavior:auto}
+@media(max-height:600px){
+ .week{--closed-h:54px}
+ .day-button,.week.expanded .day .day-button,.week .day[open] .day-button{min-height:54px}
+}
+
+/* V1.3.5: las cinco tarjetas cerradas reparten todo el alto disponible.
+   Si se abre una tarjeta, su contenido crece libremente y vuelve el scroll de la página. */
+.app{height:100dvh;min-height:100dvh}
+.week{flex:1 1 auto;min-height:0}
+.week .day{flex:1 1 0;min-height:54px}
+.week .day-button{height:100%;min-height:0}
+.app.has-open,.app:has(.day[open]){height:auto;min-height:100dvh}
+.week.expanded,.week:has(.day[open]){flex:0 0 auto;min-height:auto}
+.week.expanded .day,.week:has(.day[open]) .day{flex:none;min-height:0}
+.week.expanded .day .day-button,.week:has(.day[open]) .day .day-button{height:auto;min-height:62px}
+.week.expanded .day[open] .detail,.week:has(.day[open]) .day[open] .detail{height:auto;max-height:none;overflow:visible}
+/* En teléfonos de alto bajo, conservar la legibilidad sin ocultar contenido. */
+@media(max-height:600px){
+ .week .day{min-height:49px}
+ .week.expanded .day .day-button,.week:has(.day[open]) .day .day-button{min-height:54px}
+}
+</style>
+</head>
+<body class="theme-blue">
+<div class="app">
+ <header class="header">
+  <div class="mark" aria-hidden="true">📚</div>
+  <div class="header-text"><h1>Horarios de Iván</h1><p>3.º año · lunes a viernes</p></div>
+  <div class="actions">
+   <button id="shareBtn" class="square" type="button" aria-label="Compartir por WhatsApp o código QR" title="Compartir">↗</button>
+   <button id="themeBtn" class="square" type="button" aria-label="Cambiar tema" title="Cambiar tema">💙</button>
+  </div>
+ </header>
+ <div class="hint"><span>Tocá un día y deslizá para ver todas las materias</span><em>Horario fijo</em></div>
+ <section id="week" class="week" aria-label="Horario de lunes a viernes">
+<details class="day" id="day-0"><summary class="day-button" aria-label="Ver las materias del Lunes"><div><div class="day-title">Lunes</div><div class="day-desc">12:50 a 18:20</div></div><div class="day-meta"><span class="day-pill">5 clases</span><span class="chevron" aria-hidden="true">›</span></div></summary><div class="detail"><div class="lesson" style="--materia:#649eea"><div class="hours">12:50<br>13:50</div><div class="bar"></div><div class="info"><strong>Educación Física</strong><small>1.ª hora</small></div></div><div class="lesson" style="--materia:#ef5454"><div class="hours">13:50<br>14:50</div><div class="bar"></div><div class="info"><strong>Construcción de la Ciudadanía</strong><small>2.ª hora</small></div></div><div class="recreo">Recreo · 14:50 a 15:05</div><div class="lesson" style="--materia:#f7e058"><div class="hours">15:05<br>16:05</div><div class="bar"></div><div class="info"><strong>Inglés</strong><small>3.ª hora</small></div></div><div class="recreo">Recreo · 16:05 a 16:20</div><div class="lesson" style="--materia:#33d65a"><div class="hours">16:20<br>17:20</div><div class="bar"></div><div class="info"><strong>Historia</strong><small>4.ª hora</small></div></div><div class="lesson" style="--materia:#33d65a"><div class="hours">17:20<br>18:20</div><div class="bar"></div><div class="info"><strong>Historia</strong><small>5.ª hora</small></div></div></div></details>
+<details class="day" id="day-1"><summary class="day-button" aria-label="Ver las materias del Martes"><div><div class="day-title">Martes</div><div class="day-desc">11:30 a 18:20</div></div><div class="day-meta"><span class="day-pill">6 clases</span><span class="chevron" aria-hidden="true">›</span></div></summary><div class="detail"><div class="lesson" style="--materia:#efa642"><div class="hours">11:30<br>12:30</div><div class="bar"></div><div class="info"><strong>Matemática</strong><small>Prehora</small></div></div><div class="lesson" style="--materia:#44b8ae"><div class="hours">12:50<br>13:50</div><div class="bar"></div><div class="info"><strong>Físico Química</strong><small>1.ª hora</small></div></div><div class="lesson" style="--materia:#22d4d9"><div class="hours">13:50<br>14:50</div><div class="bar"></div><div class="info"><strong>Biología</strong><small>2.ª hora</small></div></div><div class="recreo">Recreo · 14:50 a 15:05</div><div class="lesson" style="--materia:#efa642"><div class="hours">15:05<br>16:05</div><div class="bar"></div><div class="info"><strong>Matemática</strong><small>3.ª hora</small></div></div><div class="recreo">Recreo · 16:05 a 16:20</div><div class="lesson" style="--materia:#f7e058"><div class="hours">16:20<br>17:20</div><div class="bar"></div><div class="info"><strong>Inglés</strong><small>4.ª hora</small></div></div><div class="lesson" style="--materia:#f7e058"><div class="hours">17:20<br>18:20</div><div class="bar"></div><div class="info"><strong>Inglés</strong><small>5.ª hora</small></div></div></div></details>
+<details class="day" id="day-2"><summary class="day-button" aria-label="Ver las materias del Miércoles"><div><div class="day-title">Miércoles</div><div class="day-desc">12:50 a 18:20</div></div><div class="day-meta"><span class="day-pill">5 clases</span><span class="chevron" aria-hidden="true">›</span></div></summary><div class="detail"><div class="lesson" style="--materia:#9ccdab"><div class="hours">12:50<br>13:50</div><div class="bar"></div><div class="info"><strong>Geografía</strong><small>1.ª hora</small></div></div><div class="lesson" style="--materia:#efa642"><div class="hours">13:50<br>14:50</div><div class="bar"></div><div class="info"><strong>Matemática</strong><small>2.ª hora</small></div></div><div class="recreo">Recreo · 14:50 a 15:05</div><div class="lesson" style="--materia:#649eea"><div class="hours">15:05<br>16:05</div><div class="bar"></div><div class="info"><strong>Educación Física</strong><small>3.ª hora</small></div></div><div class="recreo">Recreo · 16:05 a 16:20</div><div class="lesson" style="--materia:#44b8ae"><div class="hours">16:20<br>17:20</div><div class="bar"></div><div class="info"><strong>Físico Química</strong><small>4.ª hora</small></div></div><div class="lesson" style="--materia:#d76be8"><div class="hours">17:20<br>18:20</div><div class="bar"></div><div class="info"><strong>Prácticas del Lenguaje</strong><small>5.ª hora</small></div></div></div></details>
+<details class="day" id="day-3"><summary class="day-button" aria-label="Ver las materias del Jueves"><div><div class="day-title">Jueves</div><div class="day-desc">12:50 a 18:20</div></div><div class="day-meta"><span class="day-pill">5 clases</span><span class="chevron" aria-hidden="true">›</span></div></summary><div class="detail"><div class="lesson" style="--materia:#e18d7e"><div class="hours">12:50<br>13:50</div><div class="bar"></div><div class="info"><strong>Educación Artística</strong><small>1.ª hora</small></div></div><div class="lesson" style="--materia:#e18d7e"><div class="hours">13:50<br>14:50</div><div class="bar"></div><div class="info"><strong>Educación Artística</strong><small>2.ª hora</small></div></div><div class="recreo">Recreo · 14:50 a 15:05</div><div class="lesson" style="--materia:#9ccdab"><div class="hours">15:05<br>16:05</div><div class="bar"></div><div class="info"><strong>Geografía</strong><small>3.ª hora</small></div></div><div class="recreo">Recreo · 16:05 a 16:20</div><div class="lesson" style="--materia:#d76be8"><div class="hours">16:20<br>17:20</div><div class="bar"></div><div class="info"><strong>Prácticas del Lenguaje</strong><small>4.ª hora</small></div></div><div class="lesson" style="--materia:#41d5cc"><div class="hours">17:20<br>18:20</div><div class="bar"></div><div class="info"><strong>Robótica</strong><small>5.ª hora</small></div></div></div></details>
+<details class="day" id="day-4"><summary class="day-button" aria-label="Ver las materias del Viernes"><div><div class="day-title">Viernes</div><div class="day-desc">12:50 a 18:20</div></div><div class="day-meta"><span class="day-pill">5 clases</span><span class="chevron" aria-hidden="true">›</span></div></summary><div class="detail"><div class="lesson" style="--materia:#d76be8"><div class="hours">12:50<br>13:50</div><div class="bar"></div><div class="info"><strong>Prácticas del Lenguaje</strong><small>1.ª hora</small></div></div><div class="lesson" style="--materia:#d76be8"><div class="hours">13:50<br>14:50</div><div class="bar"></div><div class="info"><strong>Prácticas del Lenguaje</strong><small>2.ª hora</small></div></div><div class="recreo">Recreo · 14:50 a 15:05</div><div class="lesson" style="--materia:#22d4d9"><div class="hours">15:05<br>16:05</div><div class="bar"></div><div class="info"><strong>Biología</strong><small>3.ª hora</small></div></div><div class="recreo">Recreo · 16:05 a 16:20</div><div class="lesson" style="--materia:#ef5454"><div class="hours">16:20<br>17:20</div><div class="bar"></div><div class="info"><strong>Construcción de la Ciudadanía</strong><small>4.ª hora</small></div></div><div class="lesson" style="--materia:#efa642"><div class="hours">17:20<br>18:20</div><div class="bar"></div><div class="info"><strong>Matemática</strong><small>5.ª hora</small></div></div></div></details>
+</section>
+</div>
+<div id="shareOverlay" class="overlay" hidden>
+ <section class="share-panel" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
+  <div class="share-head"><div><h2 id="shareTitle">Compartir horarios</h2><p>WhatsApp o código QR para escanear.</p></div><button id="closeShare" class="close" type="button" aria-label="Cerrar">×</button></div>
+  <div class="share-buttons"><a id="waBtn" class="share-action whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a><button id="nativeShare" class="share-action" type="button">Compartir</button></div>
+  <div class="qr-frame"><img id="qrImage" src="data:image/png;base64,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" alt="Código QR para escanear" width="225" height="225"></div>
+  <p id="qrNote" class="qr-note"></p>
+ </section>
+</div>
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+const week=$('week');
+const app=document.querySelector('.app');
+const cards=[...document.querySelectorAll('.week > .day')];
+const themes=['theme-blue','theme-light','theme-dark'];
+const emojis={'theme-blue':'💙','theme-light':'☀️','theme-dark':'🌙'};
+const themeNames={'theme-blue':'Dark Blue','theme-light':'Claro','theme-dark':'Dark'};
+let theme='theme-blue';
+try{const stored=localStorage.getItem('ivan-horarios-theme-v130');if(themes.includes(stored))theme=stored;}catch(_){}
+function applyTheme(){
+ document.body.className=theme;
+ $('themeBtn').textContent=emojis[theme];
+ $('themeBtn').setAttribute('aria-label','Tema '+themeNames[theme]+'. Cambiar tema');
+ document.querySelector('meta[name="theme-color"]').content=theme==='theme-light'?'#f0f4fb':theme==='theme-blue'?'#071122':'#0b101c';
+ try{localStorage.setItem('ivan-horarios-theme-v130',theme);}catch(_){}
+}
+let changeInProgress=false;
+// V1.3.5: al abrir Jueves o Viernes, desplazar automáticamente la página
+// hasta dejar centrada la tarjeta expandida. Si es más alta que la pantalla,
+// el navegador permite seguir desplazándose para leer el contenido completo.
+let recenterToken=0;
+function autoCenterLateWeek(card){
+ const token=++recenterToken;
+ requestAnimationFrame(()=>requestAnimationFrame(()=>{
+  if(token!==recenterToken || !card.open || $('shareOverlay').hidden===false)return;
+  const rect=card.getBoundingClientRect();
+  const viewport=window.visualViewport?.height || window.innerHeight;
+  const scrollMax=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
+  const centerY=window.scrollY+rect.top+(rect.height-viewport)/2;
+  const target=Math.min(scrollMax,Math.max(0,centerY));
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({top:target,behavior:reduce?'instant':'smooth'});
+ }));
+}
+function updateOpen(clicked){
+ if(changeInProgress)return;
+ changeInProgress=true;
+ if(clicked && clicked.open){for(const other of cards){if(other!==clicked)other.open=false;}}
+ const isOpen=cards.some(c=>c.open);
+ week.classList.toggle('expanded',isOpen);
+ app.classList.toggle('has-open',isOpen);
+ changeInProgress=false;
+ if(clicked && clicked.open && (clicked.id==='day-3'||clicked.id==='day-4')){
+  autoCenterLateWeek(clicked);
+ }else if(!isOpen){
+  recenterToken++;
+ }
+}
+for(const card of cards){
+ const summary=card.querySelector('summary');
+ // Cierre inmediato antes de abrir otra tarjeta (el evento toggle puede llegar más tarde).
+ summary.addEventListener('click',()=>{if(!card.open){for(const other of cards){if(other!==card)other.open=false;}}});
+ card.addEventListener('toggle',()=>updateOpen(card));
+}
+const now=new Date().getDay();
+if(now>=1&&now<=5){cards[now-1].classList.add('today');cards[now-1].querySelector('.day-pill').textContent='HOY';}
+function publishedUrl(){
+ try{const u=new URL(location.href);if(!['https:','http:'].includes(u.protocol)||['localhost','127.0.0.1'].includes(u.hostname))return '';u.search='';u.hash='';return u.href;}catch(_){return '';}
+}
+const S=[
+ ['Lunes', [['12:50','Educación Física'],['13:50','Construcción de la Ciudadanía'],['15:05','Inglés'],['16:20','Historia'],['17:20','Historia']]],
+ ['Martes', [['11:30','Matemática'],['12:50','Físico Química'],['13:50','Biología'],['15:05','Matemática'],['16:20','Inglés'],['17:20','Inglés']]],
+ ['Miércoles', [['12:50','Geografía'],['13:50','Matemática'],['15:05','Educación Física'],['16:20','Físico Química'],['17:20','Prácticas del Lenguaje']]],
+ ['Jueves', [['12:50','Educación Artística'],['13:50','Educación Artística'],['15:05','Geografía'],['16:20','Prácticas del Lenguaje'],['17:20','Robótica']]],
+ ['Viernes', [['12:50','Prácticas del Lenguaje'],['13:50','Prácticas del Lenguaje'],['15:05','Biología'],['16:20','Construcción de la Ciudadanía'],['17:20','Matemática']]]
+];
+function scheduleText(){return '📚 Horarios de Iván (3.º año)\n'+S.map(d=>d[0]+': '+d[1].map(c=>c[0]+' '+c[1]).join(' / ')).join('\n')+'\nRecreos: 14:50 a 15:05 y 16:05 a 16:20.';}
+function shareText(){const url=publishedUrl();return url?'📚 Horarios escolares de Iván:\n'+url:scheduleText();}
+const inlineQR=$('qrImage').src;
+function openShare(){
+ const url=publishedUrl();
+ $('waBtn').href='https://wa.me/?text='+encodeURIComponent(shareText());
+ const qr=$('qrImage');
+ qr.onerror=()=>{qr.onerror=null;qr.src=inlineQR;$('qrNote').textContent='Sin conexión para generar el QR del enlace. Se muestra el resumen offline.';};
+ if(url){qr.src='https://api.qrserver.com/v1/create-qr-code/?size=350x350&data='+encodeURIComponent(url);$('qrNote').textContent='Escaneá el QR para abrir la app publicada.';}
+ else{qr.onerror=null;qr.src=inlineQR;$('qrNote').textContent='Archivo local: este QR contiene un resumen de horarios. Al publicarla, compartirá el enlace.';}
+ $('shareOverlay').hidden=false;
+ $('closeShare').focus();
+}
+function closeShare(){$('shareOverlay').hidden=true;$('shareBtn').focus();}
+$('themeBtn').addEventListener('click',()=>{theme=themes[(themes.indexOf(theme)+1)%themes.length];applyTheme();});
+$('shareBtn').addEventListener('click',openShare);
+$('closeShare').addEventListener('click',closeShare);
+$('shareOverlay').addEventListener('click',e=>{if(e.target===$('shareOverlay'))closeShare();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('shareOverlay').hidden)closeShare();});
+$('nativeShare').addEventListener('click',async()=>{
+ if(navigator.share){try{await navigator.share({title:'Horarios de Iván',text:shareText()});}catch(_){}}
+ else{window.open($('waBtn').href,'_blank','noopener');}
+});
+applyTheme();
+if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));}
+})();
+</script>
+</body>
+</html>
