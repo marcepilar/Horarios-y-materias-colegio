@@ -14,3 +14,4 @@ PARA CAMBIAR EL NOMBRE EN EL FUTURO:
 - Conviene cambiar también app en version.json y descripción / metadatos.
 - Subir la nueva versión de service-worker.js con CACHE_NAME actualizado para forzar la actualización.
 La app instalada puede tardar en mostrar el nuevo nombre en el icono; en algunos móviles requiere reinstalarla.
+Publicación inicial de Horario Escolar.
