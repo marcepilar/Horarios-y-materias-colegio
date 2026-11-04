@@ -1,8 +1,8 @@
 {
   "id": "./index.html",
-  "name": "Horarios de Iván",
-  "short_name": "Horarios Iván",
-  "description": "Horario escolar fijo de materias y recreos de lunes a viernes.",
+  "name": "Horario Escolar",
+  "short_name": "Horario Escolar",
+  "description": "Materias, horarios y recreos fijos de lunes a viernes.",
   "lang": "es-AR",
   "start_url": "./index.html",
   "scope": "./",
