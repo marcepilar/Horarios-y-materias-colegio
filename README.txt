@@ -1,17 +1,19 @@
-HORARIO ESCOLAR — PWA V1.3.6
+HORARIO ESCOLAR — PWA V1.3.7
 
-Nombre neutro: "Horario Escolar" (sin nombre de persona). Las materias y horarios siguen fijos según el horario original.
-Conserva 5 tarjetas de lunes a viernes, scroll de detalles sin recortes, centrado automático Jueves/Viernes,
-3 temas, WhatsApp y QR. Actualización de V1.3.5: solo cambia nombre/metadatos y QR offline, no el horario.
+Cambios:
+- Botón Compartir con ícono de tres puntos horizontales.
+- Botón ? de Ayuda con versión V1.3.7, uso, instalación Android/iPhone, actualizaciones y seguridad.
+- Se conservan el horario fijo, las cinco tarjetas, los tres temas y el compartir por WhatsApp y QR.
 
-INSTALACIÓN: subir TODOS los archivos descomprimidos del ZIP a la raíz del mismo repositorio GitHub Pages.
-Reemplazar archivos del mismo nombre. No subir el ZIP directamente.
-Mantener la misma URL GitHub Pages conserva la instalación actual; puede requerir cerrar y reabrir.
+PARA PUBLICAR:
+1. Extraé el ZIP.
+2. Subí los archivos directamente a la raíz del repositorio GitHub Pages.
+3. Reemplazá los existentes con el mismo nombre (no crees un repositorio nuevo).
+4. Es importante subir index.html, manifest.webmanifest, service-worker.js, version.json y los PNG.
+5. Abrí o recargá el enlace publicado (HTTPS).
 
-PARA CAMBIAR EL NOMBRE EN EL FUTURO:
-- En index.html cambiar el texto del <h1>, <title>, apple-mobile-web-app-title, y los textos de compartir.
-- En manifest.webmanifest cambiar name y short_name.
-- Conviene cambiar también app en version.json y descripción / metadatos.
-- Subir la nueva versión de service-worker.js con CACHE_NAME actualizado para forzar la actualización.
-La app instalada puede tardar en mostrar el nuevo nombre en el icono; en algunos móviles requiere reinstalarla.
-Publicación inicial de Horario Escolar.
+PARA INSTALAR:
+Android: Chrome > ⋮ > Instalar aplicación (o Agregar a pantalla principal).
+iPhone: Safari > Compartir > Añadir a pantalla de inicio > Abrir como app web > Añadir.
+
+Si la actualización no aparece de inmediato, cerrá y volvé a abrir la PWA estando conectado a Internet.

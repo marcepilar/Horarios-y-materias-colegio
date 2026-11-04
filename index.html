@@ -62,6 +62,24 @@ body{height:auto;min-height:100vh;min-height:100dvh;overflow-x:hidden;overflow-y
  .week .day{min-height:49px}
  .week.expanded .day .day-button,.week:has(.day[open]) .day .day-button{min-height:54px}
 }
+
+/* V1.3.7: acceso a ayuda, ícono Compartir de tres puntos y tres controles adaptativos. */
+.help-btn{font-size:22px;font-weight:900;letter-spacing:-.03em}
+.more-btn svg{display:block;pointer-events:none}
+.help-panel{max-height:min(90dvh,820px);overflow-y:auto;overscroll-behavior:contain}
+.help-version{font-size:11px;color:var(--accent);font-weight:850;letter-spacing:.02em;margin:4px 0 12px}
+.help-lead{font-size:12px;color:var(--muted);line-height:1.5;margin:6px 0 15px}
+.help-section{border:1px solid var(--border);background:var(--surface-alt);border-radius:14px;padding:13px 14px;margin:9px 0}
+.help-section h3{font-size:14px;margin:0 0 9px;line-height:1.25;display:flex;gap:8px;align-items:center}
+.help-section ol{margin:6px 0 0 20px;padding:0}
+.help-section li{margin:0 0 7px;padding-left:2px;font-size:12px;line-height:1.5}
+.help-section li:last-child{margin-bottom:0}
+.help-section p{font-size:12px;color:var(--muted);line-height:1.5;margin:7px 0 0}
+.help-section strong{color:var(--text)}
+.help-tip{font-size:11px;color:var(--muted);line-height:1.5;margin:11px 4px 2px}
+@media(max-width:390px){.header{gap:7px}.header h1{font-size:17px}.header p{font-size:10px}.actions{gap:5px}.square{width:39px;height:39px}.mark{width:39px;height:39px}}
+@media(max-width:350px){.header{gap:5px}.header h1{font-size:15.5px}.header p{font-size:9px}.actions{gap:4px}.square{width:35px;height:35px;border-radius:10px}.mark{width:35px;height:35px;border-radius:10px}.help-btn{font-size:19px}.more-btn svg{width:21px;height:21px}}
+
 </style>
 </head>
 <body class="theme-blue">
@@ -70,7 +88,8 @@ body{height:auto;min-height:100vh;min-height:100dvh;overflow-x:hidden;overflow-y
   <div class="mark" aria-hidden="true">📚</div>
   <div class="header-text"><h1>Horario Escolar</h1><p>Materias · lunes a viernes</p></div>
   <div class="actions">
-   <button id="shareBtn" class="square" type="button" aria-label="Compartir por WhatsApp o código QR" title="Compartir">↗</button>
+   <button id="shareBtn" class="square more-btn" type="button" aria-label="Compartir por WhatsApp o código QR" title="Compartir"><svg viewBox="0 0 24 24" width="23" height="23" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></button>
+   <button id="helpBtn" class="square help-btn" type="button" aria-label="Ayuda e instalación" title="Ayuda">?</button>
    <button id="themeBtn" class="square" type="button" aria-label="Cambiar tema" title="Cambiar tema">💙</button>
   </div>
  </header>
@@ -91,6 +110,51 @@ body{height:auto;min-height:100vh;min-height:100dvh;overflow-x:hidden;overflow-y
   <p id="qrNote" class="qr-note"></p>
  </section>
 </div>
+<div id="helpOverlay" class="overlay" hidden>
+ <section class="share-panel help-panel" role="dialog" aria-modal="true" aria-labelledby="helpTitle" tabindex="-1">
+  <div class="share-head">
+   <div><h2 id="helpTitle">Ayuda · Horario Escolar</h2><div class="help-version">Versión V1.3.7 · PWA para Android y iPhone</div></div>
+   <button id="closeHelp" class="close" type="button" aria-label="Cerrar ayuda">×</button>
+  </div>
+  <p class="help-lead">Esta aplicación muestra el horario semanal fijo, con materias y recreos de lunes a viernes. Se puede instalar en el teléfono y consultar sin abrir el navegador.</p>
+  <section class="help-section" aria-labelledby="helpUseTitle">
+   <h3 id="helpUseTitle">📚 Cómo usar la aplicación</h3>
+   <ol>
+    <li>Tocá cualquiera de las cinco tarjetas horizontales para abrir las materias y los horarios de ese día.</li>
+    <li>Deslizá hacia abajo si necesitás ver el resto de las clases y los recreos. Al elegir otro día, se cierra el anterior.</li>
+    <li>El botón de arriba con <strong>tres puntos (•••)</strong> permite compartir por WhatsApp o mostrar un QR para escanear.</li>
+    <li>El botón de tema alterna entre <strong>Dark Blue → Claro → Dark</strong>.</li>
+   </ol>
+   <p>Las materias, los días y los horarios son fijos y no se modifican desde esta aplicación.</p>
+  </section>
+  <section class="help-section" aria-labelledby="helpAndroidTitle">
+   <h3 id="helpAndroidTitle">🤖 Instalar en Android</h3>
+   <ol>
+    <li>Abrí la dirección publicada de Horario Escolar con <strong>Google Chrome</strong>, no desde el archivo HTML descargado.</li>
+    <li>Tocá los <strong>tres puntos (⋮) de Chrome</strong>, en la esquina superior.</li>
+    <li>Seleccioná <strong>Instalar aplicación</strong>. En algunos celulares aparece como <strong>Agregar a pantalla principal</strong> y luego <strong>Instalar</strong>.</li>
+    <li>Confirmá <strong>Instalar</strong>. Encontrarás el ícono de Horario Escolar en el teléfono.</li>
+   </ol>
+  </section>
+  <section class="help-section" aria-labelledby="helpIphoneTitle">
+   <h3 id="helpIphoneTitle">🍎 Instalar en iPhone</h3>
+   <ol>
+    <li>Abrí el enlace publicado usando <strong>Safari</strong>.</li>
+    <li>Tocá <strong>Compartir</strong> (cuadrado con flecha hacia arriba). En algunas versiones de iOS: <strong>Más → Compartir</strong>.</li>
+    <li>Elegí <strong>Añadir a pantalla de inicio</strong>.</li>
+    <li>Dejá activada la opción <strong>Abrir como app web</strong>, si aparece, y tocá <strong>Añadir</strong>.</li>
+    <li>Abrí la aplicación desde su nuevo ícono en la pantalla de inicio.</li>
+   </ol>
+  </section>
+  <section class="help-section" aria-labelledby="helpUpdatesTitle">
+   <h3 id="helpUpdatesTitle">🔄 Actualización y conexión</h3>
+   <p>Para recibir una versión nueva, conectate a Internet y cerrá y volvé a abrir la aplicación. Las actualizaciones pueden requerir una segunda apertura. Si el ícono o el nombre no cambia, quizá tengas que reinstalarla.</p>
+   <p>Los horarios quedan disponibles sin conexión después de cargar correctamente la PWA. Para generar el QR con el enlace público necesitás conexión.</p>
+  </section>
+  <p class="help-tip">Seguridad: esta aplicación no necesita usuario ni contraseña. Nunca compartas contraseñas ni códigos de acceso para usarla.</p>
+ </section>
+</div>
+
 <script>
 (()=>{
 'use strict';
@@ -164,6 +228,7 @@ function scheduleText(){return '📚 Horario Escolar\n'+S.map(d=>d[0]+': '+d[1].
 function shareText(){const url=publishedUrl();return url?'📚 Horario Escolar:\n'+url:scheduleText();}
 const inlineQR=$('qrImage').src;
 function openShare(){
+ $('helpOverlay').hidden=true;
  const url=publishedUrl();
  $('waBtn').href='https://wa.me/?text='+encodeURIComponent(shareText());
  const qr=$('qrImage');
@@ -174,11 +239,24 @@ function openShare(){
  $('closeShare').focus();
 }
 function closeShare(){$('shareOverlay').hidden=true;$('shareBtn').focus();}
+function openHelp(){
+ closeShareIfOpen();
+ $('helpOverlay').hidden=false;
+ $('closeHelp').focus();
+}
+function closeHelp(){
+ $('helpOverlay').hidden=true;
+ $('helpBtn').focus();
+}
+function closeShareIfOpen(){if(!$('shareOverlay').hidden)$('shareOverlay').hidden=true;}
+$('helpBtn').addEventListener('click',openHelp);
+$('closeHelp').addEventListener('click',closeHelp);
+$('helpOverlay').addEventListener('click',e=>{if(e.target===$('helpOverlay'))closeHelp();});
 $('themeBtn').addEventListener('click',()=>{theme=themes[(themes.indexOf(theme)+1)%themes.length];applyTheme();});
 $('shareBtn').addEventListener('click',openShare);
 $('closeShare').addEventListener('click',closeShare);
 $('shareOverlay').addEventListener('click',e=>{if(e.target===$('shareOverlay'))closeShare();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('shareOverlay').hidden)closeShare();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!$('helpOverlay').hidden)closeHelp();else if(!$('shareOverlay').hidden)closeShare();}});
 $('nativeShare').addEventListener('click',async()=>{
  if(navigator.share){try{await navigator.share({title:'Horario Escolar',text:shareText()});}catch(_){}}
  else{window.open($('waBtn').href,'_blank','noopener');}

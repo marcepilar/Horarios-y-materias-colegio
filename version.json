@@ -1,6 +1,6 @@
 {
   "app": "Horario Escolar",
-  "version": "1.3.6",
+  "version": "1.3.7",
   "released": "2026-11-04",
-  "notes": "Nombre neutro Horario Escolar en portada, instalación PWA, compartir WhatsApp y QR. Conserva las cinco tarjetas, materias y horarios fijos, tres temas y desplazamiento automático."
+  "notes": "Botón Compartir con tres puntos. Ayuda con versión e instrucciones para instalar la PWA en Android y iPhone. Conserva las cinco tarjetas, materias, recreos y horarios fijos, tres temas, WhatsApp y QR."
 }
