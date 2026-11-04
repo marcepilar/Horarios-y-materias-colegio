@@ -2,7 +2,7 @@
   "id": "./index.html",
   "name": "Horario Escolar",
   "short_name": "Horario Escolar",
-  "description": "Materias, horarios y recreos fijos de lunes a viernes.",
+  "description": "Horario Escolar · Tercer año A: materias, horarios y recreos de lunes a viernes.",
   "lang": "es-AR",
   "start_url": "./index.html",
   "scope": "./",

@@ -1,19 +1,18 @@
-HORARIO ESCOLAR — PWA V1.3.7
+HORARIO ESCOLAR - PWA V1.3.9
 
-Cambios:
-- Botón Compartir con ícono de tres puntos horizontales.
-- Botón ? de Ayuda con versión V1.3.7, uso, instalación Android/iPhone, actualizaciones y seguridad.
-- Se conservan el horario fijo, las cinco tarjetas, los tres temas y el compartir por WhatsApp y QR.
+NOVEDADES
+- Se muestra «Tercer año A» debajo del título Horario Escolar.
+- Nuevo ícono CH sobre fondo de calendario en encabezado y pantalla de inicio de Android / iPhone.
 
-PARA PUBLICAR:
-1. Extraé el ZIP.
-2. Subí los archivos directamente a la raíz del repositorio GitHub Pages.
-3. Reemplazá los existentes con el mismo nombre (no crees un repositorio nuevo).
-4. Es importante subir index.html, manifest.webmanifest, service-worker.js, version.json y los PNG.
-5. Abrí o recargá el enlace publicado (HTTPS).
+SE CONSERVA
+- Cinco tarjetas horizontales: lunes a viernes.
+- Materias y horarios fijos, sin posibilidad de editarlos.
+- Scroll al desplegar, y zonas seguras de Android y iPhone.
+- Temas Dark Blue / Claro / Dark, Compartir WhatsApp / QR y Ayuda.
 
-PARA INSTALAR:
-Android: Chrome > ⋮ > Instalar aplicación (o Agregar a pantalla principal).
-iPhone: Safari > Compartir > Añadir a pantalla de inicio > Abrir como app web > Añadir.
-
-Si la actualización no aparece de inmediato, cerrá y volvé a abrir la PWA estando conectado a Internet.
+ACTUALIZAR EN GITHUB PAGES
+1) Descomprimir el ZIP.
+2) Subir los 9 archivos en la raiz del mismo repositorio, reemplazando los existentes.
+3) Confirmar «Commit changes» en main.
+4) Abrir la app con internet y reiniciarla para que actualice el service worker.
+5) Si el icono instalado antiguo no cambia, quitar la app de la pantalla de inicio y reinstalarla desde la misma URL (desinstalar no borra datos de servidor; esta app no guarda cambios de horarios).

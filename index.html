@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#071020">
-<meta name="description" content="Horario fijo de materias y recreos de lunes a viernes.">
+<meta name="description" content="Horario fijo de Tercer año A: materias y recreos de lunes a viernes.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Horario Escolar">
 <link rel="icon" type="image/png" href="./icon-192.png">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <link rel="manifest" href="./manifest.webmanifest">
-<title>Horario Escolar</title>
+<title>Horario Escolar · Tercer año A</title>
 <style>
 :root{color-scheme:dark;--bg:#0b101c;--surface:#171d2a;--surface-alt:#1e2636;--border:#313b4e;--text:#f7f9fd;--muted:#acb9cc;--accent:#78b6ff;--shade:#27354b;--shadow:0 6px 22px #0003}
 body.theme-blue{color-scheme:dark;--bg:#071122;--surface:#111f38;--surface-alt:#172b4a;--border:#30486b;--text:#f7faff;--muted:#abc1de;--accent:#78c5ff;--shade:#203b61;--shadow:0 6px 22px #0003}
@@ -31,37 +31,52 @@ body.theme-light{color-scheme:light;--bg:#f0f4fb;--surface:#fff;--surface-alt:#f
 @media(max-width:350px){.app{padding-left:9px;padding-right:9px}.header{gap:7px}.header h1{font-size:17px}.header p{font-size:10px}.actions{gap:5px}.square{width:39px;height:39px}.mark{width:39px;height:39px}.day-button{padding-left:10px;padding-right:10px}.day-meta{gap:6px}.day-pill{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.chevron{transition:none}}
 
-/* V1.3.3: cinco tarjetas apiladas con altura natural.
-   La página completa se desplaza cuando se abre un día;
-   el contenido del día no tiene límite de alto ni recortes. */
-html, body{min-height:100%;height:auto;overscroll-behavior-y:auto}
-body{height:auto;min-height:100vh;min-height:100dvh;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.app{height:auto;min-height:100vh;min-height:100dvh}
-.week{flex:none;min-height:auto;--closed-h:62px}
-.day,.week.expanded .day:not([open]),.week.expanded .day[open]{flex:none;min-height:0;overflow:visible}
-.day-button,.week.expanded .day .day-button,.week .day[open] .day-button{height:auto;min-height:62px}
-.day[open] .detail{height:auto;max-height:none;overflow:visible;overscroll-behavior:auto}
-@media(max-height:600px){
- .week{--closed-h:54px}
- .day-button,.week.expanded .day .day-button,.week .day[open] .day-button{min-height:54px}
+/* V1.3.9: distribución exacta de 5 tarjetas dentro del área utilizable.
+   Se toma 100dvh y se respetan las áreas seguras del sistema en iOS/Android.
+   Cuando se abre una tarjeta, la página recupera desplazamiento natural. */
+html,body{width:100%;min-height:100%;overscroll-behavior-y:auto}
+body{height:100vh;height:100dvh;min-height:100dvh;overflow-x:hidden;overflow-y:hidden}
+.app{
+ width:100%;height:100vh;height:100dvh;min-height:0;max-height:100dvh;
+ display:grid;grid-template-rows:auto auto minmax(0,1fr);
+ gap:clamp(5px,1.1dvh,10px);
+ padding-top:max(9px,env(safe-area-inset-top,0px));
+ padding-right:max(12px,env(safe-area-inset-right,0px));
+ padding-bottom:max(14px,env(safe-area-inset-bottom,0px));
+ padding-left:max(12px,env(safe-area-inset-left,0px));
 }
-
-/* V1.3.5: las cinco tarjetas cerradas reparten todo el alto disponible.
-   Si se abre una tarjeta, su contenido crece libremente y vuelve el scroll de la página. */
-.app{height:100dvh;min-height:100dvh}
-.week{flex:1 1 auto;min-height:0}
-.week .day{flex:1 1 0;min-height:54px}
-.week .day-button{height:100%;min-height:0}
-.app.has-open,.app:has(.day[open]){height:auto;min-height:100dvh}
-.week.expanded,.week:has(.day[open]){flex:0 0 auto;min-height:auto}
-.week.expanded .day,.week:has(.day[open]) .day{flex:none;min-height:0}
+.week{
+ display:grid;grid-template-rows:repeat(5,minmax(0,1fr));
+ flex:none;min-height:0;overflow:hidden;
+ gap:clamp(5px,.95dvh,10px);
+}
+.week .day{display:block;height:100%;min-height:0;flex:none;overflow:hidden}
+.week .day .day-button{height:100%;min-height:0}
+/* El detalle expandido nunca queda cortado: ocupa su altura real y scrollea el documento. */
+body.is-expanded,body:has(.day[open]){height:auto;min-height:100dvh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.app.has-open,.app:has(.day[open]){
+ display:flex;flex-direction:column;height:auto;max-height:none;min-height:100dvh;
+}
+.week.expanded,.week:has(.day[open]){
+ display:flex;flex-direction:column;flex:0 0 auto;min-height:0;height:auto;overflow:visible;
+}
+.week.expanded .day,.week:has(.day[open]) .day{
+ flex:none;height:auto;min-height:0;overflow:visible;
+}
 .week.expanded .day .day-button,.week:has(.day[open]) .day .day-button{height:auto;min-height:62px}
-.week.expanded .day[open] .detail,.week:has(.day[open]) .day[open] .detail{height:auto;max-height:none;overflow:visible}
-/* En teléfonos de alto bajo, conservar la legibilidad sin ocultar contenido. */
+.week.expanded .day[open] .detail,.week:has(.day[open]) .day[open] .detail{
+ height:auto;max-height:none;min-height:0;overflow:visible;overscroll-behavior:auto;
+}
+.week.expanded .day[open] .chevron,.week:has(.day[open]) .day[open] .chevron{transform:rotate(90deg)}
+/* Al estar todo cerrado, el bloque Viernes queda por encima de la barra del sistema. */
 @media(max-height:600px){
- .week .day{min-height:49px}
+ .app{gap:5px;padding-top:max(6px,env(safe-area-inset-top,0px));padding-bottom:max(10px,env(safe-area-inset-bottom,0px))}
+ .week{gap:5px}
  .week.expanded .day .day-button,.week:has(.day[open]) .day .day-button{min-height:54px}
 }
+/* Modales: se mantienen dentro del área segura en dispositivos con notch o barra de gestos. */
+.overlay{padding-top:max(12px,env(safe-area-inset-top,0px));padding-right:max(12px,env(safe-area-inset-right,0px));padding-bottom:max(12px,env(safe-area-inset-bottom,0px));padding-left:max(12px,env(safe-area-inset-left,0px))}
+.share-panel{max-height:calc(100dvh - max(12px,env(safe-area-inset-top,0px)) - max(12px,env(safe-area-inset-bottom,0px)) - 8px)}
 
 /* V1.3.7: acceso a ayuda, ícono Compartir de tres puntos y tres controles adaptativos. */
 .help-btn{font-size:22px;font-weight:900;letter-spacing:-.03em}
@@ -80,13 +95,20 @@ body{height:auto;min-height:100vh;min-height:100dvh;overflow-x:hidden;overflow-y
 @media(max-width:390px){.header{gap:7px}.header h1{font-size:17px}.header p{font-size:10px}.actions{gap:5px}.square{width:39px;height:39px}.mark{width:39px;height:39px}}
 @media(max-width:350px){.header{gap:5px}.header h1{font-size:15.5px}.header p{font-size:9px}.actions{gap:4px}.square{width:35px;height:35px;border-radius:10px}.mark{width:35px;height:35px;border-radius:10px}.help-btn{font-size:19px}.more-btn svg{width:21px;height:21px}}
 
+
+/* V1.3.9: ícono CH sobre calendario, sin afectar el alto seguro de las tarjetas. */
+.mark{background:none;overflow:hidden;box-shadow:none;flex-shrink:0}
+.mark img{display:block;width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.header-text p{line-height:1.25;overflow-wrap:normal}
+@media(max-width:380px){.header-text p{font-size:10px}}
+@media(max-width:350px){.header-text p{font-size:9.4px}}
 </style>
 </head>
 <body class="theme-blue">
 <div class="app">
  <header class="header">
-  <div class="mark" aria-hidden="true">📚</div>
-  <div class="header-text"><h1>Horario Escolar</h1><p>Materias · lunes a viernes</p></div>
+  <div class="mark" aria-hidden="true"><img src="./icon-192.png" width="43" height="43" alt="" decoding="async"></div>
+  <div class="header-text"><h1>Horario Escolar</h1><p>Tercer año A · Materias · lunes a viernes</p></div>
   <div class="actions">
    <button id="shareBtn" class="square more-btn" type="button" aria-label="Compartir por WhatsApp o código QR" title="Compartir"><svg viewBox="0 0 24 24" width="23" height="23" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></button>
    <button id="helpBtn" class="square help-btn" type="button" aria-label="Ayuda e instalación" title="Ayuda">?</button>
@@ -113,7 +135,7 @@ body{height:auto;min-height:100vh;min-height:100dvh;overflow-x:hidden;overflow-y
 <div id="helpOverlay" class="overlay" hidden>
  <section class="share-panel help-panel" role="dialog" aria-modal="true" aria-labelledby="helpTitle" tabindex="-1">
   <div class="share-head">
-   <div><h2 id="helpTitle">Ayuda · Horario Escolar</h2><div class="help-version">Versión V1.3.7 · PWA para Android y iPhone</div></div>
+   <div><h2 id="helpTitle">Ayuda · Horario Escolar</h2><div class="help-version">Versión V1.3.9 · PWA para Android y iPhone</div></div>
    <button id="closeHelp" class="close" type="button" aria-label="Cerrar ayuda">×</button>
   </div>
   <p class="help-lead">Esta aplicación muestra el horario semanal fijo, con materias y recreos de lunes a viernes. Se puede instalar en el teléfono y consultar sin abrir el navegador.</p>
@@ -168,7 +190,8 @@ const themeNames={'theme-blue':'Dark Blue','theme-light':'Claro','theme-dark':'D
 let theme='theme-blue';
 try{const stored=localStorage.getItem('horario-escolar-theme') || localStorage.getItem('ivan-horarios-theme-v130');if(themes.includes(stored))theme=stored;}catch(_){}
 function applyTheme(){
- document.body.className=theme;
+ document.body.classList.remove('theme-blue','theme-light','theme-dark');
+ document.body.classList.add(theme);
  $('themeBtn').textContent=emojis[theme];
  $('themeBtn').setAttribute('aria-label','Tema '+themeNames[theme]+'. Cambiar tema');
  document.querySelector('meta[name="theme-color"]').content=theme==='theme-light'?'#f0f4fb':theme==='theme-blue'?'#071122':'#0b101c';
@@ -199,6 +222,7 @@ function updateOpen(clicked){
  const isOpen=cards.some(c=>c.open);
  week.classList.toggle('expanded',isOpen);
  app.classList.toggle('has-open',isOpen);
+ document.body.classList.toggle('is-expanded',isOpen);
  changeInProgress=false;
  if(clicked && clicked.open && (clicked.id==='day-3'||clicked.id==='day-4')){
   autoCenterLateWeek(clicked);
