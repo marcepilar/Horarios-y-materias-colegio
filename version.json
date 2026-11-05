@@ -1,9 +1,10 @@
 {
   "app": "Horario Escolar",
-  "version": "V1.4.3",
+  "version": "V1.4.4",
   "release_date": "2026-11-04",
   "changes": [
-    "Botón Compartir: nuevo símbolo de tres círculos huecos unidos por dos líneas, según la referencia proporcionada.",
-    "Sin cambios en el diseño, horarios, clases o funcionalidades de V1.4.2."
+    "Navegación con historial: cerrar con X o usar Atrás del teléfono regresa a la vista anterior, también desde las tarjetas.",
+    "El texto del selector de curso tiene animación propia de acercar y alejar.",
+    "Ayuda: guía de instalación con tarjetas Android y iPhone e íconos tomados de la imagen de referencia."
   ]
 }

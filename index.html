@@ -100,6 +100,39 @@ html,body{max-width:100%;overflow-x:clip}
 }
 @media(prefers-reduced-motion:reduce){.course-btn,.year-chip.active,.section-chip.active{animation:none}}
 
+
+/* V1.4.4 · Transiciones del texto de curso, navegación y guía de instalación */
+.course-btn { isolation:isolate; }
+body.modal-open { overflow:hidden!important; }
+.course-label { display:inline-block; transform-origin:center; animation:courseTextPulse 1.9s ease-in-out infinite; }
+@keyframes courseTextPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
+@media(prefers-reduced-motion:reduce){.course-label{animation:none}}
+.selector-head{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:10px}
+.selector-head .selector-title{min-width:0;margin:0;font-size:13px}
+.selector-head .close{width:34px;height:34px;flex:0 0 auto}
+.selector-notice{font-size:10px;line-height:1.4;color:var(--muted);border-top:1px solid var(--border);padding-top:10px;margin:12px 0 0}
+.help-install{margin:14px 0 18px}
+.install-heading{display:flex;align-items:center;gap:12px;margin-bottom:13px}
+.install-step-badge{width:42px;height:42px;display:grid;place-items:center;flex:0 0 auto;border-radius:12px;background:color-mix(in srgb,var(--accent),transparent 86%);color:var(--accent);font-size:21px;font-weight:900;border:1px solid color-mix(in srgb,var(--accent),transparent 72%)}
+.install-heading h3{font-size:17px;line-height:1.2;margin:0 0 3px;font-weight:850}
+.install-heading p{font-size:11px;color:var(--muted);margin:0}
+.install-platform-list{display:grid;gap:9px;margin:0 0 13px 0}
+.install-platform{display:grid;grid-template-columns:62px minmax(0,1fr);align-items:center;gap:10px;border-radius:16px;padding:10px;border:1px solid var(--border);background:var(--surface-alt)}
+.install-platform.android-platform{border-color:color-mix(in srgb,#93b83f,transparent 50%)}
+.install-logo{width:62px;height:62px;border-radius:12px;object-fit:cover;display:block}
+.install-platform h4{font-size:12.4px;line-height:1.32;font-weight:850;margin:0 0 5px}
+.install-platform p{font-size:11px;line-height:1.45;color:var(--muted);margin:0}
+.install-guide{background:var(--surface-alt);border:1px solid var(--border);border-radius:16px;padding:13px 12px;margin:10px 0}
+.install-guide-title{display:flex;align-items:center;gap:9px;margin:0 0 12px}
+.install-os-tag{padding:8px 10px;border-radius:9px;background:color-mix(in srgb,var(--accent),transparent 85%);border:1px solid color-mix(in srgb,var(--accent),transparent 65%);color:var(--accent);font-size:10px;font-weight:900;white-space:nowrap}
+.install-guide-title h4{font-size:13.3px;line-height:1.3;font-weight:850;margin:0}
+.install-guide ol{margin:0 0 12px 24px;padding:0}
+.install-guide li{font-size:12.1px;line-height:1.6;color:var(--muted);padding-left:1px;margin-bottom:10px}
+.install-guide li strong,.install-guide-note strong{color:var(--text)}
+.install-guide li::marker{color:var(--muted)}
+.install-guide-note{font-size:11.4px;line-height:1.58;color:var(--muted);padding:12px 11px;border-radius:12px;border:1px solid color-mix(in srgb,var(--accent),transparent 76%);background:color-mix(in srgb,var(--accent),transparent 92%)}
+@media(max-width:350px){.install-platform{grid-template-columns:54px minmax(0,1fr);gap:8px;padding:8px}.install-logo{width:54px;height:54px}.install-platform h4{font-size:11.6px}.install-guide-title{gap:7px}.install-os-tag{padding:7px 8px}.install-guide-title h4{font-size:12.5px}}
+
 </style>
 </head>
 <body class="theme-blue">
@@ -108,7 +141,7 @@ html,body{max-width:100%;overflow-x:clip}
   <div class="mark" aria-hidden="true"><img src="./icon-192.png" width="40" height="40" alt="" decoding="async"></div>
   <div class="header-text"><h1 id="titleMain">Horario Escolar</h1><p id="titleSub">Tercer año A · Materias · lunes a viernes</p></div>
   <div class="actions">
-   <button id="courseBtn" class="square course-btn" type="button" aria-label="Elegir año y división" title="Elegir año y división">3A</button>
+   <button id="courseBtn" class="square course-btn" type="button" aria-label="Elegir año y división" title="Elegir año y división" aria-expanded="false" aria-controls="selectorOverlay"><span class="course-label">3A</span></button>
    <button id="shareBtn" class="square more-btn" type="button" aria-label="Compartir por WhatsApp o código QR" title="Compartir"><svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.45 10.58 15.1 6.57 M8.45 13.42 15.1 17.43"/><circle cx="6" cy="12" r="2.65"/><circle cx="18" cy="5" r="2.65"/><circle cx="18" cy="19" r="2.65"/></svg></button>
    <button id="helpBtn" class="square help-btn" type="button" aria-label="Ayuda e instalación" title="Ayuda">?</button>
    <button id="themeBtn" class="square theme-btn" type="button" aria-label="Cambiar tema" title="Cambiar tema">💙</button>
@@ -123,13 +156,14 @@ html,body{max-width:100%;overflow-x:clip}
 </div>
 <div id="selectorOverlay" class="selector-overlay" hidden>
  <div class="selector-panel" role="dialog" aria-modal="true" aria-labelledby="selectorTitle">
-  <div class="selector-title" id="selectorTitle"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="16" rx="3"></rect><path d="M3.5 8.5h17"></path><path d="M8 3.5v4"></path><path d="M16 3.5v4"></path><path d="M8 12h3"></path><path d="M13 12h3"></path><path d="M8 16h3"></path></svg><span>Elegí curso y división</span></div>
+  <div class="selector-head"><div class="selector-title" id="selectorTitle"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="16" rx="3"></rect><path d="M3.5 8.5h17"></path><path d="M8 3.5v4"></path><path d="M16 3.5v4"></path><path d="M8 12h3"></path><path d="M13 12h3"></path><path d="M8 16h3"></path></svg><span>Elegí curso y división</span></div><button id="closeSelector" class="close" type="button" aria-label="Cerrar selección de curso">×</button></div>
   <div class="selector-grid"><div class="selector-row"><button class="year-chip" type="button" data-year="1">1 año</button><div class="section-group"><button class="section-chip" type="button" data-year="1" data-section="A">A</button><button class="section-chip" type="button" data-year="1" data-section="B">B</button></div></div>
 <div class="selector-row"><button class="year-chip" type="button" data-year="2">2 año</button><div class="section-group"><button class="section-chip" type="button" data-year="2" data-section="A">A</button><button class="section-chip" type="button" data-year="2" data-section="B">B</button></div></div>
 <div class="selector-row"><button class="year-chip" type="button" data-year="3">3 año</button><div class="section-group"><button class="section-chip" type="button" data-year="3" data-section="A">A</button><button class="section-chip" type="button" data-year="3" data-section="B">B</button></div></div>
 <div class="selector-row"><button class="year-chip" type="button" data-year="4">4 año</button><div class="section-group"><button class="section-chip" type="button" data-year="4" data-section="A">A</button><button class="section-chip" type="button" data-year="4" data-section="B">B</button></div></div>
 <div class="selector-row"><button class="year-chip" type="button" data-year="5">5 año</button><div class="section-group"><button class="section-chip" type="button" data-year="5" data-section="A">A</button><button class="section-chip" type="button" data-year="5" data-section="B">B</button></div></div>
 <div class="selector-row"><button class="year-chip" type="button" data-year="6">6 año</button><div class="section-group"><button class="section-chip" type="button" data-year="6" data-section="A">A</button><button class="section-chip" type="button" data-year="6" data-section="B">B</button></div></div></div>
+  <p class="selector-notice">Por ahora, únicamente están cargadas las materias y los horarios de 3° A. Cambiar el curso no modifica las clases.</p>
  </div>
 </div>
 <div id="shareOverlay" class="overlay" hidden>
@@ -142,11 +176,47 @@ html,body{max-width:100%;overflow-x:clip}
 </div>
 <div id="helpOverlay" class="overlay" hidden>
  <section class="panel help-panel" role="dialog" aria-modal="true" aria-labelledby="helpTitle" tabindex="-1">
-  <div class="share-head"><div><h2 id="helpTitle">Ayuda · Horario Escolar</h2><div class="help-version">Versión V1.4.3 · PWA para Android y iPhone</div></div><button id="closeHelp" class="close" type="button" aria-label="Cerrar ayuda">×</button></div>
+  <div class="share-head"><div><h2 id="helpTitle">Ayuda · Horario Escolar</h2><div class="help-version">Versión V1.4.4 · PWA para Android y iPhone</div></div><button id="closeHelp" class="close" type="button" aria-label="Cerrar ayuda">×</button></div>
   <p class="help-lead">Esta aplicación muestra el horario semanal fijo, con materias y recreos de lunes a viernes. También incorpora un selector visual de año y división para futuras adaptaciones.</p>
   <section class="help-section"><h3>📚 Cómo usar la aplicación</h3><ol><li>Tocá cualquiera de las cinco tarjetas horizontales para abrir las materias y los horarios de ese día.</li><li>Deslizá hacia abajo si necesitás ver el resto de las clases y los recreos. Al elegir otro día, se cierra el anterior.</li><li>El botón del curso (<strong>3A</strong> por defecto) despliega la lista para elegir entre <strong>1 a 6 año</strong> y división <strong>A o B</strong>.</li><li>El botón de compartir usa el ícono clásico de <strong>tres puntos unidos</strong> y permite compartir por WhatsApp o mostrar un QR.</li><li>El botón de tema alterna entre <strong>Dark Blue → Claro → Dark</strong>.</li></ol><p>Las materias, los días y los horarios publicados siguen siendo fijos y no se modifican desde esta aplicación.</p></section>
-  <section class="help-section"><h3>🤖 Instalar en Android</h3><ol><li>Abrí la dirección publicada con <strong>Google Chrome</strong>, no desde el archivo HTML descargado.</li><li>Tocá los <strong>tres puntos (⋮) de Chrome</strong> en la esquina superior.</li><li>Seleccioná <strong>Instalar aplicación</strong>. En algunos celulares aparece como <strong>Agregar a pantalla principal</strong> y luego <strong>Instalar</strong>.</li><li>Confirmá <strong>Instalar</strong>. Encontrarás el ícono de Horario Escolar en el teléfono.</li></ol></section>
-  <section class="help-section"><h3>🍎 Instalar en iPhone</h3><ol><li>Abrí el enlace publicado usando <strong>Safari</strong>.</li><li>Tocá <strong>Compartir</strong> (cuadrado con flecha hacia arriba).</li><li>Elegí <strong>Añadir a pantalla de inicio</strong>.</li><li>Si aparece, dejá activada la opción <strong>Abrir como app web</strong> y luego tocá <strong>Añadir</strong>.</li></ol></section>
+  <section class="help-install" aria-labelledby="installHeading">
+    <div class="install-heading">
+      <span class="install-step-badge">2</span>
+      <div><h3 id="installHeading">Instalar la app</h3><p>Android e iPhone paso a paso</p></div>
+    </div>
+    <div class="install-platform-list">
+      <article class="install-platform android-platform">
+        <img class="install-logo" src="./ayuda-android.png" width="74" height="74" alt="Ícono verde de Android sobre fondo blanco" loading="lazy">
+        <div><h4>Android · Recomendado: Google Chrome</h4><p>Es la opción recomendada para instalar esta PWA como aplicación.</p></div>
+      </article>
+      <article class="install-platform apple-platform">
+        <img class="install-logo" src="./ayuda-iphone.png" width="74" height="74" alt="Ícono negro de Apple sobre fondo azul" loading="lazy">
+        <div><h4>iPhone · Recomendado: Safari</h4><p>Es la opción más directa para agregarla como app web a la pantalla de inicio.</p></div>
+      </article>
+    </div>
+    <article class="install-guide">
+      <div class="install-guide-title"><span class="install-os-tag">ANDROID</span><h4>Instalar con Google Chrome</h4></div>
+      <ol>
+        <li>Abrí <strong>Google Chrome</strong> en el teléfono.</li>
+        <li>Entrá al enlace de <strong>Horario Escolar</strong> y esperá a que cargue completamente.</li>
+        <li>Tocá el menú <strong>⋮</strong> de Chrome.</li>
+        <li>Elegí <strong>“Instalar y crear acceso directo”</strong> y después <strong>“Instalar”</strong>, si aparece esa opción.</li>
+        <li>Confirmá la instalación. El ícono aparecerá en la pantalla de inicio o en el listado de aplicaciones.</li>
+      </ol>
+      <div class="install-guide-note"><strong>Si no aparece “Instalar”:</strong> en el mismo menú buscá <strong>“Instalar aplicación”</strong> o <strong>“Agregar a pantalla principal”</strong> → <strong>“Crear acceso directo”</strong>. Las opciones cambian según Chrome. Para la experiencia completa de app, mantené Chrome actualizado.</div>
+    </article>
+    <article class="install-guide">
+      <div class="install-guide-title"><span class="install-os-tag">IPHONE</span><h4>Instalar con Safari</h4></div>
+      <ol>
+        <li>Abrí <strong>Safari</strong> en tu iPhone.</li>
+        <li>Entrá al enlace de <strong>Horario Escolar</strong> y esperá a que cargue.</li>
+        <li>Tocá <strong>Compartir</strong> (cuadrado con una flecha hacia arriba).</li>
+        <li>Elegí <strong>“Añadir a pantalla de inicio”</strong>.</li>
+        <li>Si aparece, activá <strong>“Abrir como app web”</strong> y tocá <strong>“Añadir”</strong>. El ícono se agregará a la pantalla de inicio.</li>
+      </ol>
+      <div class="install-guide-note"><strong>Si no encontrás la opción:</strong> desplazate por el menú Compartir de Safari o elegí <strong>“Editar acciones”</strong> para encontrarla. No instales el archivo HTML directamente desde Descargas.</div>
+    </article>
+  </section>
   <section class="help-section"><h3>🔄 Actualización y conexión</h3><p>Para recibir una versión nueva, conectate a Internet y cerrá y volvé a abrir la aplicación. Las actualizaciones pueden requerir una segunda apertura. Si el ícono o el nombre no cambia, quizá tengas que reinstalarla.</p><p>Los horarios quedan disponibles sin conexión después de cargar correctamente la PWA.</p></section>
   <p class="help-tip">Seguridad: esta aplicación no necesita usuario ni contraseña. Nunca compartas contraseñas ni códigos de acceso para usarla.</p>
  </section>
@@ -170,21 +240,18 @@ try {
   const stored=localStorage.getItem('horario-escolar-theme');
   if(themes.includes(stored)) theme=stored;
   const course=localStorage.getItem('horario-escolar-course');
-  if(course && /^([1-6])([AB])$/.test(course)) {
-    selectedYear=course[0];
-    selectedSection=course[1];
-  }
+  if(course && /^([1-6])([AB])$/.test(course)) { selectedYear=course[0]; selectedSection=course[1]; }
 } catch(_) {}
-function courseLabelLong(){ return `${selectedYear}° año ${selectedSection}`; }
-function courseLabelShort(){ return `${selectedYear}${selectedSection}`; }
+function courseLabelLong(){return `${selectedYear}° año ${selectedSection}`;}
+function courseLabelShort(){return `${selectedYear}${selectedSection}`;}
 function applyCourse(){
-  $('courseBtn').textContent=courseLabelShort();
+  $('courseBtn').querySelector('.course-label').textContent=courseLabelShort();
   $('titleSub').textContent=courseLabelLong()+' · Materias · lunes a viernes';
   document.title='Horario Escolar · '+courseLabelLong();
   document.querySelector('meta[name="description"]').content='Horario fijo de '+courseLabelLong()+': materias y recreos de lunes a viernes.';
   document.querySelectorAll('.year-chip').forEach(btn=>btn.classList.toggle('active', btn.dataset.year===selectedYear));
   document.querySelectorAll('.section-chip').forEach(btn=>btn.classList.toggle('active', btn.dataset.year===selectedYear && btn.dataset.section===selectedSection));
-  try { localStorage.setItem('horario-escolar-course', courseLabelShort()); } catch(_) {}
+  try{localStorage.setItem('horario-escolar-course',courseLabelShort());}catch(_){}
 }
 function applyTheme(){
   document.body.classList.remove('theme-blue','theme-light','theme-dark');
@@ -192,109 +259,134 @@ function applyTheme(){
   $('themeBtn').textContent=emojis[theme];
   $('themeBtn').setAttribute('aria-label','Tema '+themeNames[theme]+'. Cambiar tema');
   document.querySelector('meta[name="theme-color"]').content=theme==='theme-light' ? '#f0f4fb' : theme==='theme-blue' ? '#071122' : '#0b101c';
-  try { localStorage.setItem('horario-escolar-theme', theme); } catch(_) {}
-}
-let changeInProgress=false;
-let recenterToken=0;
-function autoCenterLateWeek(card){
-  const token=++recenterToken;
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{
-    if(token!==recenterToken || !card.open || $('shareOverlay').hidden===false) return;
-    const rect=card.getBoundingClientRect();
-    const viewport=window.visualViewport?.height || window.innerHeight;
-    const scrollMax=Math.max(0, document.documentElement.scrollHeight-window.innerHeight);
-    const centerY=window.scrollY + rect.top + (rect.height-viewport)/2;
-    const target=Math.min(scrollMax, Math.max(0, centerY));
-    const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    window.scrollTo({top:target, behavior:reduce?'instant':'smooth'});
-  }));
-}
-function updateOpen(clicked){
-  if(changeInProgress) return;
-  changeInProgress=true;
-  if(clicked && clicked.open){ for(const other of cards){ if(other!==clicked) other.open=false; } }
-  const isOpen=cards.some(c=>c.open);
-  week.classList.toggle('expanded', isOpen);
-  app.classList.toggle('has-open', isOpen);
-  document.body.classList.toggle('is-expanded', isOpen);
-  changeInProgress=false;
-  if(clicked && clicked.open && (clicked.id==='day-3' || clicked.id==='day-4')) autoCenterLateWeek(clicked); else if(!isOpen) recenterToken++;
-}
-for(const card of cards){
-  const summary=card.querySelector('summary');
-  summary.addEventListener('click', ()=>{ if(!card.open){ for(const other of cards){ if(other!==card) other.open=false; } } });
-  card.addEventListener('toggle', ()=>updateOpen(card));
+  try{localStorage.setItem('horario-escolar-theme',theme);}catch(_){}
 }
 const now=new Date().getDay();
 if(now>=1 && now<=5){ cards[now-1].classList.add('today'); cards[now-1].querySelector('.day-pill').textContent='HOY'; }
 function publishedUrl(){
-  try {
+  try{
     const u=new URL(location.href);
-    if(!['https:','http:'].includes(u.protocol) || ['localhost','127.0.0.1'].includes(u.hostname)) return '';
-    u.search=''; u.hash='';
-    return u.href;
-  } catch(_) { return ''; }
+    if(!['https:','http:'].includes(u.protocol)||['localhost','127.0.0.1'].includes(u.hostname))return '';
+    u.search='';u.hash='';return u.href;
+  }catch(_){return '';}
 }
-function scheduleText(){
-  return '📚 Horario Escolar · '+courseLabelLong()+'\n'+S.map(d=>d[0]+': '+d[1].map(c=>c[0]+' '+c[1]).join(' / ')).join('\n')+'\nRecreos: 14:50 a 15:05 y 16:05 a 16:20.';
-}
-function shareText(){
-  const url=publishedUrl();
-  return url ? '📚 Horario Escolar · '+courseLabelLong()+':\n'+url : scheduleText();
-}
+function scheduleText(){return '📚 Horario Escolar · '+courseLabelLong()+'\n'+S.map(d=>d[0]+': '+d[1].map(c=>c[0]+' '+c[1]).join(' / ')).join('\n')+'\nRecreos: 14:50 a 15:05 y 16:05 a 16:20.';}
+function shareText(){const url=publishedUrl();return url?'📚 Horario Escolar · '+courseLabelLong()+':\n'+url:scheduleText();}
 const fallbackQR='./qr-horario.png';
-function closeSelector(){ $('selectorOverlay').hidden=true; $('courseBtn').setAttribute('aria-expanded','false'); }
-function closeShareIfOpen(){ if(!$('shareOverlay').hidden) $('shareOverlay').hidden=true; }
-function closeHelpIfOpen(){ if(!$('helpOverlay').hidden) $('helpOverlay').hidden=true; }
-function openSelector(){ closeShareIfOpen(); closeHelpIfOpen(); $('selectorOverlay').hidden=false; $('courseBtn').setAttribute('aria-expanded','true'); }
-function openShare(){
-  closeSelector(); closeHelpIfOpen();
+function configureShare(){
   const url=publishedUrl();
   $('waBtn').href='https://wa.me/?text='+encodeURIComponent(shareText());
   const qr=$('qrImage');
-  qr.onerror=()=>{ qr.onerror=null; qr.src=fallbackQR; $('qrNote').textContent='Sin conexión para generar el QR del enlace. Se muestra un QR local.'; };
-  if(url){
-    qr.src='https://api.qrserver.com/v1/create-qr-code/?size=350x350&data='+encodeURIComponent(url);
-    $('qrNote').textContent='Escaneá el QR para abrir la app publicada.';
-  } else {
-    qr.onerror=null; qr.src=fallbackQR;
-    $('qrNote').textContent='Archivo local: al publicarla, este QR compartirá el enlace.';
-  }
-  $('shareOverlay').hidden=false;
-  $('closeShare').focus();
+  qr.onerror=()=>{qr.onerror=null;qr.src=fallbackQR;$('qrNote').textContent='Sin conexión para generar el QR del enlace. Se muestra un QR local.';};
+  if(url){qr.src='https://api.qrserver.com/v1/create-qr-code/?size=350x350&data='+encodeURIComponent(url);$('qrNote').textContent='Escaneá el QR para abrir la app publicada.';}
+  else{qr.onerror=null;qr.src=fallbackQR;$('qrNote').textContent='Archivo local: al publicarla, este QR compartirá el enlace.';}
 }
-function closeShare(){ $('shareOverlay').hidden=true; $('shareBtn').focus(); }
-function openHelp(){ closeSelector(); closeShareIfOpen(); $('helpOverlay').hidden=false; $('closeHelp').focus(); }
-function closeHelp(){ $('helpOverlay').hidden=true; $('helpBtn').focus(); }
-$('courseBtn').addEventListener('click', ()=>{ $('selectorOverlay').hidden ? openSelector() : closeSelector(); });
-$('selectorOverlay').addEventListener('click', e=>{ if(e.target===$('selectorOverlay')) closeSelector(); });
-document.querySelectorAll('.section-chip').forEach(btn=>btn.addEventListener('click', ()=>{ selectedYear=btn.dataset.year; selectedSection=btn.dataset.section; applyCourse(); closeSelector(); }));
-document.querySelectorAll('.year-chip').forEach(btn=>btn.addEventListener('click', ()=>{ selectedYear=btn.dataset.year; applyCourse(); }));
-$('helpBtn').addEventListener('click', openHelp);
-$('closeHelp').addEventListener('click', closeHelp);
-$('helpOverlay').addEventListener('click', e=>{ if(e.target===$('helpOverlay')) closeHelp(); });
-$('themeBtn').addEventListener('click', ()=>{ theme=themes[(themes.indexOf(theme)+1)%themes.length]; applyTheme(); });
-$('shareBtn').addEventListener('click', openShare);
-$('closeShare').addEventListener('click', closeShare);
-$('shareOverlay').addEventListener('click', e=>{ if(e.target===$('shareOverlay')) closeShare(); });
-document.addEventListener('keydown', e=>{
-  if(e.key==='Escape'){
-    if(!$('selectorOverlay').hidden) closeSelector();
-    else if(!$('helpOverlay').hidden) closeHelp();
-    else if(!$('shareOverlay').hidden) closeShare();
-  }
+// Each window and open-day view is a real browser history entry.
+// Android/iPhone Back, browser Back, and the X all return to the previous view.
+const NAV_KEY='horarioEscolarV144';
+const BASE_VIEW={day:-1,pane:null,scrollY:0};
+let view={...BASE_VIEW};
+let transitionToken=0;
+function cleanView(v){
+  const day=Number.isInteger(v?.day)&&v.day>=0&&v.day<5?v.day:-1;
+  const pane=['course','share','help'].includes(v?.pane)?v.pane:null;
+  const scrollY=Number.isFinite(v?.scrollY)&&v.scrollY>=0?v.scrollY:0;
+  return {day,pane,scrollY};
+}
+function getStoredView(){const v=history.state?.[NAV_KEY];return v?cleanView(v):null;}
+function writeCurrent(v,replace=false){
+  const st={...(history.state||{}),[NAV_KEY]:cleanView(v)};
+  try{if(replace)history.replaceState(st,'',location.href);else history.pushState(st,'',location.href);return true;}
+  catch(_){return false;}
+}
+function syncView(v,fromHistory=false){
+  const previousPane=view.pane;
+  view=cleanView(v);
+  const openDay=view.day;
+  cards.forEach((card,i)=>{card.open=i===openDay;});
+  const expanded=openDay>=0;
+  week.classList.toggle('expanded',expanded);
+  app.classList.toggle('has-open',expanded);
+  document.body.classList.toggle('is-expanded',expanded);
+  $('selectorOverlay').hidden=view.pane!=='course';
+  $('shareOverlay').hidden=view.pane!=='share';
+  $('helpOverlay').hidden=view.pane!=='help';
+  document.body.classList.toggle('modal-open',Boolean(view.pane));
+  $('courseBtn').setAttribute('aria-expanded',String(view.pane==='course'));
+  if(view.pane==='share')configureShare();
+  if(view.pane==='course') $('closeSelector').focus({preventScroll:true});
+  else if(view.pane==='help') $('closeHelp').focus({preventScroll:true});
+  else if(view.pane==='share') $('closeShare').focus({preventScroll:true});
+  else if(previousPane==='course') $('courseBtn').focus({preventScroll:true});
+  else if(previousPane==='help') $('helpBtn').focus({preventScroll:true});
+  else if(previousPane==='share') $('shareBtn').focus({preventScroll:true});
+  const token=++transitionToken;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    if(token!==transitionToken || view.pane) return;
+    if(fromHistory){window.scrollTo({top:view.scrollY,behavior:'instant'});}
+    else if(openDay===3 || openDay===4){
+      const rect=cards[openDay].getBoundingClientRect();
+      const vh=window.visualViewport?.height||window.innerHeight;
+      const maxScroll=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
+      const target=Math.min(maxScroll,Math.max(0,window.scrollY+rect.top+(rect.height-vh)/2));
+      const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({top:target,behavior:reduced?'instant':'smooth'});
+    }else if(openDay===-1){window.scrollTo({top:0,behavior:'instant'});}
+  }));
+}
+function navigate(next){
+  const before={...view,scrollY:window.scrollY};
+  writeCurrent(before,true);
+  const to=cleanView({...next,scrollY:0});
+  writeCurrent(to,false);
+  syncView(to,false);
+}
+function goPrevious(){
+  if(!view.pane && view.day===-1) return;
+  try{history.back();}
+  catch(_){syncView(BASE_VIEW,true);}
+}
+window.addEventListener('popstate',evt=>{
+  const next=evt.state?.[NAV_KEY];
+  if(next)syncView(next,true);
+  // When leaving the first PWA entry, normal browser/OS history behavior applies.
 });
-$('nativeShare').addEventListener('click', async()=>{
-  if(navigator.share){
-    try { await navigator.share({title:'Horario Escolar · '+courseLabelLong(), text:shareText(), url:publishedUrl()||undefined}); } catch(_) {}
-  } else {
-    window.open($('waBtn').href, '_blank', 'noopener');
-  }
+// Setup baseline only once; keep the current state when the browser restores this page.
+const initial=getStoredView()||BASE_VIEW;
+writeCurrent(initial,true);
+applyTheme();applyCourse();syncView(initial,true);
+// The native details toggle is prevented so all transitions go through browser history.
+cards.forEach((card,i)=>{
+  card.querySelector('summary').addEventListener('click',evt=>{
+    evt.preventDefault();
+    if(view.pane) return;
+    if(view.day===i)goPrevious();
+    else navigate({day:i,pane:null});
+  });
 });
-applyTheme();
-applyCourse();
-if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
-  window.addEventListener('load', ()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
+$('courseBtn').addEventListener('click',()=>navigate({day:view.day,pane:'course'}));
+$('shareBtn').addEventListener('click',()=>navigate({day:view.day,pane:'share'}));
+$('helpBtn').addEventListener('click',()=>navigate({day:view.day,pane:'help'}));
+$('closeSelector').addEventListener('click',goPrevious);
+$('closeShare').addEventListener('click',goPrevious);
+$('closeHelp').addEventListener('click',goPrevious);
+$('selectorOverlay').addEventListener('click',evt=>{if(evt.target===$('selectorOverlay'))goPrevious();});
+$('shareOverlay').addEventListener('click',evt=>{if(evt.target===$('shareOverlay'))goPrevious();});
+$('helpOverlay').addEventListener('click',evt=>{if(evt.target===$('helpOverlay'))goPrevious();});
+document.querySelectorAll('.section-chip').forEach(btn=>btn.addEventListener('click',()=>{
+  selectedYear=btn.dataset.year;selectedSection=btn.dataset.section;applyCourse();goPrevious();
+}));
+document.querySelectorAll('.year-chip').forEach(btn=>btn.addEventListener('click',()=>{
+  selectedYear=btn.dataset.year;applyCourse();
+}));
+$('themeBtn').addEventListener('click',()=>{theme=themes[(themes.indexOf(theme)+1)%themes.length];applyTheme();});
+document.addEventListener('keydown',evt=>{if(evt.key==='Escape'&&(view.pane||view.day>=0)){evt.preventDefault();goPrevious();}});
+$('nativeShare').addEventListener('click',async()=>{
+  if(navigator.share){try{await navigator.share({title:'Horario Escolar · '+courseLabelLong(),text:shareText(),url:publishedUrl()||undefined});}catch(_){}}
+  else{window.open($('waBtn').href,'_blank','noopener');}
+});
+if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){
+  window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
 }
 })();
 
