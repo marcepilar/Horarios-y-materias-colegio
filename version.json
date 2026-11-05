@@ -1,6 +1,11 @@
 {
-  "app": "Horario Escolar",
-  "version": "1.3.9",
-  "released": "2026-11-04",
-  "notes": "Encabezado Tercer año A; ícono CH sobre calendario para Android y iPhone. Mantiene cinco tarjetas, horario fijo, tres temas, Ayuda, WhatsApp, QR y zonas seguras."
+  "version": "V1.4.0",
+  "name": "Horario Escolar",
+  "updated": "2026-11-04",
+  "notes": [
+    "Ícono CH sobre calendario",
+    "Botón compartir clásico de tres puntos unidos",
+    "Selector desplegable 1° a 6° con divisiones A/B",
+    "Ajuste para que la vista principal cierre en una sola pantalla"
+  ]
 }

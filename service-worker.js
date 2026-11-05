@@ -1,1 +1,19 @@
-const NAME='horario-escolar-v1.3.9';const CORE=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./apple-touch-icon.png','./qr-horario.png','./version.json'];self.addEventListener('install',e=>e.waitUntil(caches.open(NAME).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())));self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(names=>Promise.all(names.filter(n=>(n.startsWith('horarios-ivan-')||n.startsWith('horario-escolar-'))&&n!==NAME).map(n=>caches.delete(n)))).then(()=>self.clients.claim())));self.addEventListener('fetch',e=>{const r=e.request;if(r.method!=='GET'||new URL(r.url).origin!==self.location.origin)return;e.respondWith(fetch(r).then(res=>{if(res.ok){const c=res.clone();e.waitUntil(caches.open(NAME).then(cache=>cache.put(r,c)))}return res}).catch(async()=>{return(await caches.match(r))||(r.mode==='navigate'?await caches.match('./index.html'):Response.error())}))});
+const CACHE_NAME='horario-escolar-v1.4.0';
+const ASSETS=[
+ './',
+ './index.html',
+ './manifest.webmanifest',
+ './service-worker.js',
+ './version.json',
+ './icon-192.png',
+ './icon-512.png',
+ './apple-touch-icon.png',
+ './qr-horario.png'
+];
+self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting()));});
+self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
+self.addEventListener('fetch',event=>{
+ const req=event.request;
+ if(req.method!=='GET') return;
+ event.respondWith(caches.match(req).then(cached=>cached||fetch(req).then(response=>{const copy=response.clone();caches.open(CACHE_NAME).then(cache=>cache.put(req,copy)).catch(()=>{});return response;}).catch(()=>caches.match('./index.html'))));
+});

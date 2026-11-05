@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071020">
+<meta name="theme-color" content="#071122">
 <meta name="description" content="Horario fijo de Tercer año A: materias y recreos de lunes a viernes.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -13,171 +13,81 @@
 <link rel="manifest" href="./manifest.webmanifest">
 <title>Horario Escolar · Tercer año A</title>
 <style>
-:root{color-scheme:dark;--bg:#0b101c;--surface:#171d2a;--surface-alt:#1e2636;--border:#313b4e;--text:#f7f9fd;--muted:#acb9cc;--accent:#78b6ff;--shade:#27354b;--shadow:0 6px 22px #0003}
-body.theme-blue{color-scheme:dark;--bg:#071122;--surface:#111f38;--surface-alt:#172b4a;--border:#30486b;--text:#f7faff;--muted:#abc1de;--accent:#78c5ff;--shade:#203b61;--shadow:0 6px 22px #0003}
-body.theme-light{color-scheme:light;--bg:#f0f4fb;--surface:#fff;--surface-alt:#f0f5fd;--border:#d5e0ef;--text:#192943;--muted:#627792;--accent:#116cb3;--shade:#e1edfc;--shadow:0 6px 18px #15325912}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;overscroll-behavior:none}body{height:100dvh;overflow:hidden;background:var(--bg);color:var(--text);font:14px/1.3 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}[hidden]{display:none!important}
-.app{height:100%;max-width:700px;margin:0 auto;padding:max(9px,env(safe-area-inset-top)) 12px max(9px,env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:9px;min-height:0}
-.header{flex:0 0 auto;display:flex;gap:10px;align-items:center;min-height:54px}.mark{width:43px;height:43px;display:grid;place-items:center;flex-shrink:0;border-radius:13px;background:linear-gradient(135deg,#4788f9,#8670ef);font-size:22px}.header-text{min-width:0;flex:1}.header h1{font-size:19px;letter-spacing:-.035em;margin:0;line-height:1.12}.header p{font-size:11px;color:var(--muted);margin:4px 0 0}.actions{flex-shrink:0;display:flex;gap:7px}.square{width:44px;height:44px;border-radius:13px;background:var(--surface);border:1px solid var(--border);color:var(--text);display:grid;place-items:center;font-size:21px;box-shadow:var(--shadow)}
-.hint{color:var(--muted);font-size:11px;font-weight:650;display:flex;justify-content:space-between;align-items:center;gap:8px;flex:0 0 auto;padding:0 3px}.hint em{font-style:normal;font-weight:800;color:var(--accent)}
-.week{flex:1;min-height:0;display:flex;flex-direction:column;gap:8px;--closed-h:clamp(48px,9.4dvh,74px)}
-.day{flex:1 1 0;min-height:0;display:flex;flex-direction:column;overflow:hidden;background:var(--surface);border:1px solid var(--border);border-radius:17px;box-shadow:var(--shadow)}
-.day-button{list-style:none;width:100%;height:100%;min-height:0;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;padding:9px 14px;background:transparent;border:0;color:var(--text)}.day-button::-webkit-details-marker{display:none}.day-button::marker{content:""}.day-title{font-size:clamp(17px,4.4vw,21px);font-weight:850;letter-spacing:-.035em}.day-desc{font-size:11px;color:var(--muted);margin-top:2px;font-variant-numeric:tabular-nums}.day-meta{display:flex;align-items:center;gap:8px;flex-shrink:0}.day-pill{background:var(--shade);color:var(--accent);border-radius:20px;padding:6px 9px;font-weight:850;font-size:10px}.chevron{font-size:23px;color:var(--muted);width:12px;display:inline-flex;align-items:center;justify-content:center;transition:transform .18s ease}
-.day.today{border-color:var(--accent)}.day[open]{border-color:var(--accent);box-shadow:0 0 0 1px color-mix(in srgb,var(--accent),transparent 50%),var(--shadow)}
-.week.expanded .day:not([open]){flex:0 0 var(--closed-h)}.week.expanded .day[open]{flex:1 1 auto}.week.expanded .day .day-button{height:var(--closed-h)}.week .day[open] .day-button{height:var(--closed-h)}.week.expanded .day[open] .chevron{transform:rotate(90deg)}
-.detail{height:calc(100% - var(--closed-h));min-height:0;overflow-y:auto;overscroll-behavior:contain;border-top:1px solid var(--border);padding:7px 9px 10px;scrollbar-width:thin;scrollbar-color:var(--border) transparent}.lesson{display:grid;grid-template-columns:66px 4px minmax(0,1fr);align-items:center;gap:9px;min-height:46px;padding:6px 9px;border-radius:11px;background:var(--surface-alt);margin-bottom:5px}.lesson .hours{font-size:11px;line-height:1.38;color:var(--accent);font-weight:800;font-variant-numeric:tabular-nums}.lesson .bar{align-self:stretch;border-radius:7px;background:var(--materia)}.lesson .info{min-width:0}.lesson strong{display:block;font-size:12.5px;line-height:1.2;overflow-wrap:anywhere}.lesson small{color:var(--muted);font-size:10px}.recreo{text-align:center;font-size:11px;color:var(--muted);font-weight:750;padding:6px 4px;margin:1px 0 6px;border-top:1px dashed var(--border);border-bottom:1px dashed var(--border)}
-.overlay{position:fixed;inset:0;background:#020712b3;z-index:8;display:flex;justify-content:center;align-items:flex-end;padding:12px max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom))}.share-panel{width:min(100%,520px);max-height:90dvh;overflow:auto;border-radius:20px;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:17px;box-shadow:0 26px 75px #0008}.share-head{display:flex;justify-content:space-between;gap:8px}.share-head h2{font-size:18px;line-height:1.2;margin:0 0 5px}.share-head p{font-size:12px;color:var(--muted);margin:0 0 12px}.close{width:38px;height:38px;border-radius:11px;border:1px solid var(--border);background:var(--surface-alt);color:var(--text);font-size:20px}.share-buttons{display:flex;gap:9px;margin-bottom:13px}.share-action{display:grid;place-items:center;flex:1;min-height:44px;padding:9px;border:1px solid var(--border);border-radius:12px;text-decoration:none;color:var(--text);font-weight:800;background:var(--surface-alt)}.share-action.whatsapp{background:#167b48;color:#fff;border-color:#18834d}.qr-frame{background:#fff;border-radius:15px;padding:12px;display:grid;place-items:center;width:fit-content;margin:auto}.qr-frame img{display:block;max-width:calc(100vw - 95px);width:min(225px,54dvh);aspect-ratio:1;object-fit:contain}.qr-note{text-align:center;color:var(--muted);font-size:12px;margin:11px 0 0}
-@media(max-height:600px){.app{gap:6px;padding-top:max(6px,env(safe-area-inset-top));padding-bottom:max(6px,env(safe-area-inset-bottom))}.header{min-height:45px}.mark,.square{width:40px;height:40px}.header h1{font-size:17px}.header p{font-size:10px}.hint{font-size:10px}.week{gap:5px;--closed-h:clamp(43px,9.4dvh,59px)}.day-button{padding:5px 12px}.day-button::-webkit-details-marker{display:none}.day-button::marker{content:""}.day-title{font-size:17px}.day-desc{font-size:10px}.day-pill{font-size:9px;padding:4px 7px}.lesson{min-height:39px;padding:5px 7px}.recreo{padding:4px}}
-@media(max-width:350px){.app{padding-left:9px;padding-right:9px}.header{gap:7px}.header h1{font-size:17px}.header p{font-size:10px}.actions{gap:5px}.square{width:39px;height:39px}.mark{width:39px;height:39px}.day-button{padding-left:10px;padding-right:10px}.day-meta{gap:6px}.day-pill{font-size:9px}}
-@media(prefers-reduced-motion:reduce){.chevron{transition:none}}
-
-/* V1.3.9: distribución exacta de 5 tarjetas dentro del área utilizable.
-   Se toma 100dvh y se respetan las áreas seguras del sistema en iOS/Android.
-   Cuando se abre una tarjeta, la página recupera desplazamiento natural. */
-html,body{width:100%;min-height:100%;overscroll-behavior-y:auto}
-body{height:100vh;height:100dvh;min-height:100dvh;overflow-x:hidden;overflow-y:hidden}
-.app{
- width:100%;height:100vh;height:100dvh;min-height:0;max-height:100dvh;
- display:grid;grid-template-rows:auto auto minmax(0,1fr);
- gap:clamp(5px,1.1dvh,10px);
- padding-top:max(9px,env(safe-area-inset-top,0px));
- padding-right:max(12px,env(safe-area-inset-right,0px));
- padding-bottom:max(14px,env(safe-area-inset-bottom,0px));
- padding-left:max(12px,env(safe-area-inset-left,0px));
-}
-.week{
- display:grid;grid-template-rows:repeat(5,minmax(0,1fr));
- flex:none;min-height:0;overflow:hidden;
- gap:clamp(5px,.95dvh,10px);
-}
-.week .day{display:block;height:100%;min-height:0;flex:none;overflow:hidden}
-.week .day .day-button{height:100%;min-height:0}
-/* El detalle expandido nunca queda cortado: ocupa su altura real y scrollea el documento. */
-body.is-expanded,body:has(.day[open]){height:auto;min-height:100dvh;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.app.has-open,.app:has(.day[open]){
- display:flex;flex-direction:column;height:auto;max-height:none;min-height:100dvh;
-}
-.week.expanded,.week:has(.day[open]){
- display:flex;flex-direction:column;flex:0 0 auto;min-height:0;height:auto;overflow:visible;
-}
-.week.expanded .day,.week:has(.day[open]) .day{
- flex:none;height:auto;min-height:0;overflow:visible;
-}
-.week.expanded .day .day-button,.week:has(.day[open]) .day .day-button{height:auto;min-height:62px}
-.week.expanded .day[open] .detail,.week:has(.day[open]) .day[open] .detail{
- height:auto;max-height:none;min-height:0;overflow:visible;overscroll-behavior:auto;
-}
-.week.expanded .day[open] .chevron,.week:has(.day[open]) .day[open] .chevron{transform:rotate(90deg)}
-/* Al estar todo cerrado, el bloque Viernes queda por encima de la barra del sistema. */
-@media(max-height:600px){
- .app{gap:5px;padding-top:max(6px,env(safe-area-inset-top,0px));padding-bottom:max(10px,env(safe-area-inset-bottom,0px))}
- .week{gap:5px}
- .week.expanded .day .day-button,.week:has(.day[open]) .day .day-button{min-height:54px}
-}
-/* Modales: se mantienen dentro del área segura en dispositivos con notch o barra de gestos. */
-.overlay{padding-top:max(12px,env(safe-area-inset-top,0px));padding-right:max(12px,env(safe-area-inset-right,0px));padding-bottom:max(12px,env(safe-area-inset-bottom,0px));padding-left:max(12px,env(safe-area-inset-left,0px))}
-.share-panel{max-height:calc(100dvh - max(12px,env(safe-area-inset-top,0px)) - max(12px,env(safe-area-inset-bottom,0px)) - 8px)}
-
-/* V1.3.7: acceso a ayuda, ícono Compartir de tres puntos y tres controles adaptativos. */
-.help-btn{font-size:22px;font-weight:900;letter-spacing:-.03em}
-.more-btn svg{display:block;pointer-events:none}
-.help-panel{max-height:min(90dvh,820px);overflow-y:auto;overscroll-behavior:contain}
-.help-version{font-size:11px;color:var(--accent);font-weight:850;letter-spacing:.02em;margin:4px 0 12px}
-.help-lead{font-size:12px;color:var(--muted);line-height:1.5;margin:6px 0 15px}
-.help-section{border:1px solid var(--border);background:var(--surface-alt);border-radius:14px;padding:13px 14px;margin:9px 0}
-.help-section h3{font-size:14px;margin:0 0 9px;line-height:1.25;display:flex;gap:8px;align-items:center}
-.help-section ol{margin:6px 0 0 20px;padding:0}
-.help-section li{margin:0 0 7px;padding-left:2px;font-size:12px;line-height:1.5}
-.help-section li:last-child{margin-bottom:0}
-.help-section p{font-size:12px;color:var(--muted);line-height:1.5;margin:7px 0 0}
-.help-section strong{color:var(--text)}
-.help-tip{font-size:11px;color:var(--muted);line-height:1.5;margin:11px 4px 2px}
-@media(max-width:390px){.header{gap:7px}.header h1{font-size:17px}.header p{font-size:10px}.actions{gap:5px}.square{width:39px;height:39px}.mark{width:39px;height:39px}}
-@media(max-width:350px){.header{gap:5px}.header h1{font-size:15.5px}.header p{font-size:9px}.actions{gap:4px}.square{width:35px;height:35px;border-radius:10px}.mark{width:35px;height:35px;border-radius:10px}.help-btn{font-size:19px}.more-btn svg{width:21px;height:21px}}
-
-
-/* V1.3.9: ícono CH sobre calendario, sin afectar el alto seguro de las tarjetas. */
-.mark{background:none;overflow:hidden;box-shadow:none;flex-shrink:0}
-.mark img{display:block;width:100%;height:100%;object-fit:cover;border-radius:inherit}
-.header-text p{line-height:1.25;overflow-wrap:normal}
-@media(max-width:380px){.header-text p{font-size:10px}}
-@media(max-width:350px){.header-text p{font-size:9.4px}}
+:root{--bg:#0b101c;--surface:#171d2a;--surface-alt:#1e2636;--border:#313b4e;--text:#f7f9fd;--muted:#acb9cc;--accent:#78b6ff;--shade:#27354b;--shadow:0 6px 22px #0003;--selector-shadow:0 20px 60px rgba(0,0,0,.45);color-scheme:dark}
+body.theme-blue{--bg:#071122;--surface:#111f38;--surface-alt:#172b4a;--border:#30486b;--text:#f7faff;--muted:#abc1de;--accent:#78c5ff;--shade:#203b61;--shadow:0 6px 22px #0003;color-scheme:dark}
+body.theme-light{--bg:#f0f4fb;--surface:#fff;--surface-alt:#f0f5fd;--border:#d5e0ef;--text:#192943;--muted:#627792;--accent:#116cb3;--shade:#e1edfc;--shadow:0 6px 18px #15325912;color-scheme:light}
+*{box-sizing:border-box} html,body{margin:0;min-height:100%;width:100%} body{height:100vh;height:100dvh;min-height:100dvh;overflow-x:hidden;overflow-y:hidden;background:var(--bg);color:var(--text);font:14px/1.3 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent;overscroll-behavior-y:auto} button{font:inherit;cursor:pointer} [hidden]{display:none!important} button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.app{max-width:700px;margin:0 auto;height:100vh;height:100dvh;min-height:100dvh;padding:max(8px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:6px;position:relative}
+.header{display:flex;gap:8px;align-items:center;min-height:48px} .mark{width:40px;height:40px;border-radius:12px;overflow:hidden;flex-shrink:0} .mark img{display:block;width:100%;height:100%;object-fit:cover} .header-text{min-width:0;flex:1} .header-text h1{font-size:18px;letter-spacing:-.035em;margin:0;line-height:1.08;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .header-text p{font-size:10.4px;color:var(--muted);margin:3px 0 0;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.actions{flex-shrink:0;display:flex;gap:5px;align-items:center} .square{width:38px;height:38px;border-radius:12px;background:var(--surface);border:1px solid var(--border);color:var(--text);display:grid;place-items:center;font-size:18px;box-shadow:var(--shadow);padding:0} .square svg{display:block;pointer-events:none} .course-btn{min-width:48px;padding:0 10px;font-size:12px;font-weight:900;letter-spacing:-.02em} .help-btn{font-size:24px;font-weight:900;line-height:1} .theme-btn{font-size:22px}
+.hint{color:var(--muted);font-size:10.4px;font-weight:650;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:0 2px} .hint em{font-style:normal;font-weight:850;color:var(--accent)}
+.week{display:grid;grid-template-rows:repeat(5,minmax(0,1fr));gap:6px;min-height:0;overflow:hidden}
+.day{display:flex;flex-direction:column;overflow:hidden;background:var(--surface);border:1px solid var(--border);border-radius:17px;box-shadow:var(--shadow)} .day.today{border-color:var(--accent)} .day[open]{border-color:var(--accent);box-shadow:0 0 0 1px color-mix(in srgb,var(--accent),transparent 50%),var(--shadow)}
+.day-button{list-style:none;width:100%;height:100%;min-height:0;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;padding:8px 14px;background:transparent;border:0;color:var(--text)} .day-button::-webkit-details-marker{display:none} .day-button::marker{content:""} .day-title{font-size:clamp(16px,4.3vw,21px);font-weight:850;letter-spacing:-.035em} .day-desc{font-size:10.5px;color:var(--muted);margin-top:1px;font-variant-numeric:tabular-nums} .day-meta{display:flex;align-items:center;gap:8px;flex-shrink:0} .day-pill{background:var(--shade);color:var(--accent);border-radius:20px;padding:6px 9px;font-weight:850;font-size:9.8px} .chevron{font-size:22px;color:var(--muted);width:12px;display:inline-flex;align-items:center;justify-content:center;transition:transform .18s ease}
+.week.expanded .day:not([open]){flex:0 0 clamp(48px,9.5dvh,70px)} .week.expanded .day[open]{flex:1 1 auto} .week.expanded{display:flex;flex-direction:column;overflow:visible} .week.expanded .day .day-button{height:auto;min-height:clamp(48px,9.5dvh,70px)} .week.expanded .day[open] .chevron{transform:rotate(90deg)}
+.detail{padding:7px 9px 10px;border-top:1px solid var(--border);overflow:visible} .lesson{display:grid;grid-template-columns:66px 4px minmax(0,1fr);align-items:center;gap:9px;min-height:42px;padding:6px 9px;border-radius:11px;background:var(--surface-alt);margin-bottom:5px} .lesson .hours{font-size:11px;line-height:1.38;color:var(--accent);font-weight:800;font-variant-numeric:tabular-nums} .lesson .bar{align-self:stretch;border-radius:7px;background:var(--materia)} .lesson strong{display:block;font-size:12.5px;line-height:1.18;overflow-wrap:anywhere} .lesson small{color:var(--muted);font-size:10px} .recreo{text-align:center;font-size:11px;color:var(--muted);font-weight:750;padding:6px 4px;margin:1px 0 6px;border-top:1px dashed var(--border);border-bottom:1px dashed var(--border)}
+body.is-expanded{height:auto;min-height:100dvh;overflow-y:auto;-webkit-overflow-scrolling:touch} .app.has-open{display:flex;flex-direction:column;height:auto;max-height:none;min-height:100dvh} .week.expanded .day{overflow:visible}
+.overlay{position:fixed;inset:0;background:#020712b3;z-index:12;display:flex;justify-content:center;align-items:flex-end;padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))} .panel{width:min(100%,520px);max-height:calc(100dvh - max(12px,env(safe-area-inset-top)) - max(12px,env(safe-area-inset-bottom)) - 8px);overflow:auto;border-radius:20px;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:17px;box-shadow:0 26px 75px #0008}
+.share-head{display:flex;justify-content:space-between;gap:8px} .share-head h2{font-size:18px;line-height:1.2;margin:0 0 5px} .share-head p{font-size:12px;color:var(--muted);margin:0 0 12px} .close{width:38px;height:38px;border-radius:11px;border:1px solid var(--border);background:var(--surface-alt);color:var(--text);font-size:20px} .share-buttons{display:flex;gap:9px;margin-bottom:13px} .share-action{display:grid;place-items:center;flex:1;min-height:44px;padding:9px;border:1px solid var(--border);border-radius:12px;text-decoration:none;color:var(--text);font-weight:800;background:var(--surface-alt)} .share-action.whatsapp{background:#167b48;color:#fff;border-color:#18834d} .qr-frame{background:#fff;border-radius:15px;padding:12px;display:grid;place-items:center;width:fit-content;margin:auto} .qr-frame img{display:block;max-width:calc(100vw - 95px);width:min(225px,54dvh);aspect-ratio:1;object-fit:contain} .qr-note{text-align:center;color:var(--muted);font-size:12px;margin:11px 0 0}
+.help-panel{max-height:min(90dvh,820px);overflow-y:auto;overscroll-behavior:contain} .help-version{font-size:11px;color:var(--accent);font-weight:850;letter-spacing:.02em;margin:4px 0 12px} .help-lead{font-size:12px;color:var(--muted);line-height:1.5;margin:6px 0 15px} .help-section{border:1px solid var(--border);background:var(--surface-alt);border-radius:14px;padding:13px 14px;margin:9px 0} .help-section h3{font-size:14px;margin:0 0 9px;line-height:1.25} .help-section ol{margin:6px 0 0 20px;padding:0} .help-section li{margin:0 0 7px;padding-left:2px;font-size:12px;line-height:1.5} .help-section p{font-size:12px;color:var(--muted);line-height:1.5;margin:7px 0 0} .help-section strong{color:var(--text)} .help-tip{font-size:11px;color:var(--muted);line-height:1.5;margin:11px 4px 2px}
+.selector-overlay{position:fixed;inset:0;z-index:10;background:#02071280} .selector-panel{position:absolute;right:max(10px,env(safe-area-inset-right));top:calc(max(8px,env(safe-area-inset-top)) + 44px);width:min(320px,calc(100vw - 20px - env(safe-area-inset-left) - env(safe-area-inset-right)));background:var(--surface);border:1px solid var(--border);border-radius:18px;box-shadow:var(--selector-shadow);padding:12px} .selector-title{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:850;margin:0 0 10px} .selector-grid{display:grid;gap:8px} .selector-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px} .year-chip,.section-chip{border:1px solid var(--border);background:var(--surface-alt);color:var(--text);border-radius:12px;min-height:38px;padding:0 12px;font-weight:850;transition:transform .18s ease,background .18s ease,border-color .18s ease, color .18s ease;animation:breathe 1.8s ease-in-out infinite} .year-chip:active,.section-chip:active{transform:scale(.95)} .year-chip:hover,.section-chip:hover{transform:scale(1.04)} .section-group{display:flex;gap:6px} .section-chip{min-width:42px;padding:0 10px} .year-chip.active,.section-chip.active{background:var(--shade);border-color:var(--accent);color:var(--accent)} @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+@media (prefers-reduced-motion:reduce){.chevron,.year-chip,.section-chip{transition:none;animation:none}}
+@media(max-height:700px){.app{gap:5px;padding-top:max(6px,env(safe-area-inset-top));padding-bottom:max(8px,env(safe-area-inset-bottom))} .header{min-height:44px} .mark{width:38px;height:38px} .square{width:36px;height:36px;border-radius:11px} .course-btn{min-width:44px;padding:0 8px;font-size:11px} .header-text h1{font-size:17px} .header-text p{font-size:9.8px} .hint{font-size:9.8px} .week{gap:5px} .day-button{padding:7px 12px} .day-title{font-size:16.2px} .day-desc{font-size:10px} .day-pill{font-size:9.2px;padding:5px 8px} .selector-panel{top:calc(max(6px,env(safe-area-inset-top)) + 42px)}}
+@media(max-width:390px){.header{gap:7px} .actions{gap:4px} .header-text h1{font-size:16.8px} .header-text p{font-size:9.7px} .square{width:36px;height:36px} .course-btn{min-width:42px;padding:0 7px;font-size:11px} .hint{font-size:10px}}
+@media(max-width:350px){.app{padding-left:max(8px,env(safe-area-inset-left));padding-right:max(8px,env(safe-area-inset-right))} .header{gap:6px} .header-text h1{font-size:15.5px} .header-text p{font-size:9px} .square{width:34px;height:34px;border-radius:10px} .course-btn{min-width:39px;padding:0 6px;font-size:10px} .help-btn{font-size:21px} .theme-btn{font-size:18px} .day-button{padding:7px 10px} .day-meta{gap:6px} .day-pill{font-size:8.8px}}
 </style>
 </head>
 <body class="theme-blue">
 <div class="app">
  <header class="header">
-  <div class="mark" aria-hidden="true"><img src="./icon-192.png" width="43" height="43" alt="" decoding="async"></div>
-  <div class="header-text"><h1>Horario Escolar</h1><p>Tercer año A · Materias · lunes a viernes</p></div>
+  <div class="mark" aria-hidden="true"><img src="./icon-192.png" width="40" height="40" alt="" decoding="async"></div>
+  <div class="header-text"><h1 id="titleMain">Horario Escolar</h1><p id="titleSub">Tercer año A · Materias · lunes a viernes</p></div>
   <div class="actions">
-   <button id="shareBtn" class="square more-btn" type="button" aria-label="Compartir por WhatsApp o código QR" title="Compartir"><svg viewBox="0 0 24 24" width="23" height="23" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></button>
+   <button id="courseBtn" class="square course-btn" type="button" aria-label="Elegir año y división" title="Elegir año y división">3A</button>
+   <button id="shareBtn" class="square more-btn" type="button" aria-label="Compartir por WhatsApp o código QR" title="Compartir"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.15" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.3" fill="currentColor" stroke="none"></circle><circle cx="6" cy="12" r="2.3" fill="currentColor" stroke="none"></circle><circle cx="18" cy="19" r="2.3" fill="currentColor" stroke="none"></circle><path d="M8 11l7-4"></path><path d="M8 13l7 4"></path></svg></button>
    <button id="helpBtn" class="square help-btn" type="button" aria-label="Ayuda e instalación" title="Ayuda">?</button>
-   <button id="themeBtn" class="square" type="button" aria-label="Cambiar tema" title="Cambiar tema">💙</button>
+   <button id="themeBtn" class="square theme-btn" type="button" aria-label="Cambiar tema" title="Cambiar tema">💙</button>
   </div>
  </header>
  <div class="hint"><span>Tocá un día y deslizá para ver todas las materias</span><em>Horario fijo</em></div>
- <section id="week" class="week" aria-label="Horario de lunes a viernes">
-<details class="day" id="day-0"><summary class="day-button" aria-label="Ver las materias del Lunes"><div><div class="day-title">Lunes</div><div class="day-desc">12:50 a 18:20</div></div><div class="day-meta"><span class="day-pill">5 clases</span><span class="chevron" aria-hidden="true">›</span></div></summary><div class="detail"><div class="lesson" style="--materia:#649eea"><div class="hours">12:50<br>13:50</div><div class="bar"></div><div class="info"><strong>Educación Física</strong><small>1.ª hora</small></div></div><div class="lesson" style="--materia:#ef5454"><div class="hours">13:50<br>14:50</div><div class="bar"></div><div class="info"><strong>Construcción de la Ciudadanía</strong><small>2.ª hora</small></div></div><div class="recreo">Recreo · 14:50 a 15:05</div><div class="lesson" style="--materia:#f7e058"><div class="hours">15:05<br>16:05</div><div class="bar"></div><div class="info"><strong>Inglés</strong><small>3.ª hora</small></div></div><div class="recreo">Recreo · 16:05 a 16:20</div><div class="lesson" style="--materia:#33d65a"><div class="hours">16:20<br>17:20</div><div class="bar"></div><div class="info"><strong>Historia</strong><small>4.ª hora</small></div></div><div class="lesson" style="--materia:#33d65a"><div class="hours">17:20<br>18:20</div><div class="bar"></div><div class="info"><strong>Historia</strong><small>5.ª hora</small></div></div></div></details>
+ <section id="week" class="week" aria-label="Horario de lunes a viernes"><details class="day" id="day-0"><summary class="day-button" aria-label="Ver las materias del Lunes"><div><div class="day-title">Lunes</div><div class="day-desc">12:50 a 18:20</div></div><div class="day-meta"><span class="day-pill">5 clases</span><span class="chevron" aria-hidden="true">›</span></div></summary><div class="detail"><div class="lesson" style="--materia:#649eea"><div class="hours">12:50<br>13:50</div><div class="bar"></div><div class="info"><strong>Educación Física</strong><small>1.ª hora</small></div></div><div class="lesson" style="--materia:#ef5454"><div class="hours">13:50<br>14:50</div><div class="bar"></div><div class="info"><strong>Construcción de la Ciudadanía</strong><small>2.ª hora</small></div></div><div class="recreo">Recreo · 14:50 a 15:05</div><div class="lesson" style="--materia:#f7e058"><div class="hours">15:05<br>16:05</div><div class="bar"></div><div class="info"><strong>Inglés</strong><small>3.ª hora</small></div></div><div class="recreo">Recreo · 16:05 a 16:20</div><div class="lesson" style="--materia:#33d65a"><div class="hours">16:20<br>17:20</div><div class="bar"></div><div class="info"><strong>Historia</strong><small>4.ª hora</small></div></div><div class="lesson" style="--materia:#33d65a"><div class="hours">17:20<br>18:20</div><div class="bar"></div><div class="info"><strong>Historia</strong><small>5.ª hora</small></div></div></div></details>
 <details class="day" id="day-1"><summary class="day-button" aria-label="Ver las materias del Martes"><div><div class="day-title">Martes</div><div class="day-desc">11:30 a 18:20</div></div><div class="day-meta"><span class="day-pill">6 clases</span><span class="chevron" aria-hidden="true">›</span></div></summary><div class="detail"><div class="lesson" style="--materia:#efa642"><div class="hours">11:30<br>12:30</div><div class="bar"></div><div class="info"><strong>Matemática</strong><small>Prehora</small></div></div><div class="lesson" style="--materia:#44b8ae"><div class="hours">12:50<br>13:50</div><div class="bar"></div><div class="info"><strong>Físico Química</strong><small>1.ª hora</small></div></div><div class="lesson" style="--materia:#22d4d9"><div class="hours">13:50<br>14:50</div><div class="bar"></div><div class="info"><strong>Biología</strong><small>2.ª hora</small></div></div><div class="recreo">Recreo · 14:50 a 15:05</div><div class="lesson" style="--materia:#efa642"><div class="hours">15:05<br>16:05</div><div class="bar"></div><div class="info"><strong>Matemática</strong><small>3.ª hora</small></div></div><div class="recreo">Recreo · 16:05 a 16:20</div><div class="lesson" style="--materia:#f7e058"><div class="hours">16:20<br>17:20</div><div class="bar"></div><div class="info"><strong>Inglés</strong><small>4.ª hora</small></div></div><div class="lesson" style="--materia:#f7e058"><div class="hours">17:20<br>18:20</div><div class="bar"></div><div class="info"><strong>Inglés</strong><small>5.ª hora</small></div></div></div></details>
 <details class="day" id="day-2"><summary class="day-button" aria-label="Ver las materias del Miércoles"><div><div class="day-title">Miércoles</div><div class="day-desc">12:50 a 18:20</div></div><div class="day-meta"><span class="day-pill">5 clases</span><span class="chevron" aria-hidden="true">›</span></div></summary><div class="detail"><div class="lesson" style="--materia:#9ccdab"><div class="hours">12:50<br>13:50</div><div class="bar"></div><div class="info"><strong>Geografía</strong><small>1.ª hora</small></div></div><div class="lesson" style="--materia:#efa642"><div class="hours">13:50<br>14:50</div><div class="bar"></div><div class="info"><strong>Matemática</strong><small>2.ª hora</small></div></div><div class="recreo">Recreo · 14:50 a 15:05</div><div class="lesson" style="--materia:#649eea"><div class="hours">15:05<br>16:05</div><div class="bar"></div><div class="info"><strong>Educación Física</strong><small>3.ª hora</small></div></div><div class="recreo">Recreo · 16:05 a 16:20</div><div class="lesson" style="--materia:#44b8ae"><div class="hours">16:20<br>17:20</div><div class="bar"></div><div class="info"><strong>Físico Química</strong><small>4.ª hora</small></div></div><div class="lesson" style="--materia:#d76be8"><div class="hours">17:20<br>18:20</div><div class="bar"></div><div class="info"><strong>Prácticas del Lenguaje</strong><small>5.ª hora</small></div></div></div></details>
 <details class="day" id="day-3"><summary class="day-button" aria-label="Ver las materias del Jueves"><div><div class="day-title">Jueves</div><div class="day-desc">12:50 a 18:20</div></div><div class="day-meta"><span class="day-pill">5 clases</span><span class="chevron" aria-hidden="true">›</span></div></summary><div class="detail"><div class="lesson" style="--materia:#e18d7e"><div class="hours">12:50<br>13:50</div><div class="bar"></div><div class="info"><strong>Educación Artística</strong><small>1.ª hora</small></div></div><div class="lesson" style="--materia:#e18d7e"><div class="hours">13:50<br>14:50</div><div class="bar"></div><div class="info"><strong>Educación Artística</strong><small>2.ª hora</small></div></div><div class="recreo">Recreo · 14:50 a 15:05</div><div class="lesson" style="--materia:#9ccdab"><div class="hours">15:05<br>16:05</div><div class="bar"></div><div class="info"><strong>Geografía</strong><small>3.ª hora</small></div></div><div class="recreo">Recreo · 16:05 a 16:20</div><div class="lesson" style="--materia:#d76be8"><div class="hours">16:20<br>17:20</div><div class="bar"></div><div class="info"><strong>Prácticas del Lenguaje</strong><small>4.ª hora</small></div></div><div class="lesson" style="--materia:#41d5cc"><div class="hours">17:20<br>18:20</div><div class="bar"></div><div class="info"><strong>Robótica</strong><small>5.ª hora</small></div></div></div></details>
-<details class="day" id="day-4"><summary class="day-button" aria-label="Ver las materias del Viernes"><div><div class="day-title">Viernes</div><div class="day-desc">12:50 a 18:20</div></div><div class="day-meta"><span class="day-pill">5 clases</span><span class="chevron" aria-hidden="true">›</span></div></summary><div class="detail"><div class="lesson" style="--materia:#d76be8"><div class="hours">12:50<br>13:50</div><div class="bar"></div><div class="info"><strong>Prácticas del Lenguaje</strong><small>1.ª hora</small></div></div><div class="lesson" style="--materia:#d76be8"><div class="hours">13:50<br>14:50</div><div class="bar"></div><div class="info"><strong>Prácticas del Lenguaje</strong><small>2.ª hora</small></div></div><div class="recreo">Recreo · 14:50 a 15:05</div><div class="lesson" style="--materia:#22d4d9"><div class="hours">15:05<br>16:05</div><div class="bar"></div><div class="info"><strong>Biología</strong><small>3.ª hora</small></div></div><div class="recreo">Recreo · 16:05 a 16:20</div><div class="lesson" style="--materia:#ef5454"><div class="hours">16:20<br>17:20</div><div class="bar"></div><div class="info"><strong>Construcción de la Ciudadanía</strong><small>4.ª hora</small></div></div><div class="lesson" style="--materia:#efa642"><div class="hours">17:20<br>18:20</div><div class="bar"></div><div class="info"><strong>Matemática</strong><small>5.ª hora</small></div></div></div></details>
-</section>
+<details class="day" id="day-4"><summary class="day-button" aria-label="Ver las materias del Viernes"><div><div class="day-title">Viernes</div><div class="day-desc">12:50 a 18:20</div></div><div class="day-meta"><span class="day-pill">5 clases</span><span class="chevron" aria-hidden="true">›</span></div></summary><div class="detail"><div class="lesson" style="--materia:#d76be8"><div class="hours">12:50<br>13:50</div><div class="bar"></div><div class="info"><strong>Prácticas del Lenguaje</strong><small>1.ª hora</small></div></div><div class="lesson" style="--materia:#d76be8"><div class="hours">13:50<br>14:50</div><div class="bar"></div><div class="info"><strong>Prácticas del Lenguaje</strong><small>2.ª hora</small></div></div><div class="recreo">Recreo · 14:50 a 15:05</div><div class="lesson" style="--materia:#22d4d9"><div class="hours">15:05<br>16:05</div><div class="bar"></div><div class="info"><strong>Biología</strong><small>3.ª hora</small></div></div><div class="recreo">Recreo · 16:05 a 16:20</div><div class="lesson" style="--materia:#ef5454"><div class="hours">16:20<br>17:20</div><div class="bar"></div><div class="info"><strong>Construcción de la Ciudadanía</strong><small>4.ª hora</small></div></div><div class="lesson" style="--materia:#efa642"><div class="hours">17:20<br>18:20</div><div class="bar"></div><div class="info"><strong>Matemática</strong><small>5.ª hora</small></div></div></div></details></section>
+</div>
+<div id="selectorOverlay" class="selector-overlay" hidden>
+ <div class="selector-panel" role="dialog" aria-modal="true" aria-labelledby="selectorTitle">
+  <div class="selector-title" id="selectorTitle"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="16" rx="3"></rect><path d="M3.5 8.5h17"></path><path d="M8 3.5v4"></path><path d="M16 3.5v4"></path><path d="M8 12h3"></path><path d="M13 12h3"></path><path d="M8 16h3"></path></svg><span>Elegí curso y división</span></div>
+  <div class="selector-grid"><div class="selector-row"><button class="year-chip" type="button" data-year="1">1 año</button><div class="section-group"><button class="section-chip" type="button" data-year="1" data-section="A">A</button><button class="section-chip" type="button" data-year="1" data-section="B">B</button></div></div>
+<div class="selector-row"><button class="year-chip" type="button" data-year="2">2 año</button><div class="section-group"><button class="section-chip" type="button" data-year="2" data-section="A">A</button><button class="section-chip" type="button" data-year="2" data-section="B">B</button></div></div>
+<div class="selector-row"><button class="year-chip" type="button" data-year="3">3 año</button><div class="section-group"><button class="section-chip" type="button" data-year="3" data-section="A">A</button><button class="section-chip" type="button" data-year="3" data-section="B">B</button></div></div>
+<div class="selector-row"><button class="year-chip" type="button" data-year="4">4 año</button><div class="section-group"><button class="section-chip" type="button" data-year="4" data-section="A">A</button><button class="section-chip" type="button" data-year="4" data-section="B">B</button></div></div>
+<div class="selector-row"><button class="year-chip" type="button" data-year="5">5 año</button><div class="section-group"><button class="section-chip" type="button" data-year="5" data-section="A">A</button><button class="section-chip" type="button" data-year="5" data-section="B">B</button></div></div>
+<div class="selector-row"><button class="year-chip" type="button" data-year="6">6 año</button><div class="section-group"><button class="section-chip" type="button" data-year="6" data-section="A">A</button><button class="section-chip" type="button" data-year="6" data-section="B">B</button></div></div></div>
+ </div>
 </div>
 <div id="shareOverlay" class="overlay" hidden>
- <section class="share-panel" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
-  <div class="share-head"><div><h2 id="shareTitle">Compartir horarios</h2><p>WhatsApp o código QR para escanear.</p></div><button id="closeShare" class="close" type="button" aria-label="Cerrar">×</button></div>
+ <section class="panel" role="dialog" aria-modal="true" aria-labelledby="shareTitle" tabindex="-1">
+  <div class="share-head"><div><h2 id="shareTitle">Compartir Horario Escolar</h2><p>Mandalo por WhatsApp o mostrà el código QR para abrir la app.</p></div><button id="closeShare" class="close" type="button" aria-label="Cerrar">×</button></div>
   <div class="share-buttons"><a id="waBtn" class="share-action whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a><button id="nativeShare" class="share-action" type="button">Compartir</button></div>
-  <div class="qr-frame"><img id="qrImage" src="data:image/png;base64,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" alt="Código QR para escanear" width="225" height="225"></div>
+  <div class="qr-frame"><img id="qrImage" src="./qr-horario.png" alt="Código QR para escanear" width="225" height="225"></div>
   <p id="qrNote" class="qr-note"></p>
  </section>
 </div>
 <div id="helpOverlay" class="overlay" hidden>
- <section class="share-panel help-panel" role="dialog" aria-modal="true" aria-labelledby="helpTitle" tabindex="-1">
-  <div class="share-head">
-   <div><h2 id="helpTitle">Ayuda · Horario Escolar</h2><div class="help-version">Versión V1.3.9 · PWA para Android y iPhone</div></div>
-   <button id="closeHelp" class="close" type="button" aria-label="Cerrar ayuda">×</button>
-  </div>
-  <p class="help-lead">Esta aplicación muestra el horario semanal fijo, con materias y recreos de lunes a viernes. Se puede instalar en el teléfono y consultar sin abrir el navegador.</p>
-  <section class="help-section" aria-labelledby="helpUseTitle">
-   <h3 id="helpUseTitle">📚 Cómo usar la aplicación</h3>
-   <ol>
-    <li>Tocá cualquiera de las cinco tarjetas horizontales para abrir las materias y los horarios de ese día.</li>
-    <li>Deslizá hacia abajo si necesitás ver el resto de las clases y los recreos. Al elegir otro día, se cierra el anterior.</li>
-    <li>El botón de arriba con <strong>tres puntos (•••)</strong> permite compartir por WhatsApp o mostrar un QR para escanear.</li>
-    <li>El botón de tema alterna entre <strong>Dark Blue → Claro → Dark</strong>.</li>
-   </ol>
-   <p>Las materias, los días y los horarios son fijos y no se modifican desde esta aplicación.</p>
-  </section>
-  <section class="help-section" aria-labelledby="helpAndroidTitle">
-   <h3 id="helpAndroidTitle">🤖 Instalar en Android</h3>
-   <ol>
-    <li>Abrí la dirección publicada de Horario Escolar con <strong>Google Chrome</strong>, no desde el archivo HTML descargado.</li>
-    <li>Tocá los <strong>tres puntos (⋮) de Chrome</strong>, en la esquina superior.</li>
-    <li>Seleccioná <strong>Instalar aplicación</strong>. En algunos celulares aparece como <strong>Agregar a pantalla principal</strong> y luego <strong>Instalar</strong>.</li>
-    <li>Confirmá <strong>Instalar</strong>. Encontrarás el ícono de Horario Escolar en el teléfono.</li>
-   </ol>
-  </section>
-  <section class="help-section" aria-labelledby="helpIphoneTitle">
-   <h3 id="helpIphoneTitle">🍎 Instalar en iPhone</h3>
-   <ol>
-    <li>Abrí el enlace publicado usando <strong>Safari</strong>.</li>
-    <li>Tocá <strong>Compartir</strong> (cuadrado con flecha hacia arriba). En algunas versiones de iOS: <strong>Más → Compartir</strong>.</li>
-    <li>Elegí <strong>Añadir a pantalla de inicio</strong>.</li>
-    <li>Dejá activada la opción <strong>Abrir como app web</strong>, si aparece, y tocá <strong>Añadir</strong>.</li>
-    <li>Abrí la aplicación desde su nuevo ícono en la pantalla de inicio.</li>
-   </ol>
-  </section>
-  <section class="help-section" aria-labelledby="helpUpdatesTitle">
-   <h3 id="helpUpdatesTitle">🔄 Actualización y conexión</h3>
-   <p>Para recibir una versión nueva, conectate a Internet y cerrá y volvé a abrir la aplicación. Las actualizaciones pueden requerir una segunda apertura. Si el ícono o el nombre no cambia, quizá tengas que reinstalarla.</p>
-   <p>Los horarios quedan disponibles sin conexión después de cargar correctamente la PWA. Para generar el QR con el enlace público necesitás conexión.</p>
-  </section>
+ <section class="panel help-panel" role="dialog" aria-modal="true" aria-labelledby="helpTitle" tabindex="-1">
+  <div class="share-head"><div><h2 id="helpTitle">Ayuda · Horario Escolar</h2><div class="help-version">Versión V1.4.0 · PWA para Android y iPhone</div></div><button id="closeHelp" class="close" type="button" aria-label="Cerrar ayuda">×</button></div>
+  <p class="help-lead">Esta aplicación muestra el horario semanal fijo, con materias y recreos de lunes a viernes. También incorpora un selector visual de año y división para futuras adaptaciones.</p>
+  <section class="help-section"><h3>📚 Cómo usar la aplicación</h3><ol><li>Tocá cualquiera de las cinco tarjetas horizontales para abrir las materias y los horarios de ese día.</li><li>Deslizá hacia abajo si necesitás ver el resto de las clases y los recreos. Al elegir otro día, se cierra el anterior.</li><li>El botón del curso (<strong>3A</strong> por defecto) despliega la lista para elegir entre <strong>1 a 6 año</strong> y división <strong>A o B</strong>.</li><li>El botón de compartir usa el ícono clásico de <strong>tres puntos unidos</strong> y permite compartir por WhatsApp o mostrar un QR.</li><li>El botón de tema alterna entre <strong>Dark Blue → Claro → Dark</strong>.</li></ol><p>Las materias, los días y los horarios publicados siguen siendo fijos y no se modifican desde esta aplicación.</p></section>
+  <section class="help-section"><h3>🤖 Instalar en Android</h3><ol><li>Abrí la dirección publicada con <strong>Google Chrome</strong>, no desde el archivo HTML descargado.</li><li>Tocá los <strong>tres puntos (⋮) de Chrome</strong> en la esquina superior.</li><li>Seleccioná <strong>Instalar aplicación</strong>. En algunos celulares aparece como <strong>Agregar a pantalla principal</strong> y luego <strong>Instalar</strong>.</li><li>Confirmá <strong>Instalar</strong>. Encontrarás el ícono de Horario Escolar en el teléfono.</li></ol></section>
+  <section class="help-section"><h3>🍎 Instalar en iPhone</h3><ol><li>Abrí el enlace publicado usando <strong>Safari</strong>.</li><li>Tocá <strong>Compartir</strong> (cuadrado con flecha hacia arriba).</li><li>Elegí <strong>Añadir a pantalla de inicio</strong>.</li><li>Si aparece, dejá activada la opción <strong>Abrir como app web</strong> y luego tocá <strong>Añadir</strong>.</li></ol></section>
+  <section class="help-section"><h3>🔄 Actualización y conexión</h3><p>Para recibir una versión nueva, conectate a Internet y cerrá y volvé a abrir la aplicación. Las actualizaciones pueden requerir una segunda apertura. Si el ícono o el nombre no cambia, quizá tengas que reinstalarla.</p><p>Los horarios quedan disponibles sin conexión después de cargar correctamente la PWA.</p></section>
   <p class="help-tip">Seguridad: esta aplicación no necesita usuario ni contraseña. Nunca compartas contraseñas ni códigos de acceso para usarla.</p>
  </section>
 </div>
-
 <script>
+
 (()=>{
 'use strict';
 const $=id=>document.getElementById(id);
@@ -187,107 +97,142 @@ const cards=[...document.querySelectorAll('.week > .day')];
 const themes=['theme-blue','theme-light','theme-dark'];
 const emojis={'theme-blue':'💙','theme-light':'☀️','theme-dark':'🌙'};
 const themeNames={'theme-blue':'Dark Blue','theme-light':'Claro','theme-dark':'Dark'};
+const S=[['Lunes',[['12:50','Educación Física'],['13:50','Construcción de la Ciudadanía'],['15:05','Inglés'],['16:20','Historia'],['17:20','Historia']]],['Martes',[['11:30','Matemática'],['12:50','Físico Química'],['13:50','Biología'],['15:05','Matemática'],['16:20','Inglés'],['17:20','Inglés']]],['Miércoles',[['12:50','Geografía'],['13:50','Matemática'],['15:05','Educación Física'],['16:20','Físico Química'],['17:20','Prácticas del Lenguaje']]],['Jueves',[['12:50','Educación Artística'],['13:50','Educación Artística'],['15:05','Geografía'],['16:20','Prácticas del Lenguaje'],['17:20','Robótica']]],['Viernes',[['12:50','Prácticas del Lenguaje'],['13:50','Prácticas del Lenguaje'],['15:05','Biología'],['16:20','Construcción de la Ciudadanía'],['17:20','Matemática']]]];
 let theme='theme-blue';
-try{const stored=localStorage.getItem('horario-escolar-theme') || localStorage.getItem('ivan-horarios-theme-v130');if(themes.includes(stored))theme=stored;}catch(_){}
+let selectedYear='3';
+let selectedSection='A';
+try {
+  const stored=localStorage.getItem('horario-escolar-theme');
+  if(themes.includes(stored)) theme=stored;
+  const course=localStorage.getItem('horario-escolar-course');
+  if(course && /^([1-6])([AB])$/.test(course)) {
+    selectedYear=course[0];
+    selectedSection=course[1];
+  }
+} catch(_) {}
+function courseLabelLong(){ return `${selectedYear}° año ${selectedSection}`; }
+function courseLabelShort(){ return `${selectedYear}${selectedSection}`; }
+function applyCourse(){
+  $('courseBtn').textContent=courseLabelShort();
+  $('titleSub').textContent=courseLabelLong()+' · Materias · lunes a viernes';
+  document.title='Horario Escolar · '+courseLabelLong();
+  document.querySelector('meta[name="description"]').content='Horario fijo de '+courseLabelLong()+': materias y recreos de lunes a viernes.';
+  document.querySelectorAll('.year-chip').forEach(btn=>btn.classList.toggle('active', btn.dataset.year===selectedYear));
+  document.querySelectorAll('.section-chip').forEach(btn=>btn.classList.toggle('active', btn.dataset.year===selectedYear && btn.dataset.section===selectedSection));
+  try { localStorage.setItem('horario-escolar-course', courseLabelShort()); } catch(_) {}
+}
 function applyTheme(){
- document.body.classList.remove('theme-blue','theme-light','theme-dark');
- document.body.classList.add(theme);
- $('themeBtn').textContent=emojis[theme];
- $('themeBtn').setAttribute('aria-label','Tema '+themeNames[theme]+'. Cambiar tema');
- document.querySelector('meta[name="theme-color"]').content=theme==='theme-light'?'#f0f4fb':theme==='theme-blue'?'#071122':'#0b101c';
- try{localStorage.setItem('horario-escolar-theme',theme);}catch(_){}
+  document.body.classList.remove('theme-blue','theme-light','theme-dark');
+  document.body.classList.add(theme);
+  $('themeBtn').textContent=emojis[theme];
+  $('themeBtn').setAttribute('aria-label','Tema '+themeNames[theme]+'. Cambiar tema');
+  document.querySelector('meta[name="theme-color"]').content=theme==='theme-light' ? '#f0f4fb' : theme==='theme-blue' ? '#071122' : '#0b101c';
+  try { localStorage.setItem('horario-escolar-theme', theme); } catch(_) {}
 }
 let changeInProgress=false;
-// V1.3.5: al abrir Jueves o Viernes, desplazar automáticamente la página
-// hasta dejar centrada la tarjeta expandida. Si es más alta que la pantalla,
-// el navegador permite seguir desplazándose para leer el contenido completo.
 let recenterToken=0;
 function autoCenterLateWeek(card){
- const token=++recenterToken;
- requestAnimationFrame(()=>requestAnimationFrame(()=>{
-  if(token!==recenterToken || !card.open || $('shareOverlay').hidden===false)return;
-  const rect=card.getBoundingClientRect();
-  const viewport=window.visualViewport?.height || window.innerHeight;
-  const scrollMax=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
-  const centerY=window.scrollY+rect.top+(rect.height-viewport)/2;
-  const target=Math.min(scrollMax,Math.max(0,centerY));
-  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  window.scrollTo({top:target,behavior:reduce?'instant':'smooth'});
- }));
+  const token=++recenterToken;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    if(token!==recenterToken || !card.open || $('shareOverlay').hidden===false) return;
+    const rect=card.getBoundingClientRect();
+    const viewport=window.visualViewport?.height || window.innerHeight;
+    const scrollMax=Math.max(0, document.documentElement.scrollHeight-window.innerHeight);
+    const centerY=window.scrollY + rect.top + (rect.height-viewport)/2;
+    const target=Math.min(scrollMax, Math.max(0, centerY));
+    const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({top:target, behavior:reduce?'instant':'smooth'});
+  }));
 }
 function updateOpen(clicked){
- if(changeInProgress)return;
- changeInProgress=true;
- if(clicked && clicked.open){for(const other of cards){if(other!==clicked)other.open=false;}}
- const isOpen=cards.some(c=>c.open);
- week.classList.toggle('expanded',isOpen);
- app.classList.toggle('has-open',isOpen);
- document.body.classList.toggle('is-expanded',isOpen);
- changeInProgress=false;
- if(clicked && clicked.open && (clicked.id==='day-3'||clicked.id==='day-4')){
-  autoCenterLateWeek(clicked);
- }else if(!isOpen){
-  recenterToken++;
- }
+  if(changeInProgress) return;
+  changeInProgress=true;
+  if(clicked && clicked.open){ for(const other of cards){ if(other!==clicked) other.open=false; } }
+  const isOpen=cards.some(c=>c.open);
+  week.classList.toggle('expanded', isOpen);
+  app.classList.toggle('has-open', isOpen);
+  document.body.classList.toggle('is-expanded', isOpen);
+  changeInProgress=false;
+  if(clicked && clicked.open && (clicked.id==='day-3' || clicked.id==='day-4')) autoCenterLateWeek(clicked); else if(!isOpen) recenterToken++;
 }
 for(const card of cards){
- const summary=card.querySelector('summary');
- // Cierre inmediato antes de abrir otra tarjeta (el evento toggle puede llegar más tarde).
- summary.addEventListener('click',()=>{if(!card.open){for(const other of cards){if(other!==card)other.open=false;}}});
- card.addEventListener('toggle',()=>updateOpen(card));
+  const summary=card.querySelector('summary');
+  summary.addEventListener('click', ()=>{ if(!card.open){ for(const other of cards){ if(other!==card) other.open=false; } } });
+  card.addEventListener('toggle', ()=>updateOpen(card));
 }
 const now=new Date().getDay();
-if(now>=1&&now<=5){cards[now-1].classList.add('today');cards[now-1].querySelector('.day-pill').textContent='HOY';}
+if(now>=1 && now<=5){ cards[now-1].classList.add('today'); cards[now-1].querySelector('.day-pill').textContent='HOY'; }
 function publishedUrl(){
- try{const u=new URL(location.href);if(!['https:','http:'].includes(u.protocol)||['localhost','127.0.0.1'].includes(u.hostname))return '';u.search='';u.hash='';return u.href;}catch(_){return '';}
+  try {
+    const u=new URL(location.href);
+    if(!['https:','http:'].includes(u.protocol) || ['localhost','127.0.0.1'].includes(u.hostname)) return '';
+    u.search=''; u.hash='';
+    return u.href;
+  } catch(_) { return ''; }
 }
-const S=[
- ['Lunes', [['12:50','Educación Física'],['13:50','Construcción de la Ciudadanía'],['15:05','Inglés'],['16:20','Historia'],['17:20','Historia']]],
- ['Martes', [['11:30','Matemática'],['12:50','Físico Química'],['13:50','Biología'],['15:05','Matemática'],['16:20','Inglés'],['17:20','Inglés']]],
- ['Miércoles', [['12:50','Geografía'],['13:50','Matemática'],['15:05','Educación Física'],['16:20','Físico Química'],['17:20','Prácticas del Lenguaje']]],
- ['Jueves', [['12:50','Educación Artística'],['13:50','Educación Artística'],['15:05','Geografía'],['16:20','Prácticas del Lenguaje'],['17:20','Robótica']]],
- ['Viernes', [['12:50','Prácticas del Lenguaje'],['13:50','Prácticas del Lenguaje'],['15:05','Biología'],['16:20','Construcción de la Ciudadanía'],['17:20','Matemática']]]
-];
-function scheduleText(){return '📚 Horario Escolar\n'+S.map(d=>d[0]+': '+d[1].map(c=>c[0]+' '+c[1]).join(' / ')).join('\n')+'\nRecreos: 14:50 a 15:05 y 16:05 a 16:20.';}
-function shareText(){const url=publishedUrl();return url?'📚 Horario Escolar:\n'+url:scheduleText();}
-const inlineQR=$('qrImage').src;
+function scheduleText(){
+  return '📚 Horario Escolar · '+courseLabelLong()+'\n'+S.map(d=>d[0]+': '+d[1].map(c=>c[0]+' '+c[1]).join(' / ')).join('\n')+'\nRecreos: 14:50 a 15:05 y 16:05 a 16:20.';
+}
+function shareText(){
+  const url=publishedUrl();
+  return url ? '📚 Horario Escolar · '+courseLabelLong()+':\n'+url : scheduleText();
+}
+const fallbackQR='./qr-horario.png';
+function closeSelector(){ $('selectorOverlay').hidden=true; $('courseBtn').setAttribute('aria-expanded','false'); }
+function closeShareIfOpen(){ if(!$('shareOverlay').hidden) $('shareOverlay').hidden=true; }
+function closeHelpIfOpen(){ if(!$('helpOverlay').hidden) $('helpOverlay').hidden=true; }
+function openSelector(){ closeShareIfOpen(); closeHelpIfOpen(); $('selectorOverlay').hidden=false; $('courseBtn').setAttribute('aria-expanded','true'); }
 function openShare(){
- $('helpOverlay').hidden=true;
- const url=publishedUrl();
- $('waBtn').href='https://wa.me/?text='+encodeURIComponent(shareText());
- const qr=$('qrImage');
- qr.onerror=()=>{qr.onerror=null;qr.src=inlineQR;$('qrNote').textContent='Sin conexión para generar el QR del enlace. Se muestra el resumen offline.';};
- if(url){qr.src='https://api.qrserver.com/v1/create-qr-code/?size=350x350&data='+encodeURIComponent(url);$('qrNote').textContent='Escaneá el QR para abrir la app publicada.';}
- else{qr.onerror=null;qr.src=inlineQR;$('qrNote').textContent='Archivo local: este QR contiene un resumen de horarios. Al publicarla, compartirá el enlace.';}
- $('shareOverlay').hidden=false;
- $('closeShare').focus();
+  closeSelector(); closeHelpIfOpen();
+  const url=publishedUrl();
+  $('waBtn').href='https://wa.me/?text='+encodeURIComponent(shareText());
+  const qr=$('qrImage');
+  qr.onerror=()=>{ qr.onerror=null; qr.src=fallbackQR; $('qrNote').textContent='Sin conexión para generar el QR del enlace. Se muestra un QR local.'; };
+  if(url){
+    qr.src='https://api.qrserver.com/v1/create-qr-code/?size=350x350&data='+encodeURIComponent(url);
+    $('qrNote').textContent='Escaneá el QR para abrir la app publicada.';
+  } else {
+    qr.onerror=null; qr.src=fallbackQR;
+    $('qrNote').textContent='Archivo local: al publicarla, este QR compartirá el enlace.';
+  }
+  $('shareOverlay').hidden=false;
+  $('closeShare').focus();
 }
-function closeShare(){$('shareOverlay').hidden=true;$('shareBtn').focus();}
-function openHelp(){
- closeShareIfOpen();
- $('helpOverlay').hidden=false;
- $('closeHelp').focus();
-}
-function closeHelp(){
- $('helpOverlay').hidden=true;
- $('helpBtn').focus();
-}
-function closeShareIfOpen(){if(!$('shareOverlay').hidden)$('shareOverlay').hidden=true;}
-$('helpBtn').addEventListener('click',openHelp);
-$('closeHelp').addEventListener('click',closeHelp);
-$('helpOverlay').addEventListener('click',e=>{if(e.target===$('helpOverlay'))closeHelp();});
-$('themeBtn').addEventListener('click',()=>{theme=themes[(themes.indexOf(theme)+1)%themes.length];applyTheme();});
-$('shareBtn').addEventListener('click',openShare);
-$('closeShare').addEventListener('click',closeShare);
-$('shareOverlay').addEventListener('click',e=>{if(e.target===$('shareOverlay'))closeShare();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!$('helpOverlay').hidden)closeHelp();else if(!$('shareOverlay').hidden)closeShare();}});
-$('nativeShare').addEventListener('click',async()=>{
- if(navigator.share){try{await navigator.share({title:'Horario Escolar',text:shareText()});}catch(_){}}
- else{window.open($('waBtn').href,'_blank','noopener');}
+function closeShare(){ $('shareOverlay').hidden=true; $('shareBtn').focus(); }
+function openHelp(){ closeSelector(); closeShareIfOpen(); $('helpOverlay').hidden=false; $('closeHelp').focus(); }
+function closeHelp(){ $('helpOverlay').hidden=true; $('helpBtn').focus(); }
+$('courseBtn').addEventListener('click', ()=>{ $('selectorOverlay').hidden ? openSelector() : closeSelector(); });
+$('selectorOverlay').addEventListener('click', e=>{ if(e.target===$('selectorOverlay')) closeSelector(); });
+document.querySelectorAll('.section-chip').forEach(btn=>btn.addEventListener('click', ()=>{ selectedYear=btn.dataset.year; selectedSection=btn.dataset.section; applyCourse(); closeSelector(); }));
+document.querySelectorAll('.year-chip').forEach(btn=>btn.addEventListener('click', ()=>{ selectedYear=btn.dataset.year; applyCourse(); }));
+$('helpBtn').addEventListener('click', openHelp);
+$('closeHelp').addEventListener('click', closeHelp);
+$('helpOverlay').addEventListener('click', e=>{ if(e.target===$('helpOverlay')) closeHelp(); });
+$('themeBtn').addEventListener('click', ()=>{ theme=themes[(themes.indexOf(theme)+1)%themes.length]; applyTheme(); });
+$('shareBtn').addEventListener('click', openShare);
+$('closeShare').addEventListener('click', closeShare);
+$('shareOverlay').addEventListener('click', e=>{ if(e.target===$('shareOverlay')) closeShare(); });
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape'){
+    if(!$('selectorOverlay').hidden) closeSelector();
+    else if(!$('helpOverlay').hidden) closeHelp();
+    else if(!$('shareOverlay').hidden) closeShare();
+  }
+});
+$('nativeShare').addEventListener('click', async()=>{
+  if(navigator.share){
+    try { await navigator.share({title:'Horario Escolar · '+courseLabelLong(), text:shareText(), url:publishedUrl()||undefined}); } catch(_) {}
+  } else {
+    window.open($('waBtn').href, '_blank', 'noopener');
+  }
 });
 applyTheme();
-if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));}
+applyCourse();
+if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+  window.addEventListener('load', ()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
+}
 })();
+
 </script>
 </body>
 </html>
