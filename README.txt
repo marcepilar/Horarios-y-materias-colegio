@@ -1,8 +1,8 @@
-HORARIO ESCOLAR — PWA V1.4.6 (CANDIDATA DE PRUEBA)
+HORARIO ESCOLAR — PWA V1.4.7 · VERSIÓN ESTABLE OFICIAL (a pedido del usuario)
 
-Basada en la versión estable V1.4.5.
-Cambios visuales únicamente: tarjetas con adelanto de materias, acentos y animaciones.
+Actualización visual de los botones y chips partiendo de V1.4.6.
+Sin cambios en materias ni horarios.
 
-Para publicar: subir los archivos DESCOMPRIMIDOS a la raíz del mismo repositorio de GitHub Pages, reemplazando los anteriores.
+INSTALACIÓN: extraer el ZIP y subir TODOS los archivos a la raíz del repositorio GitHub Pages ya creado; reemplazar los archivos anteriores y confirmar Commit changes.
 
-IMPORTANTE: se mantiene el único horario real de Tercer año A. La selección de otros cursos cambia la etiqueta, no las materias.
+NOTA: únicamente el horario 3A tiene materias reales; los otros cursos del selector cambian el rótulo pero no los horarios.
