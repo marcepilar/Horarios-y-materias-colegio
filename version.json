@@ -1,13 +1,13 @@
 {
   "app": "Horario Escolar",
-  "version": "V1.4.12",
+  "version": "V1.4.13",
   "release_date": "2026-11-05",
-  "status": "estable",
-  "base_estable": "V1.4.8",
+  "status": "prueba",
+  "base_estable": "V1.4.12",
   "changes": [
-    "Tarjeta superior del Colegio Chesterton más compacta: se redujo únicamente el espacio blanco superior e inferior.",
-    "Escudo y marca originales conservados sin alteraciones de forma, texto ni colores.",
-    "Se mantuvieron sin cambios Dark Blue, ciclo lectivo, cinco tarjetas, horarios, Ayuda y actualizaciones."
+    "Icono de Compartir afinado: trazo de 2,5 a 2,15 (reducción aproximada del 14 %).",
+    "Signo de Ayuda afinado: peso tipográfico de 900 a 750, sin alterar su tamaño ni el círculo de fondo.",
+    "Se mantienen las cinco tarjetas, horarios, tres temas, selector, logo del colegio, ciclo lectivo y aviso de actualización."
   ],
-  "notice": "Versión estable oficial V1.4.12, aprobada para sustituir V1.4.8. No se modificaron horarios ni materias."
+  "notice": "Versión de prueba. V1.4.12 sigue siendo la última versión estable oficial hasta confirmación."
 }
