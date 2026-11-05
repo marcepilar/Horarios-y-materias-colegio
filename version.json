@@ -1,10 +1,10 @@
 {
   "app": "Horario Escolar",
-  "version": "V1.4.4",
-  "release_date": "2026-11-04",
+  "version": "V1.4.5",
+  "release_date": "2026-11-05",
   "changes": [
-    "Navegación con historial: cerrar con X o usar Atrás del teléfono regresa a la vista anterior, también desde las tarjetas.",
-    "El texto del selector de curso tiene animación propia de acercar y alejar.",
-    "Ayuda: guía de instalación con tarjetas Android y iPhone e íconos tomados de la imagen de referencia."
+    "Ayuda ahora ocupa el alto y ancho de la pantalla útil con zonas seguras Android/iPhone y botón cerrar siempre visible.",
+    "Instalar la app: numeración corregida de 2 a 1.",
+    "Íconos Android y Apple integrados dentro del HTML, sin dependencias de imágenes externas o cachés."
   ]
 }
