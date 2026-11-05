@@ -35,6 +35,71 @@ body.is-expanded{height:auto;min-height:100dvh;overflow-y:auto;-webkit-overflow-
 @media(max-height:700px){.app{gap:5px;padding-top:max(6px,env(safe-area-inset-top));padding-bottom:max(8px,env(safe-area-inset-bottom))} .header{min-height:44px} .mark{width:38px;height:38px} .square{width:36px;height:36px;border-radius:11px} .course-btn{min-width:44px;padding:0 8px;font-size:11px} .header-text h1{font-size:17px} .header-text p{font-size:9.8px} .hint{font-size:9.8px} .week{gap:5px} .day-button{padding:7px 12px} .day-title{font-size:16.2px} .day-desc{font-size:10px} .day-pill{font-size:9.2px;padding:5px 8px} .selector-panel{top:calc(max(6px,env(safe-area-inset-top)) + 42px)}}
 @media(max-width:390px){.header{gap:7px} .actions{gap:4px} .header-text h1{font-size:16.8px} .header-text p{font-size:9.7px} .square{width:36px;height:36px} .course-btn{min-width:42px;padding:0 7px;font-size:11px} .hint{font-size:10px}}
 @media(max-width:350px){.app{padding-left:max(8px,env(safe-area-inset-left));padding-right:max(8px,env(safe-area-inset-right))} .header{gap:6px} .header-text h1{font-size:15.5px} .header-text p{font-size:9px} .square{width:34px;height:34px;border-radius:10px} .course-btn{min-width:39px;padding:0 6px;font-size:10px} .help-btn{font-size:21px} .theme-btn{font-size:18px} .day-button{padding:7px 10px} .day-meta{gap:6px} .day-pill{font-size:8.8px}}
+
+/* V1.4.2 — Corrección de ancho: ningún hijo del grid puede ampliarlo */
+html,body{max-width:100%;overflow-x:clip}
+.app{width:100%;max-width:700px;min-width:0;grid-template-columns:minmax(0,1fr);overflow-x:clip}
+.app > *, .header, .header-text, .actions, .hint, .hint span, .week, .day, .day-button,
+.day-button > div:first-child, .detail, .lesson .info{min-width:0;max-width:100%}
+.header,.hint,.week{width:100%}
+.day-button{width:100%}
+.day-meta{flex-shrink:0}
+.hint{overflow:hidden}
+.hint span{overflow:hidden;text-overflow:ellipsis}
+.hint em{white-space:nowrap;flex-shrink:0}
+/* Selector más visible y animación permanente del curso elegido */
+@keyframes courseFocusPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
+.course-btn{font-size:15px;font-weight:900;color:var(--accent);background:var(--shade);
+ border:2px solid var(--accent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent),transparent 75%),
+ 0 0 14px color-mix(in srgb,var(--accent),transparent 77%);
+ animation:courseFocusPulse 1.9s ease-in-out infinite;transform-origin:center}
+.year-chip,.section-chip{animation:none}
+.year-chip.active,.section-chip.active{animation:breathe 1.9s ease-in-out infinite}
+.selector-panel{max-height:calc(100dvh - 72px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overflow-y:auto}
+/* En móviles, icono/título arriba y los 4 botones distribuidos ABAJO */
+@media(max-width:480px){
+ .app{gap:clamp(3px,.8dvh,7px);padding-left:max(9px,env(safe-area-inset-left));padding-right:max(9px,env(safe-area-inset-right))}
+ .header{display:grid!important;grid-template-columns:42px minmax(0,1fr)!important;
+  grid-template-areas:"mark heading" "actions actions";grid-template-rows:auto auto;gap:5px 8px;
+  align-items:center;min-height:0;width:100%}
+ .mark{grid-area:mark;width:42px;height:42px}
+ .header-text{grid-area:heading;min-width:0;width:100%}
+ .header-text h1{font-size:clamp(16px,4.8vw,20px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .header-text p{font-size:clamp(9.5px,2.65vw,11px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .actions{grid-area:actions;display:grid!important;grid-template-columns:minmax(74px,1.45fr) repeat(3,minmax(0,1fr));gap:7px;
+  min-width:0;width:100%;justify-self:stretch;align-items:center}
+ .actions > .square{width:100%!important;min-width:0!important;height:40px!important;border-radius:12px;padding:0!important}
+ .actions > .course-btn{font-size:16px!important}
+ .hint{font-size:10px;gap:6px;white-space:nowrap}
+ .week{gap:clamp(3px,.7dvh,8px)}
+ .day{width:100%;border-radius:15px}
+ .day-button{padding:clamp(4px,.9dvh,9px) 12px;gap:8px}
+ .day-title{font-size:clamp(16px,4.4vw,20px)}
+ .day-desc{font-size:10.2px}
+ .day-pill{font-size:9.5px;padding:5px 8px}
+}
+@media(max-width:350px){
+ .header{grid-template-columns:38px minmax(0,1fr)!important;gap:4px 7px}
+ .mark{width:38px;height:38px}
+ .actions{gap:5px;grid-template-columns:minmax(70px,1.5fr) repeat(3,minmax(0,1fr))}
+ .actions > .square{height:36px!important}
+ .actions > .course-btn{font-size:14px!important}
+ .hint{font-size:9.2px}
+ .day-button{padding:4px 9px}
+ .day-title{font-size:15px}
+ .day-desc{font-size:9.5px}
+ .day-pill{font-size:9px;padding:4px 6px}
+}
+@media(max-height:550px){
+ .header{row-gap:3px}
+ .actions > .square{height:34px!important}
+ .app{gap:3px;padding-top:max(4px,env(safe-area-inset-top));padding-bottom:max(5px,env(safe-area-inset-bottom))}
+ .day-button{padding-top:3px;padding-bottom:3px}
+ .day-title{font-size:15px}
+ .day-desc{font-size:9.3px}
+}
+@media(prefers-reduced-motion:reduce){.course-btn,.year-chip.active,.section-chip.active{animation:none}}
+
 </style>
 </head>
 <body class="theme-blue">
@@ -69,7 +134,7 @@ body.is-expanded{height:auto;min-height:100dvh;overflow-y:auto;-webkit-overflow-
 </div>
 <div id="shareOverlay" class="overlay" hidden>
  <section class="panel" role="dialog" aria-modal="true" aria-labelledby="shareTitle" tabindex="-1">
-  <div class="share-head"><div><h2 id="shareTitle">Compartir Horario Escolar</h2><p>Mandalo por WhatsApp o mostrà el código QR para abrir la app.</p></div><button id="closeShare" class="close" type="button" aria-label="Cerrar">×</button></div>
+  <div class="share-head"><div><h2 id="shareTitle">Compartir Horario Escolar</h2><p>Mandalo por WhatsApp o mostrá el código QR para abrir la app.</p></div><button id="closeShare" class="close" type="button" aria-label="Cerrar">×</button></div>
   <div class="share-buttons"><a id="waBtn" class="share-action whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a><button id="nativeShare" class="share-action" type="button">Compartir</button></div>
   <div class="qr-frame"><img id="qrImage" src="./qr-horario.png" alt="Código QR para escanear" width="225" height="225"></div>
   <p id="qrNote" class="qr-note"></p>
@@ -77,7 +142,7 @@ body.is-expanded{height:auto;min-height:100dvh;overflow-y:auto;-webkit-overflow-
 </div>
 <div id="helpOverlay" class="overlay" hidden>
  <section class="panel help-panel" role="dialog" aria-modal="true" aria-labelledby="helpTitle" tabindex="-1">
-  <div class="share-head"><div><h2 id="helpTitle">Ayuda · Horario Escolar</h2><div class="help-version">Versión V1.4.1 · PWA para Android y iPhone</div></div><button id="closeHelp" class="close" type="button" aria-label="Cerrar ayuda">×</button></div>
+  <div class="share-head"><div><h2 id="helpTitle">Ayuda · Horario Escolar</h2><div class="help-version">Versión V1.4.2 · PWA para Android y iPhone</div></div><button id="closeHelp" class="close" type="button" aria-label="Cerrar ayuda">×</button></div>
   <p class="help-lead">Esta aplicación muestra el horario semanal fijo, con materias y recreos de lunes a viernes. También incorpora un selector visual de año y división para futuras adaptaciones.</p>
   <section class="help-section"><h3>📚 Cómo usar la aplicación</h3><ol><li>Tocá cualquiera de las cinco tarjetas horizontales para abrir las materias y los horarios de ese día.</li><li>Deslizá hacia abajo si necesitás ver el resto de las clases y los recreos. Al elegir otro día, se cierra el anterior.</li><li>El botón del curso (<strong>3A</strong> por defecto) despliega la lista para elegir entre <strong>1 a 6 año</strong> y división <strong>A o B</strong>.</li><li>El botón de compartir usa el ícono clásico de <strong>tres puntos unidos</strong> y permite compartir por WhatsApp o mostrar un QR.</li><li>El botón de tema alterna entre <strong>Dark Blue → Claro → Dark</strong>.</li></ol><p>Las materias, los días y los horarios publicados siguen siendo fijos y no se modifican desde esta aplicación.</p></section>
   <section class="help-section"><h3>🤖 Instalar en Android</h3><ol><li>Abrí la dirección publicada con <strong>Google Chrome</strong>, no desde el archivo HTML descargado.</li><li>Tocá los <strong>tres puntos (⋮) de Chrome</strong> en la esquina superior.</li><li>Seleccioná <strong>Instalar aplicación</strong>. En algunos celulares aparece como <strong>Agregar a pantalla principal</strong> y luego <strong>Instalar</strong>.</li><li>Confirmá <strong>Instalar</strong>. Encontrarás el ícono de Horario Escolar en el teléfono.</li></ol></section>
