@@ -1,10 +1,8 @@
-HORARIO ESCOLAR — PWA V1.4.5 (VERSIÓN DE PRUEBA)
+HORARIO ESCOLAR — PWA V1.4.6 (CANDIDATA DE PRUEBA)
 
-Se basa en la V1.4.4. La V1.4.2 continúa como estable oficial.
+Basada en la versión estable V1.4.5.
+Cambios visuales únicamente: tarjetas con adelanto de materias, acentos y animaciones.
 
-Cambios:
-- Ayuda a pantalla completa con áreas seguras y X fija.
-- Número de instalación cambiado a 1.
-- Íconos originales Android/Apple insertados en index.html, evitando imágenes rotas.
+Para publicar: subir los archivos DESCOMPRIMIDOS a la raíz del mismo repositorio de GitHub Pages, reemplazando los anteriores.
 
-Subir TODOS los archivos a la RAÍZ del repositorio marcepilar/Horarios-y-materias-colegio, reemplazando los anteriores. No subir el ZIP directamente.
+IMPORTANTE: se mantiene el único horario real de Tercer año A. La selección de otros cursos cambia la etiqueta, no las materias.

@@ -1,6 +1,6 @@
-/* Horario Escolar PWA v1.4.5 — actualizaciones y uso sin conexión */
+/* Horario Escolar PWA v1.4.6 — actualizaciones y uso sin conexión */
 const PREFIX = 'horario-escolar-v';
-const CACHE = PREFIX + '1.4.5';
+const CACHE = PREFIX + '1.4.6';
 const CORE = ['./','./index.html','./manifest.webmanifest','./version.json',
  './icon-192.png','./icon-512.png','./apple-touch-icon.png','./qr-horario.png','./ayuda-android.png','./ayuda-iphone.png'];
 self.addEventListener('install', event => {
