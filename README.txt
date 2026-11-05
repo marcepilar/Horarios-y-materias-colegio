@@ -1,8 +1,8 @@
-HORARIO ESCOLAR — PWA V1.4.7 · VERSIÓN ESTABLE OFICIAL (a pedido del usuario)
+HORARIO ESCOLAR — PWA V1.4.8 · CANDIDATA DE PRUEBA
 
-Actualización visual de los botones y chips partiendo de V1.4.6.
-Sin cambios en materias ni horarios.
+Base estable conservada: V1.4.7.
+Cambio único: cabecera «3.º año A · Ciclo lectivo 2026».
+El curso se actualiza al elegir otra división; el ciclo lectivo sigue el año del dispositivo cuando se abre o vuelve a la app.
+Los horarios NO cambian automáticamente. Solo 3A tiene un horario real cargado.
 
-INSTALACIÓN: extraer el ZIP y subir TODOS los archivos a la raíz del repositorio GitHub Pages ya creado; reemplazar los archivos anteriores y confirmar Commit changes.
-
-NOTA: únicamente el horario 3A tiene materias reales; los otros cursos del selector cambian el rótulo pero no los horarios.
+Para actualizar GitHub Pages, descomprimí este ZIP y subí su contenido a la raíz del repositorio existente, reemplazando archivos con el mismo nombre.

@@ -1,13 +1,13 @@
 {
   "app": "Horario Escolar",
-  "version": "V1.4.7",
+  "version": "V1.4.8",
   "release_date": "2026-11-05",
+  "status": "prueba",
+  "base_estable": "V1.4.7",
   "changes": [
-    "Botón de curso destacado con flecha desplegable y pulsos del botón y del texto",
-    "Compartir, Ayuda y Tema con acabado unificado y respuesta táctil",
-    "Chips de clases y HOY renovados con colores por día",
-    "Flechas circulares con rotación al abrir el detalle",
-    "Conserva las cinco tarjetas completas, horario fijo 3A y funciones de la V1.4.6"
+    "Se muestra el curso y el ciclo lectivo actual debajo de Horario Escolar",
+    "El curso sigue al selector y el año se obtiene de la fecha del teléfono",
+    "El año se refresca al abrir o volver a la aplicación; materias y horarios no cambian"
   ],
-  "status": "estable"
+  "notice": "Solo hay horarios de 3A; seleccionar otro curso cambia únicamente la etiqueta."
 }
