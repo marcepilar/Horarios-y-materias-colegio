@@ -1,11 +1,11 @@
 {
-  "version": "V1.4.0",
+  "version": "V1.4.1",
   "name": "Horario Escolar",
   "updated": "2026-11-04",
   "notes": [
-    "Ícono CH sobre calendario",
-    "Botón compartir clásico de tres puntos unidos",
-    "Selector desplegable 1° a 6° con divisiones A/B",
-    "Ajuste para que la vista principal cierre en una sola pantalla"
+    "Ajuste de cabecera para que no se salga de pantalla",
+    "Botón de curso más grande y destacado",
+    "Animación permanente de acercar/alejar en el curso seleccionado",
+    "Mejor compactación para que la vista cerrada entre completa en la pantalla"
   ]
 }
