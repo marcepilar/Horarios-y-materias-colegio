@@ -1,12 +1,9 @@
 {
   "app": "Horario Escolar",
-  "version": "V1.4.2",
+  "version": "V1.4.3",
   "release_date": "2026-11-04",
   "changes": [
-    "Corregido desborde horizontal por ancho mínimo del grid",
-    "Cabecera de dos filas en pantallas de celular",
-    "Selector de curso más visible y animación de acercamiento/alejamiento",
-    "Cinco tarjetas cerradas visibles dentro de la altura de pantalla",
-    "Actualización de la caché de la PWA sin afectar otros repositorios"
+    "Botón Compartir: nuevo símbolo de tres círculos huecos unidos por dos líneas, según la referencia proporcionada.",
+    "Sin cambios en el diseño, horarios, clases o funcionalidades de V1.4.2."
   ]
 }
