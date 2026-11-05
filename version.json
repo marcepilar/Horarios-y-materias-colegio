@@ -1,13 +1,13 @@
 {
   "app": "Horario Escolar",
-  "version": "V1.4.8",
+  "version": "V1.4.9",
   "release_date": "2026-11-05",
   "status": "prueba",
-  "base_estable": "V1.4.7",
+  "base_estable": "V1.4.8",
   "changes": [
-    "Se muestra el curso y el ciclo lectivo actual debajo de Horario Escolar",
-    "El curso sigue al selector y el año se obtiene de la fecha del teléfono",
-    "El año se refresca al abrir o volver a la aplicación; materias y horarios no cambian"
+    "El tema Dark Blue usa un ícono tipo planeta en lugar del corazón",
+    "Se integró un destacado visual del Colegio Chesterton Pilar arriba de la ventana principal",
+    "Al volver a la app desde segundo plano, si hay una nueva versión disponible aparece un cartel para actualizar"
   ],
-  "notice": "Solo hay horarios de 3A; seleccionar otro curso cambia únicamente la etiqueta."
+  "notice": "Versión de prueba basada en la estable V1.4.8. Mantiene intactos horarios y materias."
 }

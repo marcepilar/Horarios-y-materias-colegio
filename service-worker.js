@@ -1,8 +1,8 @@
-/* Horario Escolar PWA v1.4.8 — actualizaciones y uso sin conexión */
+/* Horario Escolar PWA v1.4.9 — actualizaciones y uso sin conexión */
 const PREFIX = 'horario-escolar-v';
-const CACHE = PREFIX + '1.4.8';
+const CACHE = PREFIX + '1.4.9';
 const CORE = ['./','./index.html','./manifest.webmanifest','./version.json',
- './icon-192.png','./icon-512.png','./apple-touch-icon.png','./qr-horario.png','./ayuda-android.png','./ayuda-iphone.png'];
+ './icon-192.png','./icon-512.png','./apple-touch-icon.png','./qr-horario.png','./ayuda-android.png','./ayuda-iphone.png','./chesterton-logo.png','./chesterton-shield.png'];
 self.addEventListener('install', event => {
  event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting()));
 });
@@ -28,3 +28,5 @@ self.addEventListener('fetch',event=>{
   return response;
  })));
 });
+
+self.addEventListener('message',event=>{ if(event.data && event.data.type==='SKIP_WAITING') self.skipWaiting(); });
