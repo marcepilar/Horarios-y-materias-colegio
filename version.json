@@ -1,13 +1,14 @@
 {
   "app": "Horario Escolar",
-  "version": "V1.4.10",
+  "version": "V1.4.11",
   "release_date": "2026-11-05",
   "status": "prueba",
   "base_estable": "V1.4.8",
   "changes": [
-    "El icono del botón de tema en Dark Blue usa ahora la esfera exactamente como la referencia enviada",
-    "El logo Colegio Chesterton Pilar se muestra arriba de la ventana principal usando la imagen original para respetar forma, letras y colores",
-    "Se mantiene el aviso dentro de la app cuando vuelve del segundo plano y hay una actualización disponible"
+    "Se ubicó la tarjeta del logo Colegio Chesterton Pilar en el extremo superior, con el logo original completo y legible.",
+    "La leyenda de curso y ciclo lectivo pasó a una tarjeta bajo el título y los controles.",
+    "Se corrigió el desborde azul lateral causado por el tamaño de la imagen del botón de tema Dark Blue.",
+    "Se conservaron los horarios, las cinco tarjetas, los tres temas y el aviso de nuevas versiones al volver a la PWA."
   ],
   "notice": "Versión de prueba basada en la estable V1.4.8. Mantiene intactos horarios y materias."
 }

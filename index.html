@@ -303,7 +303,7 @@ body.theme-light{--today-glow:rgba(17,108,179,.13)}
 }
 
 
-/* V1.4.10 – Logo del colegio, icono planeta y aviso de actualización */
+/* V1.4.11 – Logo del colegio, icono planeta y aviso de actualización */
 .school-brand{
  display:flex;align-items:center;justify-content:center;gap:10px;
  min-height:38px;padding:6px 12px;border-radius:14px;
@@ -350,13 +350,88 @@ body.theme-light{--today-glow:rgba(17,108,179,.13)}
  .school-brand-logo{max-width:220px}
 }
 
+
+/* V1.4.11: logo arriba, ciclo abajo y desborde lateral corregido. */
+html, body { width:100%; max-width:100%; overflow-x:clip !important; }
+body { background:var(--bg) !important; }
+.app {
+ display:grid !important; grid-template-columns:minmax(0,1fr) !important;
+ grid-template-rows:auto auto auto auto minmax(0,1fr) !important;
+ width:100%;max-width:700px;min-width:0;
+ overflow-x:clip !important;
+ gap:clamp(3px,.5dvh,6px);
+ padding-left:max(9px,env(safe-area-inset-left)) !important;
+ padding-right:max(9px,env(safe-area-inset-right)) !important;
+}
+.app>*{min-width:0;max-width:100%;}
+.school-brand{
+ display:block !important;
+ width:100%;max-width:100%;min-height:0;
+ padding:0 !important;border:0 !important;
+ box-shadow:none !important;background:none !important;
+ overflow:hidden;
+}
+.school-brand-card{
+ width:100%;padding:4px 12px;
+ display:flex;align-items:center;justify-content:center;
+ border:1px solid #c6d6ea;border-radius:15px;
+ box-shadow:0 4px 14px rgba(0,0,0,.17);
+ background:#fff;overflow:hidden;
+}
+.school-brand .school-brand-logo{
+ display:block !important; width:100% !important;
+ max-width:100% !important; height:clamp(41px,9dvh,78px) !important;
+ max-height:none !important;object-fit:contain !important;
+ filter:none !important;
+}
+.header{width:100%;min-width:0;}
+.header-text{min-width:0;}
+.header-text h1{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cycle-strip{
+ display:flex;gap:6px;align-items:center;justify-content:space-between;
+ min-width:0;max-width:100%;padding:5px 10px;
+ border-radius:11px;border:1px solid color-mix(in srgb,var(--border),var(--accent) 22%);
+ background:linear-gradient(115deg,color-mix(in srgb,var(--surface) 91%,var(--accent) 9%),var(--surface));
+ font-size:clamp(10px,2.55vw,12px);font-weight:700;color:var(--text);
+ overflow:hidden;
+}
+.cycle-strip>span:first-child{min-width:0;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
+.cycle-strip .fixed-label{font-size:9px;white-space:nowrap;color:var(--accent);font-weight:800;letter-spacing:.01em;flex-shrink:0;}
+.hint{min-width:0;display:flex;align-items:center;min-height:12px;padding-left:4px;}
+.hint span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.week{min-width:0;width:100%;min-height:0;overflow:hidden;}
+.day,.day-button,.day-button>div:first-child,.detail{min-width:0;max-width:100%;}
+.theme-btn,.theme-icon {overflow:hidden !important;}
+.actions>.theme-btn{display:flex !important;align-items:center !important;justify-content:center !important;overflow:hidden !important;}
+.theme-btn .theme-icon { display:block !important;flex:0 0 29px !important; width:29px !important;height:29px !important;max-width:29px !important;max-height:29px !important;pointer-events:none;}
+.theme-btn .theme-icon img {display:block !important;width:100% !important;height:100% !important;max-width:100% !important;max-height:100% !important;object-fit:contain !important;border-radius:50%;}
+.theme-btn .theme-icon svg {display:block !important; width:100% !important;height:100% !important;}
+@media(max-width:480px){
+ .app{gap:clamp(3px,.55dvh,6px);}
+ .header{gap:4px 8px;}
+ .school-brand-card{padding:4px 8px;}
+ .theme-btn .theme-icon{width:28px !important;height:28px !important;flex-basis:28px !important;}
+}
+@media(max-height:620px){
+ .school-brand .school-brand-logo{height:clamp(37px,8dvh,50px) !important;}
+ .cycle-strip{padding:4px 8px;font-size:10px;}
+ .hint{font-size:9px;}
+ .app{gap:3px;}
+}
+@media(max-width:350px){
+ .cycle-strip .fixed-label{font-size:8px;}
+ .cycle-strip{padding:3px 7px;}
+ .theme-btn .theme-icon{width:25px !important;height:25px !important;flex-basis:25px !important;}
+}
+
 </style>
 </head>
 <body class="theme-blue">
 <div class="app">
+ <div class="school-brand" aria-label="Colegio Chesterton Pilar"><div class="school-brand-card"><img class="school-brand-logo" src="./chesterton-banner.png" alt="Colegio Chesterton Pilar" width="1032" height="283" decoding="async"></div></div>
  <header class="header">
   <div class="mark" aria-hidden="true"><img src="./icon-192.png" width="40" height="40" alt="" decoding="async"></div>
-  <div class="header-text"><h1 id="titleMain">Horario Escolar</h1><p id="titleSub">3.º año A · Ciclo lectivo 2026</p></div>
+  <div class="header-text"><h1 id="titleMain">Horario Escolar</h1></div>
   <div class="actions">
    <button id="courseBtn" class="square course-btn" type="button" aria-label="Elegir año y división" title="Elegir año y división" aria-expanded="false" aria-controls="selectorOverlay"><span class="course-label">3A</span><svg class="course-caret" viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 7 5 6 5-6"/></svg></button>
    <button id="shareBtn" class="square more-btn" type="button" aria-label="Compartir por WhatsApp o código QR" title="Compartir"><svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.45 10.58 15.1 6.57 M8.45 13.42 15.1 17.43"/><circle cx="6" cy="12" r="2.65"/><circle cx="18" cy="5" r="2.65"/><circle cx="18" cy="19" r="2.65"/></svg></button>
@@ -364,8 +439,9 @@ body.theme-light{--today-glow:rgba(17,108,179,.13)}
    <button id="themeBtn" class="square theme-btn" type="button" aria-label="Cambiar tema" title="Cambiar tema"><span class="theme-icon" aria-hidden="true"></span></button>
   </div>
  </header>
- <div class="hint"><span>Tocá un día y deslizá para ver todas las materias</span><em>Horario fijo</em></div>
- <div class="school-brand" aria-label="Colegio Chesterton Pilar"><div class="school-brand-card"><img class="school-brand-logo" src="./chesterton-brand-ref.jpg" width="1528" height="488" alt="Colegio Chesterton Pilar" decoding="async"></div></div>
+  <div class="cycle-strip"><span id="titleSub">3.º año A · Ciclo lectivo 2026</span><span class="fixed-label">HORARIO FIJO</span></div>
+ <div class="hint"><span>Tocá un día y deslizá para ver todas las materias</span></div>
+
  <section id="week" class="week" aria-label="Horario de lunes a viernes"><details class="day" id="day-0" style="--day-accent:#69aeff"><summary class="day-button" aria-label="Ver las materias del Lunes"><div><div class="day-title">Lunes</div><div class="day-desc">12:50 a 18:20</div><div class="day-preview" aria-hidden="true"><span class="preview-text">Educación Física · Ciudadanía · Inglés · Historia</span></div></div><div class="day-meta"><span class="day-pill">5 clases</span><span class="chevron" aria-hidden="true">›</span></div></summary><div class="detail"><div class="lesson" style="--materia:#649eea"><div class="hours">12:50<br>13:50</div><div class="bar"></div><div class="info"><strong>Educación Física</strong><small>1.ª hora</small></div></div><div class="lesson" style="--materia:#ef5454"><div class="hours">13:50<br>14:50</div><div class="bar"></div><div class="info"><strong>Construcción de la Ciudadanía</strong><small>2.ª hora</small></div></div><div class="recreo">Recreo · 14:50 a 15:05</div><div class="lesson" style="--materia:#f7e058"><div class="hours">15:05<br>16:05</div><div class="bar"></div><div class="info"><strong>Inglés</strong><small>3.ª hora</small></div></div><div class="recreo">Recreo · 16:05 a 16:20</div><div class="lesson" style="--materia:#33d65a"><div class="hours">16:20<br>17:20</div><div class="bar"></div><div class="info"><strong>Historia</strong><small>4.ª hora</small></div></div><div class="lesson" style="--materia:#33d65a"><div class="hours">17:20<br>18:20</div><div class="bar"></div><div class="info"><strong>Historia</strong><small>5.ª hora</small></div></div></div></details>
 <details class="day" id="day-1" style="--day-accent:#ffb15e"><summary class="day-button" aria-label="Ver las materias del Martes"><div><div class="day-title">Martes</div><div class="day-desc">11:30 a 18:20</div><div class="day-preview" aria-hidden="true"><span class="preview-text">Matemática · Físico Química · Biología · Inglés</span></div></div><div class="day-meta"><span class="day-pill">6 clases</span><span class="chevron" aria-hidden="true">›</span></div></summary><div class="detail"><div class="lesson" style="--materia:#efa642"><div class="hours">11:30<br>12:30</div><div class="bar"></div><div class="info"><strong>Matemática</strong><small>Prehora</small></div></div><div class="lesson" style="--materia:#44b8ae"><div class="hours">12:50<br>13:50</div><div class="bar"></div><div class="info"><strong>Físico Química</strong><small>1.ª hora</small></div></div><div class="lesson" style="--materia:#22d4d9"><div class="hours">13:50<br>14:50</div><div class="bar"></div><div class="info"><strong>Biología</strong><small>2.ª hora</small></div></div><div class="recreo">Recreo · 14:50 a 15:05</div><div class="lesson" style="--materia:#efa642"><div class="hours">15:05<br>16:05</div><div class="bar"></div><div class="info"><strong>Matemática</strong><small>3.ª hora</small></div></div><div class="recreo">Recreo · 16:05 a 16:20</div><div class="lesson" style="--materia:#f7e058"><div class="hours">16:20<br>17:20</div><div class="bar"></div><div class="info"><strong>Inglés</strong><small>4.ª hora</small></div></div><div class="lesson" style="--materia:#f7e058"><div class="hours">17:20<br>18:20</div><div class="bar"></div><div class="info"><strong>Inglés</strong><small>5.ª hora</small></div></div></div></details>
 <details class="day" id="day-2" style="--day-accent:#69d8be"><summary class="day-button" aria-label="Ver las materias del Miércoles"><div><div class="day-title">Miércoles</div><div class="day-desc">12:50 a 18:20</div><div class="day-preview" aria-hidden="true"><span class="preview-text">Geografía · Matemática · Ed. Física · Lenguaje</span></div></div><div class="day-meta"><span class="day-pill">5 clases</span><span class="chevron" aria-hidden="true">›</span></div></summary><div class="detail"><div class="lesson" style="--materia:#9ccdab"><div class="hours">12:50<br>13:50</div><div class="bar"></div><div class="info"><strong>Geografía</strong><small>1.ª hora</small></div></div><div class="lesson" style="--materia:#efa642"><div class="hours">13:50<br>14:50</div><div class="bar"></div><div class="info"><strong>Matemática</strong><small>2.ª hora</small></div></div><div class="recreo">Recreo · 14:50 a 15:05</div><div class="lesson" style="--materia:#649eea"><div class="hours">15:05<br>16:05</div><div class="bar"></div><div class="info"><strong>Educación Física</strong><small>3.ª hora</small></div></div><div class="recreo">Recreo · 16:05 a 16:20</div><div class="lesson" style="--materia:#44b8ae"><div class="hours">16:20<br>17:20</div><div class="bar"></div><div class="info"><strong>Físico Química</strong><small>4.ª hora</small></div></div><div class="lesson" style="--materia:#d76be8"><div class="hours">17:20<br>18:20</div><div class="bar"></div><div class="info"><strong>Prácticas del Lenguaje</strong><small>5.ª hora</small></div></div></div></details>
@@ -400,7 +476,7 @@ body.theme-light{--today-glow:rgba(17,108,179,.13)}
 </div>
 <div id="helpOverlay" class="overlay" hidden>
  <section class="panel help-panel" role="dialog" aria-modal="true" aria-labelledby="helpTitle" tabindex="-1">
-  <div class="share-head"><div><h2 id="helpTitle">Ayuda · Horario Escolar</h2><div class="help-version">Versión V1.4.10 · PWA para Android y iPhone</div></div><button id="closeHelp" class="close" type="button" aria-label="Cerrar ayuda">×</button></div>
+  <div class="share-head"><div><h2 id="helpTitle">Ayuda · Horario Escolar</h2><div class="help-version">Versión V1.4.11 · PWA para Android y iPhone</div></div><button id="closeHelp" class="close" type="button" aria-label="Cerrar ayuda">×</button></div>
   <div class="help-scroll" id="helpScroll" tabindex="0">
   <p class="help-lead">Esta aplicación muestra el horario semanal fijo, con materias y recreos de lunes a viernes. También incorpora un selector visual de año y división para futuras adaptaciones.</p>
   <section class="help-section"><h3>📚 Cómo usar la aplicación</h3><ol><li>Tocá cualquiera de las cinco tarjetas horizontales para abrir las materias y los horarios de ese día.</li><li>Deslizá hacia abajo si necesitás ver el resto de las clases y los recreos. Al elegir otro día, se cierra el anterior.</li><li>El botón del curso (<strong>3A</strong> por defecto) despliega la lista para elegir entre <strong>1 a 6 año</strong> y división <strong>A o B</strong>.</li><li>El botón de compartir usa el ícono clásico de <strong>tres puntos unidos</strong> y permite compartir por WhatsApp o mostrar un QR.</li><li>El botón de tema alterna entre <strong>Dark Blue → Claro → Dark</strong>.</li></ol><p>Las materias, los días y los horarios publicados siguen siendo fijos y no se modifican desde esta aplicación.</p></section>
@@ -457,9 +533,9 @@ const app=document.querySelector('.app');
 const cards=[...document.querySelectorAll('.week > .day')];
 const themes=['theme-blue','theme-light','theme-dark'];
 
-const APP_VERSION='V1.4.10';
+const APP_VERSION='V1.4.11';
 const themeIcons={
-  'theme-blue': '<span class="theme-icon" aria-hidden="true"><img src="./theme-blue-planet-ref.jpg" alt=""></span>',
+  'theme-blue': '<span class="theme-icon" aria-hidden="true"><img src="./theme-blue-orb.png" alt=""></span>',
   'theme-light': '<span class="theme-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="4.8" fill="#ffd45d"/><g stroke="#ffd45d" stroke-width="1.7" stroke-linecap="round"><path d="M12 2.7v2.6"/><path d="M12 18.7v2.6"/><path d="M2.7 12h2.6"/><path d="M18.7 12h2.6"/><path d="m5.4 5.4 1.8 1.8"/><path d="m16.8 16.8 1.8 1.8"/><path d="m16.8 7.2 1.8-1.8"/><path d="m5.4 18.6 1.8-1.8"/></g></svg></span>',
   'theme-dark': '<span class="theme-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.4 3.5a7.7 7.7 0 1 0 5.1 13.6A8.6 8.6 0 1 1 15.4 3.5Z" fill="#ffd768"/></svg></span>'
 };
@@ -497,6 +573,7 @@ function applyTheme(){
 
 let swReg=null;
 let pendingVersion='';
+let userRequestedUpdate=false;
 function showUpdateBanner(version=''){
   pendingVersion=version||'';
   $('updateText').textContent = version && version!==APP_VERSION
@@ -668,6 +745,7 @@ $('applyUpdate').addEventListener('click',async()=>{
   try{
     if(swReg) await swReg.update().catch(()=>{});
     if(swReg?.waiting){
+      userRequestedUpdate=true;
       swReg.waiting.postMessage({type:'SKIP_WAITING'});
       return;
     }
@@ -679,7 +757,7 @@ $('nativeShare').addEventListener('click',async()=>{
   else{window.open($('waBtn').href,'_blank','noopener');}
 });
 if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){
-  navigator.serviceWorker.addEventListener('controllerchange',()=>{ location.reload(); });
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{ if(userRequestedUpdate) location.reload(); });
   window.addEventListener('load',()=>{
     navigator.serviceWorker.register('./service-worker.js')
       .then(reg=>{ swReg=reg; attachRegListeners(reg); checkForUpdates(); })
