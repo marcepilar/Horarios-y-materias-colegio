@@ -713,16 +713,17 @@ body.theme-light .actions::after{background:linear-gradient(90deg,transparent,#f
 .pending-notice strong{color:var(--text)}
 .day.is-pending .day-pill{opacity:.9;}
 
-/* V1.4.15 — Materia o recreo en curso, solo para el día y curso reales.
+/* V1.4.16 — Materia o recreo en curso, solo para el día y curso reales.
    No modifica los bloques horarios del colegio, solo su estado visual. */
 .day .detail .lesson.live-now{
   position:relative;
   background:linear-gradient(110deg,
     color-mix(in srgb,var(--surface-alt) 76%,#32d5a4 24%),
     color-mix(in srgb,var(--surface-alt) 90%,#32d5a4 10%));
-  outline:2px solid #43d5ad;
+  /* V1.4.16: halo exterior reducido ~15 % para un aspecto más discreto. */
+  outline:2px solid color-mix(in srgb,#43d5ad 85%,var(--surface-alt));
   outline-offset:-2px;
-  box-shadow:0 0 0 1px color-mix(in srgb,#25d5a4 35%,transparent),0 0 16px color-mix(in srgb,#25d5a4 28%,transparent);
+  box-shadow:0 0 0 1px color-mix(in srgb,#25d5a4 28%,transparent),0 0 12px color-mix(in srgb,#25d5a4 21%,transparent);
 }
 .day .detail .lesson.live-now .hours{color:color-mix(in srgb,var(--accent) 65%,#35e7aa 35%)}
 .day .detail .recreo.live-now{
@@ -743,7 +744,18 @@ body.theme-light .actions::after{background:linear-gradient(90deg,transparent,#f
 }
 .day .detail .recreo .live-badge{margin:5px 0 0 6px;color:#342800;background:#ffdd79}
 .day .detail .live-badge::before{content:'';width:6px;height:6px;flex:0 0 6px;border-radius:50%;background:currentColor}
-body.theme-light .day .detail .lesson.live-now{background:#e5faf2;outline-color:#168760;box-shadow:0 0 0 1px #16876055}
+/* Etiqueta en una línea propia debajo de la hora de clase: nunca al lado de «3.ª hora». */
+.day .detail .lesson .info{min-width:0;}
+.day .detail .lesson .info>.live-badge{
+  display:flex;align-items:center;justify-content:flex-start;
+  width:fit-content;max-width:100%;
+  margin:7px 0 0;padding:4px 8px;
+  line-height:1.35;white-space:normal;
+  box-sizing:border-box;
+}
+/* Recreos: etiqueta alineada debajo del rótulo, sin solaparse. */
+.day .detail .recreo .live-badge{display:flex;width:fit-content;max-width:100%;margin:7px auto 0;}
+body.theme-light .day .detail .lesson.live-now{background:#e5faf2;outline-color:#168760;box-shadow:0 0 0 1px #16876044}
 body.theme-light .day .detail .recreo.live-now{background:#fff4d2;border-color:#a8750c;box-shadow:0 0 0 1px #a8750c33}
 body.theme-light .day .detail .live-badge{background:#146c50;color:#fff}
 body.theme-light .day .detail .recreo .live-badge{background:#8a5f07;color:#fff}
@@ -800,7 +812,7 @@ body.theme-light .day .detail .recreo .live-badge{background:#8a5f07;color:#fff}
 </div>
 <div id="helpOverlay" class="overlay" hidden>
  <section class="panel help-panel" role="dialog" aria-modal="true" aria-labelledby="helpTitle" tabindex="-1">
-  <div class="share-head"><div><h2 id="helpTitle">Ayuda · Horario Escolar</h2><div class="help-version">Versión V1.4.15 · PWA para Android y iPhone</div></div><button id="closeHelp" class="close" type="button" aria-label="Cerrar ayuda">×</button></div>
+  <div class="share-head"><div><h2 id="helpTitle">Ayuda · Horario Escolar</h2><div class="help-version">Versión V1.4.16 · PWA para Android y iPhone</div></div><button id="closeHelp" class="close" type="button" aria-label="Cerrar ayuda">×</button></div>
   <div class="help-scroll" id="helpScroll" tabindex="0">
   <p class="help-lead">Aplicación de horarios del <strong>Colegio Chesterton Pilar</strong>, desarrollada de manera independiente. Actualmente están cargadas las materias, horas y recreos de <strong>3.º A</strong>. Los demás cursos se completarán cuando dispongamos de sus horarios.</p>
   <section class="help-section"><h3>📚 Cómo usar la aplicación</h3>
@@ -871,7 +883,7 @@ const app=document.querySelector('.app');
 const cards=[...document.querySelectorAll('.week > .day')];
 const themes=['theme-blue','theme-light','theme-dark'];
 
-const APP_VERSION='V1.4.15';
+const APP_VERSION='V1.4.16';
 const themeIcons={
   'theme-blue': '<span class="theme-icon" aria-hidden="true"><img src="./theme-blue-orb.png" alt=""></span>',
   'theme-light': '<span class="theme-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="4.8" fill="#ffd45d"/><g stroke="#ffd45d" stroke-width="1.7" stroke-linecap="round"><path d="M12 2.7v2.6"/><path d="M12 18.7v2.6"/><path d="M2.7 12h2.6"/><path d="M18.7 12h2.6"/><path d="m5.4 5.4 1.8 1.8"/><path d="m16.8 16.8 1.8 1.8"/><path d="m16.8 7.2 1.8-1.8"/><path d="m5.4 18.6 1.8-1.8"/></g></svg></span>',
