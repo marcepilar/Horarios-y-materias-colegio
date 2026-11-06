@@ -698,7 +698,7 @@ body.theme-light .actions::after{background:linear-gradient(90deg,transparent,#f
 }
 
 
-/* V1.4.14 Chesterton — identidad original, conservada sobre el motor y controles demo. */
+/* V1.4.15 Chesterton — identidad original, conservada sobre el motor y controles demo. */
 .school-brand-card{padding:1px 12px!important;background:#fff!important;}
 .school-brand .school-brand-logo{
  height:clamp(41px,8.7dvh,74px)!important;
@@ -712,6 +712,42 @@ body.theme-light .actions::after{background:linear-gradient(90deg,transparent,#f
 .pending-notice{margin:8px 6px 10px;padding:13px;border:1px solid var(--border);border-radius:12px;background:var(--surface-alt);color:var(--muted);font-size:12px;line-height:1.5;}
 .pending-notice strong{color:var(--text)}
 .day.is-pending .day-pill{opacity:.9;}
+
+/* V1.4.15 — Materia o recreo en curso, solo para el día y curso reales.
+   No modifica los bloques horarios del colegio, solo su estado visual. */
+.day .detail .lesson.live-now{
+  position:relative;
+  background:linear-gradient(110deg,
+    color-mix(in srgb,var(--surface-alt) 76%,#32d5a4 24%),
+    color-mix(in srgb,var(--surface-alt) 90%,#32d5a4 10%));
+  outline:2px solid #43d5ad;
+  outline-offset:-2px;
+  box-shadow:0 0 0 1px color-mix(in srgb,#25d5a4 35%,transparent),0 0 16px color-mix(in srgb,#25d5a4 28%,transparent);
+}
+.day .detail .lesson.live-now .hours{color:color-mix(in srgb,var(--accent) 65%,#35e7aa 35%)}
+.day .detail .recreo.live-now{
+  border:2px solid #f1c75f;
+  border-radius:11px;
+  padding:8px 6px;
+  background:color-mix(in srgb,var(--surface-alt) 74%,#efb943 26%);
+  box-shadow:0 0 14px color-mix(in srgb,#efb943 24%,transparent);
+  color:var(--text);
+}
+.day .detail .live-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  border-radius:7px;padding:3px 7px;margin-top:5px;
+  font:800 10px/1.35 system-ui,-apple-system,'Segoe UI',sans-serif;
+  letter-spacing:.01em;
+  color:#07291e;background:#69e7be;
+  white-space:normal;
+}
+.day .detail .recreo .live-badge{margin:5px 0 0 6px;color:#342800;background:#ffdd79}
+.day .detail .live-badge::before{content:'';width:6px;height:6px;flex:0 0 6px;border-radius:50%;background:currentColor}
+body.theme-light .day .detail .lesson.live-now{background:#e5faf2;outline-color:#168760;box-shadow:0 0 0 1px #16876055}
+body.theme-light .day .detail .recreo.live-now{background:#fff4d2;border-color:#a8750c;box-shadow:0 0 0 1px #a8750c33}
+body.theme-light .day .detail .live-badge{background:#146c50;color:#fff}
+body.theme-light .day .detail .recreo .live-badge{background:#8a5f07;color:#fff}
+@media(prefers-reduced-motion:reduce){.day .detail .lesson.live-now,.day .detail .recreo.live-now{transition:none;animation:none}}
 </style>
 </head>
 <body class="theme-blue">
@@ -764,7 +800,7 @@ body.theme-light .actions::after{background:linear-gradient(90deg,transparent,#f
 </div>
 <div id="helpOverlay" class="overlay" hidden>
  <section class="panel help-panel" role="dialog" aria-modal="true" aria-labelledby="helpTitle" tabindex="-1">
-  <div class="share-head"><div><h2 id="helpTitle">Ayuda · Horario Escolar</h2><div class="help-version">Versión V1.4.14 · PWA para Android y iPhone</div></div><button id="closeHelp" class="close" type="button" aria-label="Cerrar ayuda">×</button></div>
+  <div class="share-head"><div><h2 id="helpTitle">Ayuda · Horario Escolar</h2><div class="help-version">Versión V1.4.15 · PWA para Android y iPhone</div></div><button id="closeHelp" class="close" type="button" aria-label="Cerrar ayuda">×</button></div>
   <div class="help-scroll" id="helpScroll" tabindex="0">
   <p class="help-lead">Aplicación de horarios del <strong>Colegio Chesterton Pilar</strong>, desarrollada de manera independiente. Actualmente están cargadas las materias, horas y recreos de <strong>3.º A</strong>. Los demás cursos se completarán cuando dispongamos de sus horarios.</p>
   <section class="help-section"><h3>📚 Cómo usar la aplicación</h3>
@@ -815,6 +851,7 @@ body.theme-light .actions::after{background:linear-gradient(90deg,transparent,#f
   </section>
   <section class="help-section"><h3>🔄 Actualización y conexión</h3><p>Para recibir una versión nueva, conectate a Internet y cerrá y volvé a abrir la aplicación. Las actualizaciones pueden requerir una segunda apertura. Si el ícono o el nombre no cambia, quizá tengas que reinstalarla.</p><p>Los horarios quedan disponibles sin conexión después de cargar correctamente la PWA.</p></section>
   <p class="help-tip">Seguridad: esta aplicación no necesita usuario ni contraseña. Nunca compartas contraseñas ni códigos de acceso para usarla.</p>
+  <section class="help-section"><h3>🟢 Materia o recreo en curso</h3><p>Al desplegar <strong>el día de hoy</strong> en 3.º A, la materia actual aparece resaltada en verde y el recreo activo en amarillo, con los minutos que faltan para terminar. El indicador se actualiza automáticamente según la hora del celular. No aparece en otros días, fuera del horario escolar ni en cursos pendientes de carga.</p></section>
   <section class="help-section creator-info" aria-label="Autoría de la aplicación">
     <h3>🛡️ Autoría</h3>
     <p><strong>Desarrollado por Marcelo Rodriguez</strong> · Proyecto independiente de horarios escolares.</p>
@@ -834,7 +871,7 @@ const app=document.querySelector('.app');
 const cards=[...document.querySelectorAll('.week > .day')];
 const themes=['theme-blue','theme-light','theme-dark'];
 
-const APP_VERSION='V1.4.14';
+const APP_VERSION='V1.4.15';
 const themeIcons={
   'theme-blue': '<span class="theme-icon" aria-hidden="true"><img src="./theme-blue-orb.png" alt=""></span>',
   'theme-light': '<span class="theme-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="4.8" fill="#ffd45d"/><g stroke="#ffd45d" stroke-width="1.7" stroke-linecap="round"><path d="M12 2.7v2.6"/><path d="M12 18.7v2.6"/><path d="M2.7 12h2.6"/><path d="M18.7 12h2.6"/><path d="m5.4 5.4 1.8 1.8"/><path d="m16.8 16.8 1.8 1.8"/><path d="m16.8 7.2 1.8-1.8"/><path d="m5.4 18.6 1.8-1.8"/></g></svg></span>',
@@ -867,6 +904,58 @@ function renderSchoolSchedule(){
   });
   S=loaded?CHESTERTON_3A_S:[];
   $('scheduleStatus').textContent=loaded?'HORARIO FIJO':'SIN CARGAR';
+  // La actualización visual se hace luego de aplicar el cambio de curso.
+  // Puede ejecutarse antes de inicializar `view`: se inicia también desde syncView().
+}
+
+// V1.4.15 — Resaltado de materia/recreo en tiempo real (hora LOCAL del dispositivo).
+// No se guardan datos ni se cambia el horario oficial. Solo se marca la franja actual.
+const LIVE_TICK_MS=15000;
+function minutesFromClock(value){
+  const m=/^(\d{1,2}):(\d{2})$/.exec((value||'').trim());
+  if(!m)return null;
+  const h=Number(m[1]),min=Number(m[2]);
+  return h>=0&&h<=23&&min>=0&&min<=59 ? 60*h+min : null;
+}
+function liveInterval(el){
+  if(el.classList.contains('lesson')){
+    // Los horarios originales están en dos líneas, comienzo y fin.
+    const clocks=[...(el.querySelector('.hours')?.textContent||'').matchAll(/(\d{1,2}:\d{2})/g)].map(x=>x[1]);
+    return clocks.length===2 ? clocks.map(minutesFromClock) : null;
+  }
+  if(el.classList.contains('recreo')){
+    const clocks=[...el.textContent.matchAll(/(\d{1,2}:\d{2})/g)].map(x=>x[1]);
+    return clocks.length===2 ? clocks.map(minutesFromClock) : null;
+  }
+  return null;
+}
+function updateLiveSchedule(now=new Date()){
+  // Todo apagado por defecto (incluida la insignia vieja), incluso al cambiar de curso.
+  cards.forEach(card=>card.querySelectorAll('.detail .lesson.live-now,.detail .recreo.live-now').forEach(el=>{
+    el.classList.remove('live-now');
+    el.removeAttribute('aria-current');
+  }));
+  cards.forEach(card=>card.querySelectorAll('.detail .live-badge').forEach(el=>el.remove()));
+  if(!isLoadedCourse())return;
+  const today=now.getDay()-1;  // domingo=-1, lunes=0 ... viernes=4
+  if(today<0||today>4||view.day!==today)return;
+  const minute=now.getHours()*60+now.getMinutes()+now.getSeconds()/60;
+  const card=cards[today];
+  for(const el of card.querySelectorAll('.detail .lesson,.detail .recreo')){
+    const range=liveInterval(el);
+    if(!range || range[0]===null || range[1]===null || range[1]<=range[0])continue;
+    if(minute>=range[0]&&minute<range[1]){
+      el.classList.add('live-now');
+      el.setAttribute('aria-current','true');
+      const badge=document.createElement('span');
+      badge.className='live-badge';
+      const left=Math.max(1,Math.ceil(range[1]-minute));
+      badge.textContent=(el.classList.contains('recreo')?'RECREO AHORA':'EN CURSO')+' · '+left+' min restantes';
+      const target=el.classList.contains('lesson')?(el.querySelector('.info')||el):el;
+      target.appendChild(badge);
+      break;  // como máximo un bloque activo
+    }
+  }
 }
 
 let theme='theme-blue';
@@ -1021,6 +1110,7 @@ function syncView(v,fromHistory=false){
   app.classList.toggle('has-open',expanded);
   app.style.paddingBottom=''; // descartar el margen de centrado del día anterior
   document.body.classList.toggle('is-expanded',expanded);
+  updateLiveSchedule();
   $('selectorOverlay').hidden=view.pane!=='course';
   $('shareOverlay').hidden=view.pane!=='share';
   $('helpOverlay').hidden=view.pane!=='help';
@@ -1083,17 +1173,20 @@ applyTheme();applyCourse();syncView(initial,true);
 document.addEventListener('visibilitychange',()=>{
   if(!document.hidden){
     applyCourse();
+    updateLiveSchedule();
     queueViewportSync();
     checkForUpdates();
   }
 });
 window.addEventListener('pageshow',()=>{
   applyCourse();
+  updateLiveSchedule();
   // El navegador puede restaurar el scroll y las medidas de la versión anterior.
   queueViewportSync();
   requestAnimationFrame(()=>requestAnimationFrame(queueViewportSync));
   checkForUpdates();
 });
+setInterval(()=>{if(!document.hidden&&view.day>=0)updateLiveSchedule();},LIVE_TICK_MS);
 window.addEventListener('resize',queueViewportSync,{passive:true});
 window.visualViewport?.addEventListener('resize',queueViewportSync,{passive:true});
 window.addEventListener('orientationchange',queueViewportSync,{passive:true});
@@ -1116,10 +1209,10 @@ $('selectorOverlay').addEventListener('click',evt=>{if(evt.target===$('selectorO
 $('shareOverlay').addEventListener('click',evt=>{if(evt.target===$('shareOverlay'))goPrevious();});
 $('helpOverlay').addEventListener('click',evt=>{if(evt.target===$('helpOverlay'))goPrevious();});
 document.querySelectorAll('.section-chip').forEach(btn=>btn.addEventListener('click',()=>{
-  selectedYear=btn.dataset.year;selectedSection=btn.dataset.section;applyCourse();goPrevious();
+  selectedYear=btn.dataset.year;selectedSection=btn.dataset.section;applyCourse();updateLiveSchedule();goPrevious();
 }));
 document.querySelectorAll('.year-chip').forEach(btn=>btn.addEventListener('click',()=>{
-  selectedYear=btn.dataset.year;applyCourse();
+  selectedYear=btn.dataset.year;applyCourse();updateLiveSchedule();
 }));
 $('themeBtn').addEventListener('click',()=>{theme=themes[(themes.indexOf(theme)+1)%themes.length];applyTheme();});
 document.addEventListener('keydown',evt=>{if(evt.key==='Escape'&&(view.pane||view.day>=0)){evt.preventDefault();goPrevious();}});
