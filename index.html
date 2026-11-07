@@ -764,6 +764,30 @@ body.theme-light .day .detail .recreo .live-badge{background:#8a5f07;color:#fff}
 /* V1.4.18 — Escudo institucional de Chesterton junto al título, sin calendario. */
 .mark{background:transparent!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important;}
 .mark img{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;}
+
+/* V1.4.24 — Banner de Chesterton con el mismo espacio visual 3:1 de North Green.
+   Se conserva el PNG original: escudo y nombre completos, sin distorsión. */
+.school-brand-card{
+  display:block!important;
+  padding:0!important;
+  line-height:0!important;
+  background:#fff!important;
+  border-color:#c6d6ea!important;
+}
+.school-brand .school-brand-logo{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  max-height:none!important;
+  aspect-ratio:3/1!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  background:#fff!important;
+}
+@media(max-height:620px){
+  .school-brand .school-brand-logo{height:auto!important;max-height:none!important;}
+}
+
 </style>
 </head>
 <body class="theme-blue">
@@ -887,7 +911,7 @@ const app=document.querySelector('.app');
 const cards=[...document.querySelectorAll('.week > .day')];
 const themes=['theme-blue','theme-light','theme-dark'];
 
-const APP_VERSION='V1.4.23';
+const APP_VERSION='V1.4.24';
 $('helpAppVersion').textContent=APP_VERSION;
 const themeIcons={
   'theme-blue': '<span class="theme-icon" aria-hidden="true"><img src="./theme-blue-orb.png" alt=""></span>',
