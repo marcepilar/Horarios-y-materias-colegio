@@ -1,18 +1,20 @@
-HORARIO ESCOLAR — COLEGIO CHESTERTON PILAR — V1.4.20 DE PRUEBA
-BASE: V1.4.19 DE PRUEBA · ESTABLE OFICIAL: V1.4.18
+HORARIO ESCOLAR — COLEGIO CHESTERTON PILAR — V1.4.21 DE PRUEBA
+BASE: V1.4.20 DE PRUEBA · ESTABLE OFICIAL: V1.4.18
 
-CAMBIO ÚNICO: apertura y cierre de tarjetas un poco más lentos.
-- Cambio de tamaño y posición: 410 ms → 540 ms.
-- Aparición de materias y recreos: 320 ms → 400 ms.
-- Transiciones visuales internas sincronizadas para mantener la suavidad.
-- Respeta la configuración Reducir movimiento de Android/iOS.
+CORRECCIÓN ÚNICA:
+- Antes, la ventana Ayuda decía siempre «Versión V1.4.18» aunque el código
+  ejecutara la V1.4.19 o la V1.4.20.
+- Ahora Ayuda presenta la versión obtenida automáticamente desde APP_VERSION;
+  no hay dos números diferentes que mantener manualmente.
+- Se incrementa versión.json y el caché del service worker a V1.4.21.
 
-SIN CAMBIOS: horarios y materias de 3.º A, recreos, otras divisiones,
-temas, navegación, botones, Ayuda, QR, banner, logo, manifiesto e íconos.
+SE CONSERVAN: apertura y cierre suave de tarjetas (540 ms), aparición de
+materias (400 ms), los horarios reales y recreos, todos los controles,
+modos de tema, iconos de PWA, identificador, manifiesto y banner.
 North Green Academy no se modifica.
 
-GITHUB PAGES:
-1. Descomprimí el ZIP y subí todos los archivos al repositorio de Chesterton.
-2. Conservá los nombres y reemplazá los archivos de la versión anterior.
-3. Comprobá en el teléfono la apertura y cierre de tarjetas.
-4. Dejar como prueba hasta que apruebes explícitamente la nueva versión.
+PARA PUBLICAR:
+1. Descomprimí este ZIP y reemplazá TODOS los archivos en el repositorio de Chesterton.
+2. Esperá a que GitHub Pages termine de publicar los cambios.
+3. Abrí la PWA y comprobá en Ayuda que indique «Versión V1.4.21».
+4. Esta versión sigue EN PRUEBA hasta aprobación.
