@@ -788,11 +788,16 @@ body.theme-light .day .detail .recreo .live-badge{background:#8a5f07;color:#fff}
   .school-brand .school-brand-logo{height:auto!important;max-height:none!important;}
 }
 
+
+/* V1.4.25 — Nuevo banner Chesterton HD; se conserva el marco 3:1 aprobado.
+   La imagen no se recorta ni se deforma. El borde azul pertenece al propio PNG. */
+.school-brand-card{border:0!important;box-shadow:none!important;background:#fff!important;overflow:hidden!important;}
+.school-brand .school-brand-logo{object-fit:contain!important;object-position:center center!important;image-rendering:auto!important;}
 </style>
 </head>
 <body class="theme-blue">
 <div class="app">
- <div class="school-brand" aria-label="Colegio Chesterton Pilar"><div class="school-brand-card"><img class="school-brand-logo" src="./chesterton-banner.png" alt="Colegio Chesterton Pilar" width="1032" height="283" decoding="async"></div></div>
+ <div class="school-brand" aria-label="Colegio Chesterton Pilar"><div class="school-brand-card"><img class="school-brand-logo" src="./chesterton-banner.png?v=1.4.25" alt="Colegio Chesterton Pilar" width="2508" height="836" decoding="async"></div></div>
  <header class="header">
   <div class="mark" aria-hidden="true"><img src="./chesterton-shield.png" width="40" height="40" alt="" decoding="async"></div>
   <div class="header-text"><h1 id="titleMain">Horario Escolar</h1></div>
@@ -911,7 +916,7 @@ const app=document.querySelector('.app');
 const cards=[...document.querySelectorAll('.week > .day')];
 const themes=['theme-blue','theme-light','theme-dark'];
 
-const APP_VERSION='V1.4.24';
+const APP_VERSION='V1.4.25';
 $('helpAppVersion').textContent=APP_VERSION;
 const themeIcons={
   'theme-blue': '<span class="theme-icon" aria-hidden="true"><img src="./theme-blue-orb.png" alt=""></span>',
