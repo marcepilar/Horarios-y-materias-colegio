@@ -793,6 +793,53 @@ body.theme-light .day .detail .recreo .live-badge{background:#8a5f07;color:#fff}
    La imagen no se recorta ni se deforma. El borde azul pertenece al propio PNG. */
 .school-brand-card{border:0!important;box-shadow:none!important;background:#fff!important;overflow:hidden!important;}
 .school-brand .school-brand-logo{object-fit:contain!important;object-position:center center!important;image-rendering:auto!important;}
+
+
+/* Auditoría UX — texto legible, adelanto completo y selector de tema inequívoco.
+   Sin alteraciones de alto/filas de las cinco tarjetas ni de sus animaciones. */
+.day-preview .preview-text{
+  color:color-mix(in srgb,var(--text) 79%,var(--muted) 21%) !important;
+  font-size:clamp(10.7px,2.85vw,12.3px) !important;
+  font-weight:560;
+  flex:1 1 auto;
+  width:100%;max-width:100%;
+  text-overflow:ellipsis; /* protección excepcional para nombres muy largos */
+  letter-spacing:0;
+}
+.day-desc{color:color-mix(in srgb,var(--text) 73%,var(--muted) 27%) !important;}
+.hint{color:color-mix(in srgb,var(--text) 70%,var(--muted) 30%) !important;}
+/* La etiqueta TEMA es visible en móvil; se conserva el color e ícono de cada tema. */
+.actions>.theme-btn{
+  flex-direction:column !important;
+  justify-content:center !important;
+  align-items:center !important;
+  gap:1px !important;
+  padding-block:1px !important;
+}
+.actions>.theme-btn .theme-icon{
+  flex:0 0 24px !important;
+  width:24px !important;
+  height:24px !important;
+  max-width:24px !important;
+  max-height:24px !important;
+}
+.actions>.theme-btn .theme-caption{
+  display:block !important;
+  flex:0 0 auto;
+  pointer-events:none;
+  font:800 8.5px/1 system-ui,-apple-system,'Segoe UI',sans-serif;
+  letter-spacing:.015em;
+  color:var(--nav-key,var(--text));
+  opacity:.88;
+}
+@media(max-width:350px), (max-height:620px){
+  .actions>.theme-btn .theme-icon{
+    width:21px !important;height:21px !important;
+    max-width:21px !important;max-height:21px !important;
+    flex-basis:21px !important;
+  }
+  .actions>.theme-btn .theme-caption{font-size:8px;}
+}
 </style>
 </head>
 <body class="theme-blue">
@@ -916,7 +963,7 @@ const app=document.querySelector('.app');
 const cards=[...document.querySelectorAll('.week > .day')];
 const themes=['theme-blue','theme-light','theme-dark'];
 
-const APP_VERSION='V1.4.25';
+const APP_VERSION='V1.4.26';
 $('helpAppVersion').textContent=APP_VERSION;
 const themeIcons={
   'theme-blue': '<span class="theme-icon" aria-hidden="true"><img src="./theme-blue-orb.png" alt=""></span>',
@@ -925,6 +972,48 @@ const themeIcons={
 };
 
 const themeNames={'theme-blue':'Dark Blue','theme-light':'Claro','theme-dark':'Dark'};
+
+/* Preview inteligente: nunca corta a mitad una materia si puede resumir.
+   Usa la información ya cargada; +N más indica materias/clases restantes. */
+const previewMeasureCanvas=document.createElement('canvas');
+const previewMeasureCtx=previewMeasureCanvas.getContext('2d');
+function previewFitLabel(el){
+  if(!el.dataset.previewSubjects)return;
+  let subjects=[];
+  try{subjects=JSON.parse(el.dataset.previewSubjects);}catch(_){return;}
+  if(!subjects.length)return;
+  const total=Math.max(subjects.length,Number(el.dataset.previewTotal)||subjects.length);
+  const width=el.clientWidth;
+  if(width<32 || !previewMeasureCtx)return;
+  const css=getComputedStyle(el);
+  previewMeasureCtx.font=`${css.fontWeight} ${css.fontSize} ${css.fontFamily}`;
+  const fits=(v)=>previewMeasureCtx.measureText(v).width+Math.max(0,v.length-1)*.08 <=width-5;
+  const full=subjects.join(' · ');
+  if(total===subjects.length && fits(full)){el.textContent=full;return;}
+  for(let n=subjects.length;n>=1;n--){
+    const label=subjects.slice(0,n).join(' · ')+` · +${total-n} más`;
+    if(fits(label)){el.textContent=label;return;}
+  }
+  // Solo se recorta cuando la primera materia es más ancha que toda la tarjeta.
+  el.textContent=subjects[0];
+}
+function previewSet(el,subjects,total=subjects.length){
+  el.dataset.previewSubjects=JSON.stringify(subjects);
+  el.dataset.previewTotal=String(total);
+  el.title=subjects.join(' · ');
+  el.textContent=subjects.join(' · ');
+  previewFitLabel(el);
+}
+function previewRefresh(){
+  document.querySelectorAll('.preview-text[data-preview-subjects]').forEach(previewFitLabel);
+}
+let previewFrame=0;
+window.addEventListener('resize',()=>{
+  cancelAnimationFrame(previewFrame);
+  previewFrame=requestAnimationFrame(previewRefresh);
+});
+if(document.fonts && document.fonts.ready){document.fonts.ready.then(previewRefresh).catch(()=>{});}
+
 // Datos auténticos de 3.º A, conservados íntegramente desde Chesterton V1.4.13.
 const CHESTERTON_3A_S=[['Lunes',[['12:50','Educación Física'],['13:50','Construcción de la Ciudadanía'],['15:05','Inglés'],['16:20','Historia'],['17:20','Historia']]],['Martes',[['11:30','Matemática'],['12:50','Físico Química'],['13:50','Biología'],['15:05','Matemática'],['16:20','Inglés'],['17:20','Inglés']]],['Miércoles',[['12:50','Geografía'],['13:50','Matemática'],['15:05','Educación Física'],['16:20','Físico Química'],['17:20','Prácticas del Lenguaje']]],['Jueves',[['12:50','Educación Artística'],['13:50','Educación Artística'],['15:05','Geografía'],['16:20','Prácticas del Lenguaje'],['17:20','Robótica']]],['Viernes',[['12:50','Prácticas del Lenguaje'],['13:50','Prácticas del Lenguaje'],['15:05','Biología'],['16:20','Construcción de la Ciudadanía'],['17:20','Matemática']]]];
 // Conservar el HTML original de las cinco tarjetas, sin reescribir sus clases ni recreos.
@@ -944,7 +1033,9 @@ function renderSchoolSchedule(){
     card.classList.toggle('is-pending',!loaded);
     card.querySelector('.day-desc').textContent=loaded?item.desc:'Horario pendiente';
     card.querySelector('.day-pill').textContent=loaded?(i===todayIndex?'HOY':item.pill):'Pendiente';
-    card.querySelector('.preview-text').textContent=loaded?item.preview:'Materias y horarios aún no cargados';
+    const preview=card.querySelector('.preview-text');
+    if(loaded){previewSet(preview,item.preview.split(' · '),CHESTERTON_3A_S[i][1].length);}
+    else{preview.removeAttribute('data-preview-subjects');preview.removeAttribute('data-preview-total');preview.removeAttribute('title');preview.textContent='Materias y horarios aún no cargados';}
     card.querySelector('.detail').innerHTML=loaded?item.detail:
       '<div class="pending-notice"><strong>Horario pendiente</strong> · Todavía no se cargaron las materias de este curso. Se incorporarán cuando estén disponibles los datos oficiales del colegio.</div>';
   });
@@ -1029,7 +1120,8 @@ function applyCourse(){
 function applyTheme(){
   document.body.classList.remove('theme-blue','theme-light','theme-dark');
   document.body.classList.add(theme);
-  $('themeBtn').innerHTML=themeIcons[theme];
+  $('themeBtn').innerHTML=themeIcons[theme]+'<span class="theme-caption" aria-hidden="true">Tema</span>';
+  $('themeBtn').title='Cambiar tema · Actual: '+themeNames[theme];
   $('themeBtn').setAttribute('aria-label','Tema '+themeNames[theme]+'. Cambiar tema');
   document.querySelector('meta[name="theme-color"]').content=theme==='theme-light' ? '#f0f4fb' : theme==='theme-blue' ? '#071122' : '#0b101c';
   try{localStorage.setItem('horario-escolar-theme',theme);}catch(_){}
@@ -1153,6 +1245,7 @@ function syncView(v,fromHistory=false){
   document.documentElement.classList.toggle('ng-day-expanded',expanded);
   refreshViewport();
   week.classList.toggle('expanded',expanded);
+  if(!expanded)requestAnimationFrame(previewRefresh);
   app.classList.toggle('has-open',expanded);
   app.style.paddingBottom=''; // descartar el margen de centrado del día anterior
   document.body.classList.toggle('is-expanded',expanded);

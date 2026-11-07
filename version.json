@@ -1,15 +1,16 @@
 {
   "app": "Horario Escolar · Colegio Chesterton Pilar",
-  "version": "V1.4.25",
+  "version": "V1.4.26",
   "release_date": "2026-11-07",
   "status": "prueba",
   "base_estable": "V1.4.23",
   "changes": [
-    "Adaptación del nuevo banner de Chesterton a la proporción 3:1 de la PWA, en alta resolución (2508 × 836 píxeles).",
-    "Mismo espacio visual aprobado en V1.4.24; imagen completa, sin estiramiento ni recorte.",
-    "Actualización de caché e imagen con parámetro de versión para forzar la carga del banner nuevo.",
-    "Sin cambios en horarios, escudo pequeño, íconos de instalación, temas, selección de cursos ni demás funciones.",
-    "ZIP incremental de 4 archivos: los 3 habituales y chesterton-banner.png."
+    "Mejora controlada de contraste en horarios y adelantos de materias en los tres temas.",
+    "Vista compacta inteligente: muestra nombres completos que entren en la tarjeta y un indicador +N más; las clases reales/ficticias no se modifican.",
+    "Selector de tema más claro con etiqueta visible «Tema», sin cambiar el ciclo de colores ni la disposición de botones.",
+    "Sin efectos nuevos en apertura/cierre; se conservan calendarios, ayuda, QR, instalación y demás funciones.",
+    "Actualización ligera con index.html, service-worker.js y version.json; sin reemplazar banners ni íconos."
   ],
-  "notice": "Versión V1.4.25 de PRUEBA; última estable Chesterton V1.4.23. North Green sin cambios."
+  "notice": "Versión V1.4.26 de PRUEBA; última estable VV1.4.23. Las dos PWA conservan numeración independiente.",
+  "based_on": "V1.4.25 (banner de alta resolución)"
 }
