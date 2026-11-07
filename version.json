@@ -1,16 +1,16 @@
 {
   "app": "Horario Escolar · Colegio Chesterton Pilar",
-  "version": "V1.4.27",
+  "version": "V1.4.28",
   "release_date": "2026-11-07",
   "status": "prueba",
   "base_estable": "V1.4.23",
   "changes": [
-    "Se elimina el centrado vertical artificial y el relleno dinámico que generaban espacio vacío al desplegar Jueves y Viernes.",
-    "Los cinco días permanecen en flujo natural, y el detalle abierto queda inmediatamente bajo la cabecera, con padding final ajustado.",
-    "Desplazamiento suave solo para acercar el día abierto a la zona visible, respetando el límite real de desplazamiento; cierre inmediato.",
-    "Conservados horarios, materias, recreos, versión visible automática, QR, temas, selector, escudo y banner de alta resolución.",
-    "Actualización de tres archivos: index.html, service-worker.js, version.json."
+    "Botón de temas sin leyenda visible: sol dorado para Claro, luna creciente dorada para Dark y luna menguante azul para Dark Blue.",
+    "Las lunas tienen orientaciones opuestas, brillo discreto y nombres accesibles para el lector de pantalla.",
+    "Se conservan la altura natural y desplazamiento sin relleno artificial de las tarjetas desde V1.4.27.",
+    "Sin cambios en los horarios reales, recreos, banner HD, escudo, instalación ni selección de curso.",
+    "ZIP ligero de tres archivos: index.html, service-worker.js y version.json."
   ],
-  "notice": "Versión V1.4.27 de PRUEBA; última estable V1.4.23. North Green no se modifica.",
-  "based_on": "V1.4.26 (mejoras visuales), preserva banner de alta resolución V1.4.25"
+  "notice": "V1.4.28 DE PRUEBA; última estable V1.4.23. North Green tiene numeración independiente.",
+  "based_on": "V1.4.27 (candidata anterior)"
 }

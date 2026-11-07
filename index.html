@@ -845,6 +845,42 @@ body.theme-light .day .detail .recreo .live-badge{background:#8a5f07;color:#fff}
 .week.expanded .day[open]{flex:0 0 auto}
 .week.expanded .day[open] .detail{padding-bottom:7px}
 .week.expanded .day[open] .lesson:last-child{margin-bottom:0}
+
+/* Selector minimalista: ícono lunar/solar inequívoco, sin leyenda visual.
+   Creciente dorada = Dark; menguante azul = Dark Blue; sol = Claro.
+   Se mantiene el nombre accesible y el área táctil original. */
+.actions>.theme-btn{
+  display:flex!important;flex-direction:row!important;
+  align-items:center!important;justify-content:center!important;
+  gap:0!important;padding:0!important;
+}
+.actions>.theme-btn .theme-icon{
+  display:block!important;flex:0 0 29px!important;
+  width:29px!important;height:29px!important;
+  max-width:29px!important;max-height:29px!important;
+  pointer-events:none;
+}
+.actions>.theme-btn .theme-icon svg{
+  display:block!important;width:100%!important;height:100%!important;
+  overflow:visible;
+}
+.actions>.theme-btn .theme-caption{display:none!important}
+body.theme-blue .actions>.theme-btn .theme-icon svg{
+  filter:drop-shadow(0 0 4px rgba(99,185,255,.48));
+}
+body.theme-dark .actions>.theme-btn .theme-icon svg{
+  filter:drop-shadow(0 0 4px rgba(255,199,81,.40));
+}
+body.theme-light .actions>.theme-btn .theme-icon svg{
+  filter:drop-shadow(0 1px 2px rgba(207,151,36,.24));
+}
+@media(max-width:350px){
+  .actions>.theme-btn .theme-icon{
+    width:26px!important;height:26px!important;max-width:26px!important;
+    max-height:26px!important;flex-basis:26px!important;
+  }
+}
+
 </style>
 </head>
 <body class="theme-blue">
@@ -905,7 +941,7 @@ body.theme-light .day .detail .recreo .live-badge{background:#8a5f07;color:#fff}
 <li>Tocá un día de lunes a viernes para desplegar materias, horarios y recreos. Deslizá para recorrer las clases.</li>
 <li>El botón del curso (<strong>3.º A</strong> por defecto) permite elegir año y división. <strong>Actualmente solo 3.º A tiene sus horarios cargados.</strong> Los demás cursos muestran «Horario pendiente» hasta recibir sus datos.</li>
 <li>El botón de <strong>Compartir</strong> permite enviar el enlace por WhatsApp o mostrar un código QR.</li>
-<li>El botón <strong>Tema</strong> alterna entre Azul oscuro, Claro y Negro.</li>
+<li>El botón de <strong>luna o sol</strong> cambia entre Dark Blue (menguante azul), Claro (sol) y Dark (creciente dorada).</li>
 <li>Para volver a las cinco tarjetas cerradas, tocá nuevamente el día o utilizá Volver en el teléfono.</li>
 </ol><p>Los horarios son de solo lectura y se actualizan desde la versión publicada de la aplicación.</p></section>
   <section class="help-install" aria-labelledby="installHeading">
@@ -968,12 +1004,12 @@ const app=document.querySelector('.app');
 const cards=[...document.querySelectorAll('.week > .day')];
 const themes=['theme-blue','theme-light','theme-dark'];
 
-const APP_VERSION='V1.4.27';
+const APP_VERSION='V1.4.28';
 $('helpAppVersion').textContent=APP_VERSION;
 const themeIcons={
-  'theme-blue': '<span class="theme-icon" aria-hidden="true"><img src="./theme-blue-orb.png" alt=""></span>',
-  'theme-light': '<span class="theme-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="4.8" fill="#ffd45d"/><g stroke="#ffd45d" stroke-width="1.7" stroke-linecap="round"><path d="M12 2.7v2.6"/><path d="M12 18.7v2.6"/><path d="M2.7 12h2.6"/><path d="M18.7 12h2.6"/><path d="m5.4 5.4 1.8 1.8"/><path d="m16.8 16.8 1.8 1.8"/><path d="m16.8 7.2 1.8-1.8"/><path d="m5.4 18.6 1.8-1.8"/></g></svg></span>',
-  'theme-dark': '<span class="theme-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.4 3.5a7.7 7.7 0 1 0 5.1 13.6A8.6 8.6 0 1 1 15.4 3.5Z" fill="#ffd768"/></svg></span>'
+  'theme-blue': "<span class=\"theme-icon\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\" focusable=\"false\"><defs><linearGradient id=\"waningBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop stop-color=\"#D0F1FF\"/><stop offset=\".45\" stop-color=\"#81C8FF\"/><stop offset=\"1\" stop-color=\"#3087EA\"/></linearGradient></defs><path d=\"M12 2.3 A9.7 9.7 0 0 0 12 21.7 C8.05 18.4 8.05 5.6 12 2.3Z\" fill=\"url(#waningBlue)\" stroke=\"#B3E2FF\" stroke-width=\".65\" stroke-linejoin=\"round\"/></svg></span>",
+  'theme-light': "<span class=\"theme-icon\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" focusable=\"false\"><circle cx=\"12\" cy=\"12\" r=\"4.8\" fill=\"#FFD45D\"/><g stroke=\"#FFC94A\" stroke-width=\"1.7\" stroke-linecap=\"round\"><path d=\"M12 2.7v2.6\"/><path d=\"M12 18.7v2.6\"/><path d=\"M2.7 12h2.6\"/><path d=\"M18.7 12h2.6\"/><path d=\"m5.4 5.4 1.8 1.8\"/><path d=\"m16.8 16.8 1.8 1.8\"/><path d=\"m16.8 7.2 1.8-1.8\"/><path d=\"m5.4 18.6 1.8-1.8\"/></g></svg></span>",
+  'theme-dark': "<span class=\"theme-icon\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\" focusable=\"false\"><defs><linearGradient id=\"waxingGold\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop stop-color=\"#FFF3B7\"/><stop offset=\".43\" stop-color=\"#FFD86B\"/><stop offset=\"1\" stop-color=\"#E69C24\"/></linearGradient></defs><path d=\"M12 2.3 A9.7 9.7 0 0 1 12 21.7 C15.95 18.4 15.95 5.6 12 2.3Z\" fill=\"url(#waxingGold)\" stroke=\"#FFE9A2\" stroke-width=\".65\" stroke-linejoin=\"round\"/></svg></span>"
 };
 
 const themeNames={'theme-blue':'Dark Blue','theme-light':'Claro','theme-dark':'Dark'};
@@ -1123,7 +1159,7 @@ function applyCourse(){
 function applyTheme(){
   document.body.classList.remove('theme-blue','theme-light','theme-dark');
   document.body.classList.add(theme);
-  $('themeBtn').innerHTML=themeIcons[theme]+'<span class="theme-caption" aria-hidden="true">Tema</span>';
+  $('themeBtn').innerHTML=themeIcons[theme];
   $('themeBtn').title='Cambiar tema · Actual: '+themeNames[theme];
   $('themeBtn').setAttribute('aria-label','Tema '+themeNames[theme]+'. Cambiar tema');
   document.querySelector('meta[name="theme-color"]').content=theme==='theme-light' ? '#f0f4fb' : theme==='theme-blue' ? '#071122' : '#0b101c';
