@@ -801,8 +801,6 @@ body.theme-light .day .detail .recreo .live-badge{background:#8a5f07;color:#fff}
   color:color-mix(in srgb,var(--text) 79%,var(--muted) 21%) !important;
   font-size:clamp(10.7px,2.85vw,12.3px) !important;
   font-weight:560;
-  flex:1 1 auto;
-  width:100%;max-width:100%;
   text-overflow:ellipsis; /* protección excepcional para nombres muy largos */
   letter-spacing:0;
 }
@@ -840,6 +838,13 @@ body.theme-light .day .detail .recreo .live-badge{background:#8a5f07;color:#fff}
   }
   .actions>.theme-btn .theme-caption{font-size:8px;}
 }
+
+/* V1.4.27 — acordeón de altura natural: sin estiramiento del día abierto
+   ni espacio adicional al pie de la página. El scroll solamente posiciona la vista. */
+.week.expanded{justify-content:flex-start;align-items:stretch}
+.week.expanded .day[open]{flex:0 0 auto}
+.week.expanded .day[open] .detail{padding-bottom:7px}
+.week.expanded .day[open] .lesson:last-child{margin-bottom:0}
 </style>
 </head>
 <body class="theme-blue">
@@ -963,7 +968,7 @@ const app=document.querySelector('.app');
 const cards=[...document.querySelectorAll('.week > .day')];
 const themes=['theme-blue','theme-light','theme-dark'];
 
-const APP_VERSION='V1.4.26';
+const APP_VERSION='V1.4.27';
 $('helpAppVersion').textContent=APP_VERSION;
 const themeIcons={
   'theme-blue': '<span class="theme-icon" aria-hidden="true"><img src="./theme-blue-orb.png" alt=""></span>',
@@ -982,24 +987,22 @@ function previewFitLabel(el){
   let subjects=[];
   try{subjects=JSON.parse(el.dataset.previewSubjects);}catch(_){return;}
   if(!subjects.length)return;
-  const total=Math.max(subjects.length,Number(el.dataset.previewTotal)||subjects.length);
   const width=el.clientWidth;
   if(width<32 || !previewMeasureCtx)return;
   const css=getComputedStyle(el);
   previewMeasureCtx.font=`${css.fontWeight} ${css.fontSize} ${css.fontFamily}`;
   const fits=(v)=>previewMeasureCtx.measureText(v).width+Math.max(0,v.length-1)*.08 <=width-5;
   const full=subjects.join(' · ');
-  if(total===subjects.length && fits(full)){el.textContent=full;return;}
-  for(let n=subjects.length;n>=1;n--){
-    const label=subjects.slice(0,n).join(' · ')+` · +${total-n} más`;
+  if(fits(full)){el.textContent=full;return;}
+  for(let n=subjects.length-1;n>=1;n--){
+    const label=subjects.slice(0,n).join(' · ')+` · +${subjects.length-n} más`;
     if(fits(label)){el.textContent=label;return;}
   }
   // Solo se recorta cuando la primera materia es más ancha que toda la tarjeta.
   el.textContent=subjects[0];
 }
-function previewSet(el,subjects,total=subjects.length){
+function previewSet(el,subjects){
   el.dataset.previewSubjects=JSON.stringify(subjects);
-  el.dataset.previewTotal=String(total);
   el.title=subjects.join(' · ');
   el.textContent=subjects.join(' · ');
   previewFitLabel(el);
@@ -1034,8 +1037,8 @@ function renderSchoolSchedule(){
     card.querySelector('.day-desc').textContent=loaded?item.desc:'Horario pendiente';
     card.querySelector('.day-pill').textContent=loaded?(i===todayIndex?'HOY':item.pill):'Pendiente';
     const preview=card.querySelector('.preview-text');
-    if(loaded){previewSet(preview,item.preview.split(' · '),CHESTERTON_3A_S[i][1].length);}
-    else{preview.removeAttribute('data-preview-subjects');preview.removeAttribute('data-preview-total');preview.removeAttribute('title');preview.textContent='Materias y horarios aún no cargados';}
+    if(loaded){previewSet(preview,item.preview.split(' · '));}
+    else{preview.removeAttribute('data-preview-subjects');preview.removeAttribute('title');preview.textContent='Materias y horarios aún no cargados';}
     card.querySelector('.detail').innerHTML=loaded?item.detail:
       '<div class="pending-notice"><strong>Horario pendiente</strong> · Todavía no se cargaron las materias de este curso. Se incorporarán cuando estén disponibles los datos oficiales del colegio.</div>';
   });
@@ -1247,7 +1250,7 @@ function syncView(v,fromHistory=false){
   week.classList.toggle('expanded',expanded);
   if(!expanded)requestAnimationFrame(previewRefresh);
   app.classList.toggle('has-open',expanded);
-  app.style.paddingBottom=''; // descartar el margen de centrado del día anterior
+  app.style.paddingBottom=''; // mantener únicamente el padding natural de la aplicación
   document.body.classList.toggle('is-expanded',expanded);
   updateLiveSchedule();
   $('selectorOverlay').hidden=view.pane!=='course';
@@ -1268,22 +1271,17 @@ function syncView(v,fromHistory=false){
     if(token!==transitionToken || view.pane) return;
     if(openDay>=0){
       const rect=cards[openDay].getBoundingClientRect();
-      const vh=window.visualViewport?.height||window.innerHeight;
-      // Centrar la tarjeta completa cuando entra en pantalla; si es más alta,
-      // ubicar su encabezado cerca del borde superior para empezar a leerla.
-      const safeTop=Math.max(18,Math.min(80,vh*0.09));
-      const visibleTop = rect.height > vh-safeTop*2 ? safeTop : Math.max(safeTop,(vh-rect.height)/2);
-      const desired = fromHistory && view.scrollY>0 ? view.scrollY : Math.max(0,window.scrollY+rect.top-visibleTop);
-      // Sin este pequeño margen flexible, martes/miércoles quedaban limitados
-      // por el final de la página y no podían llegar al centro.
-      let maxScroll=Math.max(0,Math.max(document.documentElement.scrollHeight,document.body.scrollHeight)-window.innerHeight);
-      if(desired>maxScroll){
-        const basePadding=parseFloat(getComputedStyle(app).paddingBottom)||0;
-        app.style.paddingBottom=(basePadding+Math.ceil(desired-maxScroll)+8)+'px';
-        maxScroll=Math.max(0,Math.max(document.documentElement.scrollHeight,document.body.scrollHeight)-window.innerHeight);
-      }
+      const vh=window.visualViewport?.height || window.innerHeight;
+      // Acordeón natural: intentar acercar la cabecera al borde superior,
+      // pero NUNCA inventar altura/padding para forzar un centrado.
+      // En jueves y viernes el límite real del documento deja el último
+      // contenido cerca del borde inferior, sin generar un fondo vacío artificial.
+      const safeTop=Math.max(16,Math.min(48,vh*0.055));
+      const naturalMaxScroll=Math.max(0,Math.max(document.documentElement.scrollHeight,document.body.scrollHeight)-window.innerHeight);
+      const naturalTarget=window.scrollY+rect.top-safeTop;
+      const desired=fromHistory && view.scrollY>0 ? view.scrollY : naturalTarget;
       const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      window.scrollTo({top:Math.min(maxScroll,desired),behavior:fromHistory||reduced?'instant':'smooth'});
+      window.scrollTo({left:0,top:Math.max(0,Math.min(naturalMaxScroll,desired)),behavior:fromHistory||reduced?'instant':'smooth'});
     }else{restoreHomeLayout();}
   }));
 }
