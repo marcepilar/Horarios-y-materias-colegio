@@ -1,8 +1,8 @@
-/* Horario Escolar PWA v1.4.28 — actualizaciones y uso sin conexión */
+/* Horario Escolar PWA v1.4.29 — actualizaciones y uso sin conexión */
 const PREFIX = 'horario-escolar-v';
-const CACHE = PREFIX + '1.4.28';
+const CACHE = PREFIX + '1.4.29';
 const CORE = ['./','./index.html','./manifest.webmanifest','./version.json',
- './icon-192.png','./icon-512.png','./apple-touch-icon.png','./qr-horario.png','./ayuda-android.png','./ayuda-iphone.png','./theme-blue-orb.png','./chesterton-banner.png?v=1.4.28','./chesterton-shield.png','./icon-maskable-512.png'];
+ './icon-192.png','./icon-512.png','./apple-touch-icon.png','./qr-horario.png','./ayuda-android.png','./ayuda-iphone.png','./theme-blue-orb.png','./chesterton-banner.png?v=1.4.29','./chesterton-shield.png','./icon-maskable-512.png'];
 self.addEventListener('install', event => {
  event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)));
 });

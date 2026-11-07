@@ -1,16 +1,16 @@
 {
   "app": "Horario Escolar · Colegio Chesterton Pilar",
-  "version": "V1.4.28",
+  "version": "V1.4.29",
   "release_date": "2026-11-07",
   "status": "prueba",
   "base_estable": "V1.4.23",
   "changes": [
-    "Botón de temas sin leyenda visible: sol dorado para Claro, luna creciente dorada para Dark y luna menguante azul para Dark Blue.",
-    "Las lunas tienen orientaciones opuestas, brillo discreto y nombres accesibles para el lector de pantalla.",
-    "Se conservan la altura natural y desplazamiento sin relleno artificial de las tarjetas desde V1.4.27.",
-    "Sin cambios en los horarios reales, recreos, banner HD, escudo, instalación ni selección de curso.",
+    "El botón de tema muestra el icono del SIGUIENTE tema, siguiendo el cambio ciclico Claro → Dark → Dark Blue → Claro.",
+    "Luna creciente dorada y luna menguante azul ligeramente mas finas, manteniendo color, orientacion y brillo.",
+    "El botón conserva la accesibilidad: anuncia a qué tema cambia y cuál está activo; sin leyenda visible de Tema.",
+    "Sin cambios en horarios, tarjetas, temas visuales, iconos instalados, banner, manifiesto o datos locales.",
     "ZIP ligero de tres archivos: index.html, service-worker.js y version.json."
   ],
-  "notice": "V1.4.28 DE PRUEBA; última estable V1.4.23. North Green tiene numeración independiente.",
-  "based_on": "V1.4.27 (candidata anterior)"
+  "notice": "V1.4.29 DE PRUEBA; última estable V1.4.23.",
+  "based_on": "V1.4.28 (candidata anterior)"
 }
