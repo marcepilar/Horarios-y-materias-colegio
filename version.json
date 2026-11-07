@@ -1,16 +1,15 @@
 {
   "app": "Horario Escolar · Colegio Chesterton Pilar",
-  "version": "V1.4.18",
+  "version": "V1.4.19",
   "release_date": "2026-11-07",
   "status": "prueba",
-  "base_estable": "V1.4.16",
+  "base_estable": "V1.4.18",
   "interface_based_on": "North Green Academy V1.0.12 (estable)",
   "changes": [
-    "Se fija un identificador propio de PWA en el manifiesto: /Horarios-y-materias-colegio/index.html.",
-    "El identificador coincide con el valor implícito de la antigua PWA en su dirección actual de GitHub Pages, para mantener continuidad.",
-    "Se actualizan referencias de versión y caché del service worker, sin modificar el inicio, alcance ni modo standalone.",
-    "Ícono junto al título y los iconos de instalación Android/iOS con escudo Chesterton sin cambios desde V1.4.17.",
-    "Banner institucional, horarios completos de 3.º A, temas, selector, ayuda, compartir y seguimiento de clase/recreo intactos."
+    "Al abrir/cerrar/cambiar una tarjeta de lunes a viernes, transición suave de tamaño y posición (410 ms) compatible con los navegadores modernos.",
+    "Las materias aparecen con un deslizamiento sutil y fundido (320 ms); se respeta la preferencia de reducir movimiento.",
+    "Se conservan la navegación con Atrás, el centrado del día abierto, los horarios, el QR, los temas y los controles.",
+    "El manifiesto y los iconos de instalación no se modifican para evitar cambiar la identidad de la PWA."
   ],
-  "notice": "Versión de prueba: mejora identificación PWA, pero no garantiza resolver una instalación residual reconocida por Chrome. No sustituye la estable V1.4.16 hasta aprobación."
+  "notice": "Versión de PRUEBA. Última versión estable oficial: V1.4.18. No publicar como estable hasta aprobación."
 }
