@@ -764,95 +764,6 @@ body.theme-light .day .detail .recreo .live-badge{background:#8a5f07;color:#fff}
 /* V1.4.18 — Escudo institucional de Chesterton junto al título, sin calendario. */
 .mark{background:transparent!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important;}
 .mark img{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;}
-
-/* APERTURA DESDE EL CENTRO — Chesterton V1.4.22 DE PRUEBA.
-   El nuevo panel se revela verticalmente desde el centro hacia los bordes
-   superior e inferior; al cerrar se repliega en dirección contraria. */
-@keyframes schoolDayDetailReveal{
- from{opacity:0;transform:translateY(-7px)}
- to{opacity:1;transform:translateY(0)}
-}
-.day[open]>.detail{animation:schoolDayDetailReveal 560ms cubic-bezier(.22,1,.36,1) both}
-.day{transition:border-color 260ms ease,box-shadow 260ms ease}
-html.school-card-motion #day-0{view-transition-name:school-day-0}
-html.school-card-motion #day-1{view-transition-name:school-day-1}
-html.school-card-motion #day-2{view-transition-name:school-day-2}
-html.school-card-motion #day-3{view-transition-name:school-day-3}
-html.school-card-motion #day-4{view-transition-name:school-day-4}
-/* Sólo la tarjeta abierta/cerrada usa el efecto especial. Las otras conservan
-   su transición de posición original para no deformar el calendario. */
-html.school-card-motion .day.school-motion-target{
- view-transition-name:school-day-active!important
-}
-/* El nombre del día permanece visible mientras el cuerpo se despliega
-   desde el centro; así no queda un panel anónimo durante la apertura. */
-html.school-card-motion .day.school-motion-target > .day-button{
- view-transition-name:school-day-heading!important;
- background:var(--surface);
- border-radius:16px;
-}
-::view-transition-group(school-day-heading){
- animation-duration:820ms;
- animation-timing-function:cubic-bezier(.22,.72,.18,1);
-}
-::view-transition-old(school-day-heading){animation:none!important;opacity:0!important}
-::view-transition-new(school-day-heading){animation:none!important;opacity:1!important}
-::view-transition-group(school-day-0),
-::view-transition-group(school-day-1),
-::view-transition-group(school-day-2),
-::view-transition-group(school-day-3),
-::view-transition-group(school-day-4),
-::view-transition-group(school-day-active){
- animation-duration:820ms;
- animation-timing-function:cubic-bezier(.22,.72,.18,1);
- transform-origin:center center;
-}
-::view-transition-old(school-day-0),::view-transition-old(school-day-1),
-::view-transition-old(school-day-2),::view-transition-old(school-day-3),
-::view-transition-old(school-day-4){animation:none!important;opacity:0!important}
-::view-transition-new(school-day-0),::view-transition-new(school-day-1),
-::view-transition-new(school-day-2),::view-transition-new(school-day-3),
-::view-transition-new(school-day-4){animation:none!important;opacity:1!important}
-/* Aislar los dos estados impide que se vea una doble imagen transparente. */
-::view-transition-image-pair(school-day-active){isolation:auto}
-@keyframes schoolDayUnfoldCenter{
- 0%{clip-path:inset(49% 0 49% 0 round 17px);opacity:.95}
- 18%{opacity:1}
- 100%{clip-path:inset(0 0 0 0 round 17px);opacity:1}
-}
-@keyframes schoolDayFoldCenter{
- 0%{clip-path:inset(0 0 0 0 round 17px);opacity:1}
- 82%{opacity:1}
- 100%{clip-path:inset(49% 0 49% 0 round 17px);opacity:.95}
-}
-@keyframes schoolDayOldVanish{from{opacity:1}to{opacity:0}}
-@keyframes schoolDayCompactReturn{from{opacity:0}to{opacity:1}}
-html.school-card-opening::view-transition-new(school-day-active){
- animation:schoolDayUnfoldCenter 820ms cubic-bezier(.25,.58,.19,1) both;
- mix-blend-mode:normal;
-}
-html.school-card-opening::view-transition-old(school-day-active){
- animation:schoolDayOldVanish 170ms ease-out both;
- mix-blend-mode:normal;
-}
-html.school-card-closing::view-transition-old(school-day-active){
- animation:schoolDayFoldCenter 820ms cubic-bezier(.42,0,.33,1) both;
- mix-blend-mode:normal;
-}
-html.school-card-closing::view-transition-new(school-day-active){
- animation:schoolDayCompactReturn 180ms 630ms ease-out both;
- mix-blend-mode:normal;
-}
-/* El encabezado y la barra superior permanecen nítidos: no se mezclan
-   dos capturas del banner durante el movimiento de las tarjetas. */
-::view-transition-old(root){animation:none!important;opacity:0!important}
-::view-transition-new(root){animation:none!important;opacity:1!important}
-@media(prefers-reduced-motion:reduce){
- .day[open]>.detail{animation:none!important}
- .day{transition:none!important}
- ::view-transition-old(root),::view-transition-new(root){animation-duration:0.01ms!important}
-}
-
 </style>
 </head>
 <body class="theme-blue">
@@ -976,7 +887,7 @@ const app=document.querySelector('.app');
 const cards=[...document.querySelectorAll('.week > .day')];
 const themes=['theme-blue','theme-light','theme-dark'];
 
-const APP_VERSION='V1.4.22';
+const APP_VERSION='V1.4.23';
 $('helpAppVersion').textContent=APP_VERSION;
 const themeIcons={
   'theme-blue': '<span class="theme-icon" aria-hidden="true"><img src="./theme-blue-orb.png" alt=""></span>',
@@ -1204,7 +1115,7 @@ function writeCurrent(v,replace=false){
   try{if(replace)history.replaceState(st,'',location.href);else history.pushState(st,'',location.href);return true;}
   catch(_){return false;}
 }
-function applyViewState(v,fromHistory=false,animateLayout=false){
+function syncView(v,fromHistory=false){
   const previousPane=view.pane;
   view=cleanView(v);
   const openDay=view.day;
@@ -1231,7 +1142,7 @@ function applyViewState(v,fromHistory=false,animateLayout=false){
   else if(previousPane==='help') $('helpBtn').focus({preventScroll:true});
   else if(previousPane==='share') $('shareBtn').focus({preventScroll:true});
   const token=++transitionToken;
-  const positionExpandedDay=()=>{
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
     if(token!==transitionToken || view.pane) return;
     if(openDay>=0){
       const rect=cards[openDay].getBoundingClientRect();
@@ -1250,62 +1161,9 @@ function applyViewState(v,fromHistory=false,animateLayout=false){
         maxScroll=Math.max(0,Math.max(document.documentElement.scrollHeight,document.body.scrollHeight)-window.innerHeight);
       }
       const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      window.scrollTo({top:Math.min(maxScroll,desired),behavior:animateLayout||fromHistory||reduced?'instant':'smooth'});
+      window.scrollTo({top:Math.min(maxScroll,desired),behavior:fromHistory||reduced?'instant':'smooth'});
     }else{restoreHomeLayout();}
-  };
-  if(animateLayout) positionExpandedDay();
-  else requestAnimationFrame(()=>requestAnimationFrame(positionExpandedDay));
-}
-
-// Abrir/cerrar una tarjeta conserva el historial y hace una transición de
-// tamaño/posición entre las dos disposiciones reales del calendario.
-// Si el navegador no admite View Transitions, mantiene la navegación existente
-// y usa la animación ligera de entrada del detalle definida en CSS.
-let activeSchoolCardTransition=null;
-function clearSchoolCardMotion(){
-  document.documentElement.classList.remove('school-card-motion','school-card-opening','school-card-closing');
-  cards.forEach(card=>card.classList.remove('school-motion-target'));
-}
-function syncView(v,fromHistory=false){
-  const next=cleanView(v);
-  const dayChanged=next.day!==view.day;
-  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const canAnimate=dayChanged && !next.pane && !view.pane && !reduced &&
-    typeof document.startViewTransition==='function' &&
-    document.readyState==='complete' && !document.hidden;
-  if(!canAnimate){
-    activeSchoolCardTransition?.skipTransition();
-    clearSchoolCardMotion();
-    applyViewState(next,fromHistory,false);
-    return;
-  }
-  try{
-    activeSchoolCardTransition?.skipTransition();
-    clearSchoolCardMotion();
-    const isOpening=view.day<0 && next.day>=0;
-    const isClosing=view.day>=0 && next.day<0;
-    const targetIndex=isOpening?next.day:(isClosing?view.day:-1);
-    if(targetIndex>=0){
-      cards[targetIndex].classList.add('school-motion-target');
-      document.documentElement.classList.add(isOpening?'school-card-opening':'school-card-closing');
-    }
-    document.documentElement.classList.add('school-card-motion');
-    const transition=document.startViewTransition(()=>{
-      // Mantener la geometría final y el centrado real del día, pero hacer
-      // que la tarjeta se despliegue visualmente desde su mitad vertical.
-      applyViewState(next,fromHistory,true);
-    });
-    activeSchoolCardTransition=transition;
-    transition.finished.catch(()=>{}).finally(()=>{
-      if(activeSchoolCardTransition===transition){
-        activeSchoolCardTransition=null;
-        clearSchoolCardMotion();
-      }
-    });
-  }catch(_){
-    clearSchoolCardMotion();
-    applyViewState(next,fromHistory,false);
-  }
+  }));
 }
 function navigate(next){
   const before={...view,scrollY:window.scrollY};

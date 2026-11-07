@@ -1,15 +1,14 @@
 {
   "app": "Horario Escolar · Colegio Chesterton Pilar",
-  "version": "V1.4.22",
+  "version": "V1.4.23",
   "release_date": "2026-11-07",
   "status": "prueba",
   "base_estable": "V1.4.18",
-  "interface_based_on": "North Green Academy V1.0.12 (estable)",
   "changes": [
-    "Efecto de apertura de tarjetas desde el centro hacia los extremos superior e inferior (820 ms).",
-    "Cierre inverso progresivo desde los bordes hacia el centro (820 ms), respetando el botón Atrás.",
-    "Conserva Ayuda con versión automática, materias, recreos, escudos y PWA intactos; North Green sin modificar."
+    "Se descartan totalmente los efectos de apertura, cierre, revelado desde el centro y retardos de tarjetas ensayados entre V1.4.19 y V1.4.22.",
+    "Se restaura exactamente el comportamiento de apertura y cierre de tarjetas de la versión estable V1.4.18.",
+    "Ayuda muestra la versión actual automáticamente mediante APP_VERSION.",
+    "Sin cambios en los horarios reales, recreos, banner, escudo, iconos, manifiesto, selector ni otras funciones."
   ],
-  "notice": "Versión de PRUEBA. Última estable oficial: V1.4.18. North Green no se modifica.",
-  "base_de_prueba": "V1.4.21"
+  "notice": "Solo Chesterton. V1.4.23 es de prueba, última versión estable oficial V1.4.18. North Green no se modifica."
 }
