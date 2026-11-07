@@ -1,22 +1,28 @@
-HORARIO ESCOLAR — COLEGIO CHESTERTON PILAR
-Versión V1.4.16 — PRUEBA (no estable)
-Última versión estable aprobada: V1.4.14
+HORARIO ESCOLAR · COLEGIO CHESTERTON PILAR
+VERSIÓN V1.4.18 · PRUEBA
+Última versión estable aprobada: V1.4.16
+Basada en: V1.4.17 (escudo aprobado)
 
-CAMBIOS DE ESTA VERSIÓN
-- La etiqueta «EN CURSO · N min restantes» ocupa una línea propia debajo de «1.ª/2.ª/3.ª hora», sin superponer textos.
-- Se suavizó el resplandor verde del contorno de la materia en curso, aproximadamente un 15 %.
-- Recreo en curso y cálculo automático de minutos restantes: sin cambios en su funcionamiento.
-- Materias, horarios y recreos reales de 3.º A: exactamente los mismos de V1.4.15.
-- Otros cursos: permanecen con «Horario pendiente» hasta contar con los datos reales.
+CAMBIO TÉCNICO PUNTUAL
+- Se añade un ID explícito al manifiesto: /Horarios-y-materias-colegio/index.html
+- El ID corresponde al inicio original de la PWA publicada en el repositorio
+  marcepilar/Horarios-y-materias-colegio; no cambia con futuras versiones.
+- Se conserva start_url ./index.html, scope ./ y display standalone.
+- Se renueva el caché de recursos y se actualizan las versiones a 1.4.18.
+- El escudo de Chesterton, los iconos instalables y el banner están sin cambios.
+- Se mantienen los horarios y materias de 3.º A y todas las funciones.
 
-PUBLICACIÓN EN GITHUB PAGES
-1. Descomprimí el ZIP en tu computadora.
-2. Subí los 13 archivos directamente a la raíz del repositorio Chesterton existente, reemplazando los anteriores.
-3. Confirmá los cambios y comprobá V1.4.16 en Ayuda de la PWA.
-4. Si la versión anterior queda en caché, cerrá y volvé a abrir la PWA con conexión a internet.
+CÓMO PROBAR EN GITHUB PAGES
+1. Descomprimir el ZIP completo.
+2. Subir el contenido (los 15 archivos, no la carpeta) a la raíz del repositorio
+   marcepilar/Horarios-y-materias-colegio, reemplazando los archivos anteriores.
+3. Esperar a que la publicación de Pages termine; abrir el enlace habitual.
+4. Comprobar en Ayuda que muestra V1.4.18, luego probar el menú Instalar
+   de Chrome en el teléfono.
 
-ARCHIVOS: index.html, manifest.webmanifest, service-worker.js, version.json, README.txt,
-chesterton-banner.png, icon-192.png, icon-512.png, apple-touch-icon.png,
-ayuda-android.png, ayuda-iphone.png, theme-blue-orb.png, qr-horario.png.
-
-Autoría: Marcelo Rodriguez. Desarrollo independiente, no oficial del colegio.
+PRECAUCIONES
+- NO borrar datos de Chrome ni desinstalar North Green Academy para probar.
+- Si Chrome sigue diciendo «Ya se instaló esta app», este ajuste no logró
+  superar su registro local; evitar reinstalaciones repetidas.
+- Esta versión sigue siendo de PRUEBA; no cambia la V1.4.16 estable.
+- El paquete no se subió automáticamente a GitHub.
