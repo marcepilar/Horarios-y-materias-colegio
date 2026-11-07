@@ -1,20 +1,18 @@
-HORARIO ESCOLAR — CHESTERTON — V1.4.19 DE PRUEBA
-BASE: V1.4.18 · ESTABLE OFICIAL: V1.4.18
+HORARIO ESCOLAR — COLEGIO CHESTERTON PILAR — V1.4.20 DE PRUEBA
+BASE: V1.4.19 DE PRUEBA · ESTABLE OFICIAL: V1.4.18
 
-NOVEDAD: apertura, cierre y cambio entre tarjetas con transición de tamaño y
-posición de 410 ms; materias reveladas con deslizamiento suave de 320 ms.
-Respeta Ajustes del sistema > Reducir movimiento.
+CAMBIO ÚNICO: apertura y cierre de tarjetas un poco más lentos.
+- Cambio de tamaño y posición: 410 ms → 540 ms.
+- Aparición de materias y recreos: 320 ms → 400 ms.
+- Transiciones visuales internas sincronizadas para mantener la suavidad.
+- Respeta la configuración Reducir movimiento de Android/iOS.
 
-INSTALACIÓN GITHUB PAGES:
-1. Descomprimir el ZIP completo.
-2. Subir los archivos de la carpeta (no una subcarpeta) al repositorio correspondiente.
-3. Mantener los nombres index.html, manifest.webmanifest y service-worker.js.
-4. Probar en el teléfono antes de declarar esta versión estable.
-5. El manifiesto, el identificador de instalación y los iconos son IDÉNTICOS a la base.
+SIN CAMBIOS: horarios y materias de 3.º A, recreos, otras divisiones,
+temas, navegación, botones, Ayuda, QR, banner, logo, manifiesto e íconos.
+North Green Academy no se modifica.
 
-NOTAS:
-- Ambas aplicaciones se versionan y distribuyen por separado.
-- No se modifican horarios institucionales ni ficticios.
-- El cierre conserva el botón Atrás y la navegación por historial.
-- La animación es meramente visual; no agrega permisos ni servicios.
-- Para evitar cambios no aprobados, esta versión es sólo de prueba.
+GITHUB PAGES:
+1. Descomprimí el ZIP y subí todos los archivos al repositorio de Chesterton.
+2. Conservá los nombres y reemplazá los archivos de la versión anterior.
+3. Comprobá en el teléfono la apertura y cierre de tarjetas.
+4. Dejar como prueba hasta que apruebes explícitamente la nueva versión.
