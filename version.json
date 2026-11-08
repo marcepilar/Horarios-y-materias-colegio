@@ -1,16 +1,15 @@
 {
   "app": "Horario Escolar · Colegio Chesterton Pilar",
-  "version": "V1.4.31",
+  "version": "V1.4.32",
   "release_date": "2026-11-07",
   "status": "prueba",
   "base_estable": "V1.4.23",
   "changes": [
-    "Selector de tema: sol dorado con rayos un 32% mas finos y disco central un 11% mas pequeno.",
-    "Discreto degradado de luz en el centro para mantener definicion a tamano de boton.",
-    "Se conserva el ciclo de mostrar el PROXIMO tema: luna grafito (Dark), luna azul (Dark Blue) y sol dorado (Claro).",
-    "Sin modificaciones de lunas, horarios, clases, recreos, tarjetas, escudos, banners o manifiesto.",
-    "Actualizacion ligera de tres archivos para GitHub Pages."
+    "Corregida la vista previa de materias: se mide el ancho disponible de cada tarjeta, sin reducirse progresivamente a una sola materia.",
+    "Los resúmenes vuelven a calcularse correctamente al abrir y cerrar una tarjeta, cambiar de año o división, volver a la app y cambiar el tamaño de pantalla.",
+    "Sin modificaciones de materias, horarios, recreos, banners, iconos o funcionamiento de los tres temas.",
+    "Actualización ligera de tres archivos para GitHub Pages."
   ],
-  "notice": "V1.4.31 DE PRUEBA; ultima estable V1.4.23.",
-  "based_on": "V1.4.30"
+  "notice": "V1.4.32 DE PRUEBA; ultima estable V1.4.23.",
+  "based_on": "V1.4.31"
 }

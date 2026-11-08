@@ -881,6 +881,10 @@ body.theme-light .actions>.theme-btn .theme-icon svg{
   }
 }
 
+
+/* V1.4.32 — Vista previa estable al cambiar de curso y abrir/cerrar tarjetas.
+   El texto ocupa el espacio de la tarjeta sin modificar sus dimensiones. */
+.day-preview .preview-text{flex:1 1 0%;width:0;}
 </style>
 </head>
 <body class="theme-blue">
@@ -1004,7 +1008,7 @@ const app=document.querySelector('.app');
 const cards=[...document.querySelectorAll('.week > .day')];
 const themes=['theme-blue','theme-light','theme-dark'];
 
-const APP_VERSION='V1.4.31';
+const APP_VERSION='V1.4.32';
 $('helpAppVersion').textContent=APP_VERSION;
 const themeIcons={
   'theme-blue': "<span class=\"theme-icon\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\" focusable=\"false\"><defs><linearGradient id=\"waningBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop stop-color=\"#D0F1FF\"/><stop offset=\".45\" stop-color=\"#81C8FF\"/><stop offset=\"1\" stop-color=\"#3087EA\"/></linearGradient></defs><path transform=\"rotate(11 12 12)\" d=\"M12 2.3 A9.7 9.7 0 0 0 12 21.7 C5.05 17.25 5.05 6.75 12 2.3Z\" fill=\"url(#waningBlue)\" stroke=\"#A9DCFF\" stroke-width=\".36\" stroke-linejoin=\"round\"/></svg></span>",
@@ -1023,7 +1027,9 @@ function previewFitLabel(el){
   let subjects=[];
   try{subjects=JSON.parse(el.dataset.previewSubjects);}catch(_){return;}
   if(!subjects.length)return;
-  const width=el.clientWidth;
+  // Medir el contenedor fijo, no el texto: el ancho del texto cambia al resumirlo.
+  const container=el.closest('.day-preview');
+  const width=container ? Math.max(0,container.clientWidth-12) : 0; // punto (5px) + separacion (7px)
   if(width<32 || !previewMeasureCtx)return;
   const css=getComputedStyle(el);
   previewMeasureCtx.font=`${css.fontWeight} ${css.fontSize} ${css.fontFamily}`;
