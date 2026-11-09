@@ -1,15 +1,15 @@
 {
   "app": "Horario Escolar · Colegio Chesterton Pilar",
-  "version": "V1.4.35",
-  "release_date": "2026-11-08",
+  "version": "V1.4.36",
+  "release_date": "2026-11-09",
   "status": "prueba",
   "base_estable": "V1.4.32",
   "changes": [
-    "Rediseñados los iconos de la app para mejorar lectura y presencia en la pantalla de inicio del celular.",
-    "Chesterton: escudo y letra C más grandes, mejor contraste, contornos más firmes y composición más limpia para tamaño pequeño.",
-    "Se agregan iconos 192, 512, maskable y apple-touch renovados junto al manifest actualizado.",
-    "Se mantienen intactos horarios, materias, tarjetas, temas, QR, compartir, banner y demás funciones."
+    "Los iconos instalables ahora usan exactamente el escudo institucional original presente en el banner de Chesterton, sin reinterpretarlo ni redibujarlo.",
+    "El escudo se presenta centrado sobre fondo blanco institucional, sin bordes ni adornos que alteren su diseño.",
+    "Nuevo icono adaptativo maskable con margen de seguridad para Android.",
+    "Se actualizan iconos Android/iOS y referencias de caché; horarios, materias, banner, funciones y temas permanecen sin cambios."
   ],
-  "notice": "V1.4.35 DE PRUEBA; ultima estable V1.4.32.",
-  "based_on": "V1.4.34"
+  "notice": "V1.4.36 DE PRUEBA; ultima estable oficial V1.4.32.",
+  "based_on": "V1.4.35"
 }
