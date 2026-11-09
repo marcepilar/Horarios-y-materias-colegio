@@ -1,15 +1,15 @@
 {
   "app": "Horario Escolar · Colegio Chesterton Pilar",
-  "version": "V1.4.37",
+  "version": "V1.4.38",
   "release_date": "2026-11-09",
   "status": "prueba",
   "base_estable": "V1.4.32",
   "changes": [
-    "Se conserva exactamente el escudo institucional original de la V1.4.36, sin redibujarlo.",
-    "Los iconos del manifiesto ahora usan archivos PNG con nombres exclusivos de versión, para que Chrome detecte el cambio del icono instalado.",
-    "Se mantiene la URL del manifiesto que usaba la V1.4.36, para favorecer la actualización de las instalaciones existentes de Chrome Beta.",
-    "Actualizados la versión visible, los archivos de iconos y el caché; no se modificaron materias, horarios, tarjetas, diseño interior ni temas."
+    "Se bloquea la ampliación de la interfaz por pellizco y doble toque en pantallas táctiles.",
+    "Se conservan el desplazamiento de las tarjetas y las interacciones de un dedo.",
+    "Se actualiza el caché del service worker sin modificar el manifiesto ni los íconos ya aprobados.",
+    "Sin cambios en materias, horarios, temas, escudo, banner ni demás funciones."
   ],
-  "notice": "V1.4.37 DE PRUEBA; última estable oficial V1.4.32.",
-  "based_on": "V1.4.36"
+  "notice": "V1.4.38 DE PRUEBA; última estable oficial V1.4.32.",
+  "based_on": "V1.4.37"
 }

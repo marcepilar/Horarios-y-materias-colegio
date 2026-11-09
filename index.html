@@ -2,7 +2,7 @@
 <html lang="es-AR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#071122">
 <meta name="description" content="Horario escolar del Colegio Chesterton Pilar. Materias y recreos de 3.º A; demás cursos pendientes.">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -893,6 +893,9 @@ body.theme-light .actions>.theme-btn .theme-icon svg{
     box-shadow:inset 0 1px 0 rgba(231,246,255,.10),0 2px 4px rgba(1,10,23,.16)!important;
   }
 }
+
+/* V1.4.38: bloquear pellizco/doble toque para ampliar la interfaz, conservando el desplazamiento vertical de las tarjetas. */
+html, body { touch-action: pan-x pan-y; }
 </style>
 </head>
 <body class="theme-blue">
@@ -1016,7 +1019,7 @@ const app=document.querySelector('.app');
 const cards=[...document.querySelectorAll('.week > .day')];
 const themes=['theme-blue','theme-light','theme-dark'];
 
-const APP_VERSION='V1.4.37';
+const APP_VERSION='V1.4.38';
 $('helpAppVersion').textContent=APP_VERSION;
 const themeIcons={
   'theme-blue': "<span class=\"theme-icon\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\" focusable=\"false\"><defs><linearGradient id=\"waningBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop stop-color=\"#D0F1FF\"/><stop offset=\".45\" stop-color=\"#81C8FF\"/><stop offset=\"1\" stop-color=\"#3087EA\"/></linearGradient></defs><path transform=\"rotate(11 12 12)\" d=\"M12 2.3 A9.7 9.7 0 0 0 12 21.7 C5.05 17.25 5.05 6.75 12 2.3Z\" fill=\"url(#waningBlue)\" stroke=\"#A9DCFF\" stroke-width=\".36\" stroke-linejoin=\"round\"/></svg></span>",
@@ -1436,6 +1439,11 @@ if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){
 }
 })();
 
+
+// V1.4.38: evitar el zoom por gesto en motores iOS que ignoran la restricción de viewport.
+for (const eventName of ['gesturestart', 'gesturechange']) {
+  document.addEventListener(eventName, event => event.preventDefault(), {passive:false});
+}
 </script>
 </body>
 </html>
