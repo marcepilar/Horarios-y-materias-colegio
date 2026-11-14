@@ -1,15 +1,17 @@
 {
   "app": "Horario Escolar · Colegio Chesterton Pilar",
-  "version": "V1.4.38",
-  "release_date": "2026-11-09",
+  "version": "V1.4.39",
+  "release_date": "2026-11-14",
   "status": "prueba",
-  "base_estable": "V1.4.32",
+  "base_estable": "V1.4.38",
   "changes": [
-    "Se bloquea la ampliación de la interfaz por pellizco y doble toque en pantallas táctiles.",
-    "Se conservan el desplazamiento de las tarjetas y las interacciones de un dedo.",
-    "Se actualiza el caché del service worker sin modificar el manifiesto ni los íconos ya aprobados.",
-    "Sin cambios en materias, horarios, temas, escudo, banner ni demás funciones."
+    "Se añade el año del ciclo lectivo configurado (2026) a la derecha del título Horario Escolar, en el estilo de North Green V1.0.29.",
+    "El año solo cambia al actualizar los horarios oficiales y la constante SCHOOL_CYCLE_YEAR; no cambia al llegar el 1 de enero.",
+    "Se reemplaza la etiqueta repetida Ciclo lectivo 2026 por Turno tarde para el único curso cargado 3.º A.",
+    "Los demás cursos continúan mostrando Horario pendiente, sin turnos inventados.",
+    "Se mantienen intactos horarios reales, materias, recreos, temas, selector, escudo y banner.",
+    "Se agregan los recursos estáticos que faltaban en el paquete anterior y se ajusta el cache PWA."
   ],
-  "notice": "V1.4.38 DE PRUEBA; última estable oficial V1.4.32.",
-  "based_on": "V1.4.37"
+  "notice": "V1.4.39 DE PRUEBA; no publicar hasta aprobación.",
+  "based_on": "V1.4.38"
 }
