@@ -897,7 +897,7 @@ body.theme-light .actions>.theme-btn .theme-icon svg{
 /* V1.4.38: bloquear pellizco/doble toque para ampliar la interfaz, conservando el desplazamiento vertical de las tarjetas. */
 html, body { touch-action: pan-x pan-y; }
 
-/* V1.4.39 DE PRUEBA — Año del ciclo lectivo junto al título; no cambia con el año calendario. */
+/* V1.4.40 DE PRUEBA — Año del ciclo lectivo junto al título; no cambia con el año calendario. */
 .header-text{display:flex;align-items:center;justify-content:space-between;gap:8px;}
 .header-text h1{min-width:0;flex:1 1 auto;}
 .header-year{flex:0 0 auto;color:var(--accent);font-size:clamp(15px,4.3vw,21px);font-weight:900;line-height:1.1;letter-spacing:.005em;font-variant-numeric:tabular-nums;white-space:nowrap;}
@@ -906,7 +906,7 @@ html, body { touch-action: pan-x pan-y; }
 </head>
 <body class="theme-blue">
 <div class="app">
- <div class="school-brand" aria-label="Colegio Chesterton Pilar"><div class="school-brand-card"><img class="school-brand-logo" src="./chesterton-banner.png?v=1.4.25" alt="Colegio Chesterton Pilar" width="2508" height="836" decoding="async"></div></div>
+ <div class="school-brand" aria-label="Colegio Chesterton Pilar"><div class="school-brand-card"><img class="school-brand-logo" src="./chesterton-banner.png?v=1.4.40" alt="Colegio Chesterton Pilar" width="2508" height="836" decoding="async"></div></div>
  <header class="header">
   <div class="mark" aria-hidden="true"><img src="./chesterton-shield.png" width="40" height="40" alt="" decoding="async"></div>
   <div class="header-text"><h1 id="titleMain">Horario Escolar</h1><span id="headerYear" class="header-year" aria-label="Ciclo lectivo 2026">2026</span></div>
@@ -1025,7 +1025,7 @@ const app=document.querySelector('.app');
 const cards=[...document.querySelectorAll('.week > .day')];
 const themes=['theme-blue','theme-light','theme-dark'];
 
-const APP_VERSION='V1.4.39';
+const APP_VERSION='V1.4.40';
 // Actualizar solo al publicar los horarios oficiales del siguiente ciclo lectivo.
 const SCHOOL_CYCLE_YEAR=2026;
 $('helpAppVersion').textContent=APP_VERSION;
