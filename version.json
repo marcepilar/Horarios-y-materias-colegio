@@ -1,6 +1,6 @@
 {
   "app": "Horario Escolar · Colegio Chesterton Pilar",
-  "version": "V1.4.41",
+  "version": "V1.4.42",
   "release_date": "2026-11-23",
   "status": "prueba",
   "base_estable": "V1.4.40",
@@ -12,6 +12,6 @@
     "Hoy visible junto al día; bordes dinámicos, contadores de clases y actualización al reanudar y después de medianoche.",
     "Se mantienen sin cambios los horarios reales, materias, previews, y preferencias almacenadas."
   ],
-  "notice": "V1.4.41 DE PRUEBA; no publicar hasta aprobación del usuario.",
+  "notice": "V1.4.42 DE PRUEBA; no publicar hasta aprobación del usuario.",
   "based_on": "V1.4.40"
 }

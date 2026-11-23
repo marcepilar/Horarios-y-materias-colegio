@@ -1,4 +1,4 @@
-# Horario Escolar — Colegio Chesterton Pilar V1.4.41 DE PRUEBA
+# Horario Escolar — Colegio Chesterton Pilar V1.4.42 DE PRUEBA
 
 Basada estrictamente en la V1.4.40 aprobada. Cambios limitados a la interfaz.
 
@@ -8,4 +8,7 @@ Basada estrictamente en la V1.4.40 aprobada. Cambios limitados a la interfaz.
 - Mantiene preferencias del usuario: `horario-escolar-course`, `horario-escolar-theme`.
 - No publicada. No utilizar para sustituir V1.4.40 hasta aprobación.
 
-Entrega: `index.html`, recursos locales, `manifest.webmanifest`, `service-worker.js`, `version.json`; HTML autónomo `Horario_Escolar_Chesterton_V1.4.41_Vista_Interactiva.html` para probar localmente.
+Entrega: `index.html`, recursos locales, `manifest.webmanifest`, `service-worker.js`, `version.json`; HTML autónomo `Horario_Escolar_Chesterton_V1.4.42_Vista_Interactiva.html` para probar localmente.
+
+
+Cambio único de esta iteración: el dibujo de la luna del botón de tema se igualó al de North Green Academy, manteniendo el resto de la V1.4.41.

@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-title" content="Horario Escolar">
 <link rel="icon" type="image/png" href="./icon-192-v1.4.37.png">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png?v=1.4.37">
-<link rel="manifest" href="./manifest.webmanifest?v=1.4.41">
+<link rel="manifest" href="./manifest.webmanifest?v=1.4.42">
 <title>Horario Escolar · Colegio Chesterton Pilar</title>
 <style>
 :root{--bg:#0b101c;--surface:#171d2a;--surface-alt:#1e2636;--border:#313b4e;--text:#f7f9fd;--muted:#acb9cc;--accent:#78b6ff;--shade:#27354b;--shadow:0 6px 22px #0003;--selector-shadow:0 20px 60px rgba(0,0,0,.45);color-scheme:dark}
@@ -903,7 +903,7 @@ html, body { touch-action: pan-x pan-y; }
 .header-year{flex:0 0 auto;color:var(--accent);font-size:clamp(15px,4.3vw,21px);font-weight:900;line-height:1.1;letter-spacing:.005em;font-variant-numeric:tabular-nums;white-space:nowrap;}
 @media(max-width:350px){.header-text{gap:5px}.header-year{font-size:15px}}
 
-/* V1.4.41 — Ajustes de interfaz adaptados desde North Green, sin cambiar datos de Chesterton. */
+/* V1.4.42 — Ajustes de interfaz adaptados desde North Green, sin cambiar datos de Chesterton. */
 /* El escudo aparece solo en el banner institucional. La cuadrícula no reserva un hueco invisible. */
 .header-text{min-width:0;display:flex!important;align-items:baseline!important;justify-content:space-between!important;gap:10px;width:100%;}
 .header-text h1{min-width:0;flex:1 1 auto;white-space:nowrap!important;overflow:visible!important;text-overflow:clip!important;}
@@ -929,7 +929,7 @@ body.theme-blue .actions>.theme-btn .theme-icon svg,body.theme-dark .actions>.th
 </head>
 <body class="theme-blue">
 <div class="app">
- <div class="school-brand" aria-label="Colegio Chesterton Pilar"><div class="school-brand-card"><img class="school-brand-logo" src="./chesterton-banner.png?v=1.4.41" alt="Colegio Chesterton Pilar" width="2508" height="836" decoding="async"></div></div>
+ <div class="school-brand" aria-label="Colegio Chesterton Pilar"><div class="school-brand-card"><img class="school-brand-logo" src="./chesterton-banner.png?v=1.4.42" alt="Colegio Chesterton Pilar" width="2508" height="836" decoding="async"></div></div>
  <header class="header">
   <div class="header-text"><h1 id="titleMain">Horario Escolar</h1><span id="headerYear" class="header-year" aria-label="Ciclo lectivo 2026">2026</span></div>
   <div class="actions" role="group" aria-label="Controles principales">
@@ -984,7 +984,7 @@ body.theme-blue .actions>.theme-btn .theme-icon svg,body.theme-dark .actions>.th
 <li>Tocá un día de lunes a viernes para desplegar materias, horarios y recreos. Deslizá para recorrer las clases.</li>
 <li>El botón del curso (<strong>3.º A</strong> por defecto) permite elegir año y división. <strong>Actualmente solo 3.º A tiene sus horarios cargados.</strong> Los demás cursos muestran «Horario pendiente» hasta recibir sus datos.</li>
 <li>El botón de <strong>Compartir</strong> permite enviar el enlace por WhatsApp o mostrar un código QR.</li>
-<li>El botón de <strong>luna o sol</strong> cambia entre Dark Blue (menguante azul), Claro (sol) y Dark (creciente grafito).</li>
+<li>El botón de <strong>luna o sol</strong> cambia entre Dark Blue (luna como North Green), Claro (sol) y Dark (luna como North Green).</li>
 <li>Para volver a las cinco tarjetas cerradas, tocá nuevamente el día o utilizá Volver en el teléfono.</li>
 </ol><p>Los horarios son de solo lectura y se actualizan desde la versión publicada de la aplicación.</p></section>
   <section class="help-install" aria-labelledby="installHeading">
@@ -1047,14 +1047,14 @@ const app=document.querySelector('.app');
 const cards=[...document.querySelectorAll('.week > .day')];
 const themes=['theme-blue','theme-light','theme-dark'];
 
-const APP_VERSION='V1.4.41';
+const APP_VERSION='V1.4.42';
 // Actualizar solo al publicar los horarios oficiales del siguiente ciclo lectivo.
 const SCHOOL_CYCLE_YEAR=2026;
 $('helpAppVersion').textContent=APP_VERSION;
 const themeIcons={
-  'theme-blue': "<span class=\"theme-icon\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" focusable=\"false\"><path d=\"M20.3 15.1A8.9 8.9 0 0 1 8.9 3.7 9.2 9.2 0 1 0 20.3 15.1Z\" fill=\"#6FC8FF\" fill-opacity=\".34\" stroke=\"#BBECFF\" stroke-width=\"2.3\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/></svg></span>",
+  'theme-blue': "<span class=\"theme-icon\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\" focusable=\"false\"><defs><linearGradient id=\"waningBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop stop-color=\"#D0F1FF\"/><stop offset=\".45\" stop-color=\"#81C8FF\"/><stop offset=\"1\" stop-color=\"#3087EA\"/></linearGradient></defs><path transform=\"rotate(11 12 12)\" d=\"M12 2.3 A9.7 9.7 0 0 0 12 21.7 C5.05 17.25 5.05 6.75 12 2.3Z\" fill=\"url(#waningBlue)\" stroke=\"#A9DCFF\" stroke-width=\".36\" stroke-linejoin=\"round\"/></svg></span>",
   'theme-light': "<span class=\"theme-icon\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" focusable=\"false\"><defs><radialGradient id=\"sunCoreGold\" cx=\"35%\" cy=\"27%\" r=\"75%\"><stop offset=\"0\" stop-color=\"#FFF0A5\"/><stop offset=\".48\" stop-color=\"#FFD45F\"/><stop offset=\"1\" stop-color=\"#F0AF2B\"/></radialGradient></defs><circle cx=\"12\" cy=\"12\" r=\"4.25\" fill=\"url(#sunCoreGold)\"/><g stroke=\"#FFD05B\" stroke-width=\"1.15\" stroke-linecap=\"round\"><path d=\"M12 2.7v2.6\"/><path d=\"M12 18.7v2.6\"/><path d=\"M2.7 12h2.6\"/><path d=\"M18.7 12h2.6\"/><path d=\"m5.4 5.4 1.8 1.8\"/><path d=\"m16.8 16.8 1.8 1.8\"/><path d=\"m16.8 7.2 1.8-1.8\"/><path d=\"m5.4 18.6 1.8-1.8\"/></g></svg></span>",
-  'theme-dark': "<span class=\"theme-icon\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" focusable=\"false\"><path d=\"M20.3 15.1A8.9 8.9 0 0 1 8.9 3.7 9.2 9.2 0 1 0 20.3 15.1Z\" fill=\"#84D5FF\" fill-opacity=\".32\" stroke=\"#C6F0FF\" stroke-width=\"2.3\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/></svg></span>"
+  'theme-dark': "<span class=\"theme-icon\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\" focusable=\"false\"><defs><linearGradient id=\"waxingNight\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop stop-color=\"#36404C\"/><stop offset=\".55\" stop-color=\"#212B36\"/><stop offset=\"1\" stop-color=\"#101722\"/></linearGradient><filter id=\"moonGlowDark\" x=\"-40%\" y=\"-40%\" width=\"180%\" height=\"180%\"><feGaussianBlur in=\"SourceAlpha\" stdDeviation=\".55\" result=\"blur\"/><feFlood flood-color=\"#F5F9FF\" flood-opacity=\".38\" result=\"glowColor\"/><feComposite in=\"glowColor\" in2=\"blur\" operator=\"in\" result=\"softGlow\"/><feMerge><feMergeNode in=\"softGlow\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><path filter=\"url(#moonGlowDark)\" transform=\"rotate(-11 12 12)\" d=\"M12 2.3 A9.7 9.7 0 0 1 12 21.7 C18.95 17.25 18.95 6.75 12 2.3Z\" fill=\"url(#waxingNight)\" stroke=\"#EEF4FF\" stroke-opacity=\".24\" stroke-width=\".34\" stroke-linejoin=\"round\"/></svg></span>"
 };
 
 const themeNames={'theme-blue':'Dark Blue','theme-light':'Claro','theme-dark':'Dark'};

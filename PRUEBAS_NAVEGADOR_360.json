@@ -1,0 +1,212 @@
+[
+  {
+    "theme": "theme-blue",
+    "result": {
+      "theme": "theme-blue",
+      "version": "V1.4.42",
+      "mark": 0,
+      "banner": true,
+      "year": "2026",
+      "subtitle": "Turno tarde",
+      "title": "Horario Escolar",
+      "counter": "5 clases",
+      "preview": "Geografía · Matemática · +2 más",
+      "today": [
+        "day-2"
+      ],
+      "todayLabel": "Miércoles\n· Hoy",
+      "yearColor": "rgb(169, 218, 255)",
+      "documentWidth": 360,
+      "windowWidth": 360,
+      "course": "3.º A"
+    },
+    "layout": {
+      "title": {
+        "left": 9,
+        "right": 304.3125,
+        "top": 124.28125,
+        "bottom": 145.65625,
+        "width": 295.3125
+      },
+      "year": {
+        "left": 313.3125,
+        "right": 351,
+        "top": 128.28125,
+        "bottom": 146.09375,
+        "width": 37.6875
+      },
+      "dayTitle": {
+        "left": 26,
+        "right": 237.046875,
+        "top": 482.984375,
+        "bottom": 502.703125,
+        "width": 211.046875
+      },
+      "counter": {
+        "left": 245.046875,
+        "right": 338,
+        "top": 498.453125,
+        "bottom": 525.453125,
+        "width": 92.953125
+      },
+      "brand": {
+        "left": 9,
+        "right": 351,
+        "top": 6,
+        "bottom": 120,
+        "width": 342
+      },
+      "banner": {
+        "left": 9,
+        "right": 351,
+        "top": 6,
+        "bottom": 120,
+        "width": 342
+      }
+    },
+    "errors": [],
+    "real_timetable": "12:50\n13:50\nGeografía\n1.ª hora\n13:50\n14:50\nMatemática\n2.ª hora\nEN CURSO · 50 min restantes\nRecreo · 14:50 a 15:05\n15:05\n16:05\nEducación Físi",
+    "restored_preview": "[\"Geografía\",\"Matemática\",\"Ed. Física\",\"Lenguaje\"]",
+    "passed": true
+  },
+  {
+    "theme": "theme-light",
+    "result": {
+      "theme": "theme-light",
+      "version": "V1.4.42",
+      "mark": 0,
+      "banner": true,
+      "year": "2026",
+      "subtitle": "Turno tarde",
+      "title": "Horario Escolar",
+      "counter": "5 clases",
+      "preview": "Geografía · Matemática · +2 más",
+      "today": [
+        "day-2"
+      ],
+      "todayLabel": "Miércoles\n· Hoy",
+      "yearColor": "rgb(32, 90, 135)",
+      "documentWidth": 360,
+      "windowWidth": 360,
+      "course": "3.º A"
+    },
+    "layout": {
+      "title": {
+        "left": 9,
+        "right": 304.3125,
+        "top": 124.28125,
+        "bottom": 145.65625,
+        "width": 295.3125
+      },
+      "year": {
+        "left": 313.3125,
+        "right": 351,
+        "top": 128.28125,
+        "bottom": 146.09375,
+        "width": 37.6875
+      },
+      "dayTitle": {
+        "left": 26,
+        "right": 237.046875,
+        "top": 482.984375,
+        "bottom": 502.703125,
+        "width": 211.046875
+      },
+      "counter": {
+        "left": 245.046875,
+        "right": 338,
+        "top": 498.453125,
+        "bottom": 525.453125,
+        "width": 92.953125
+      },
+      "brand": {
+        "left": 9,
+        "right": 351,
+        "top": 6,
+        "bottom": 120,
+        "width": 342
+      },
+      "banner": {
+        "left": 9,
+        "right": 351,
+        "top": 6,
+        "bottom": 120,
+        "width": 342
+      }
+    },
+    "errors": [],
+    "real_timetable": "12:50\n13:50\nGeografía\n1.ª hora\n13:50\n14:50\nMatemática\n2.ª hora\nEN CURSO · 50 min restantes\nRecreo · 14:50 a 15:05\n15:05\n16:05\nEducación Físi",
+    "restored_preview": "[\"Geografía\",\"Matemática\",\"Ed. Física\",\"Lenguaje\"]",
+    "passed": true
+  },
+  {
+    "theme": "theme-dark",
+    "result": {
+      "theme": "theme-dark",
+      "version": "V1.4.42",
+      "mark": 0,
+      "banner": true,
+      "year": "2026",
+      "subtitle": "Turno tarde",
+      "title": "Horario Escolar",
+      "counter": "5 clases",
+      "preview": "Geografía · Matemática · +2 más",
+      "today": [
+        "day-2"
+      ],
+      "todayLabel": "Miércoles\n· Hoy",
+      "yearColor": "rgb(169, 218, 255)",
+      "documentWidth": 360,
+      "windowWidth": 360,
+      "course": "3.º A"
+    },
+    "layout": {
+      "title": {
+        "left": 9,
+        "right": 304.3125,
+        "top": 124.28125,
+        "bottom": 145.65625,
+        "width": 295.3125
+      },
+      "year": {
+        "left": 313.3125,
+        "right": 351,
+        "top": 128.28125,
+        "bottom": 146.09375,
+        "width": 37.6875
+      },
+      "dayTitle": {
+        "left": 26,
+        "right": 237.046875,
+        "top": 482.984375,
+        "bottom": 502.703125,
+        "width": 211.046875
+      },
+      "counter": {
+        "left": 245.046875,
+        "right": 338,
+        "top": 498.453125,
+        "bottom": 525.453125,
+        "width": 92.953125
+      },
+      "brand": {
+        "left": 9,
+        "right": 351,
+        "top": 6,
+        "bottom": 120,
+        "width": 342
+      },
+      "banner": {
+        "left": 9,
+        "right": 351,
+        "top": 6,
+        "bottom": 120,
+        "width": 342
+      }
+    },
+    "errors": [],
+    "real_timetable": "12:50\n13:50\nGeografía\n1.ª hora\n13:50\n14:50\nMatemática\n2.ª hora\nEN CURSO · 50 min restantes\nRecreo · 14:50 a 15:05\n15:05\n16:05\nEducación Físi",
+    "restored_preview": "[\"Geografía\",\"Matemática\",\"Ed. Física\",\"Lenguaje\"]",
+    "passed": true
+  }
+]
