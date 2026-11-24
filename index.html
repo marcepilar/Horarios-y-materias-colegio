@@ -1,7 +1,8 @@
 <!doctype html>
-<html lang="es-AR">
+<html lang="es-AR" translate="no">
 <head>
 <meta charset="utf-8">
+<meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#071122">
 <meta name="description" content="Horario escolar del Colegio Chesterton Pilar. Materias y recreos de 3.º A; demás cursos pendientes.">
@@ -10,7 +11,7 @@
 <meta name="apple-mobile-web-app-title" content="Horario Escolar">
 <link rel="icon" type="image/png" href="./icon-192-v1.4.37.png">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png?v=1.4.37">
-<link rel="manifest" href="./manifest.webmanifest?v=1.4.42">
+<link rel="manifest" href="./manifest.webmanifest?v=1.4.43">
 <title>Horario Escolar · Colegio Chesterton Pilar</title>
 <style>
 :root{--bg:#0b101c;--surface:#171d2a;--surface-alt:#1e2636;--border:#313b4e;--text:#f7f9fd;--muted:#acb9cc;--accent:#78b6ff;--shade:#27354b;--shadow:0 6px 22px #0003;--selector-shadow:0 20px 60px rgba(0,0,0,.45);color-scheme:dark}
@@ -903,7 +904,7 @@ html, body { touch-action: pan-x pan-y; }
 .header-year{flex:0 0 auto;color:var(--accent);font-size:clamp(15px,4.3vw,21px);font-weight:900;line-height:1.1;letter-spacing:.005em;font-variant-numeric:tabular-nums;white-space:nowrap;}
 @media(max-width:350px){.header-text{gap:5px}.header-year{font-size:15px}}
 
-/* V1.4.42 — Ajustes de interfaz adaptados desde North Green, sin cambiar datos de Chesterton. */
+/* V1.4.43 — Ajustes de interfaz adaptados desde North Green, sin cambiar datos de Chesterton. */
 /* El escudo aparece solo en el banner institucional. La cuadrícula no reserva un hueco invisible. */
 .header-text{min-width:0;display:flex!important;align-items:baseline!important;justify-content:space-between!important;gap:10px;width:100%;}
 .header-text h1{min-width:0;flex:1 1 auto;white-space:nowrap!important;overflow:visible!important;text-overflow:clip!important;}
@@ -925,15 +926,43 @@ body.theme-blue .header-year,body.theme-dark .header-year{color:#A9DAFF!importan
 /* Mantener luna claramente identificable aun en tema Dark, sin tocar la lógica ni el sol. */
 body.theme-blue .actions>.theme-btn .theme-icon svg,body.theme-dark .actions>.theme-btn .theme-icon svg{filter:drop-shadow(0 0 2px rgba(117,199,255,.35));}
 
+/* Selector multilingüe 6 idiomas: un botón extra sin segunda línea. */
+.actions>.lang-btn svg{width:23px;height:23px;display:block;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.actions{gap:6px!important}
+.actions>.course-btn{flex:1.65 1 0!important}
+@media(max-width:480px){
+ .actions{grid-template-columns:minmax(0,1.65fr) repeat(4,minmax(0,1fr))!important;gap:6px!important;padding:4px!important}
+ .actions>.square{min-width:0!important}
+ .actions>.course-btn{font-size:clamp(12px,3.7vw,16px)!important}
+ .actions>.lang-btn svg{width:21px;height:21px}
+}
+@media(max-width:350px){
+ .actions{gap:4px!important;padding:3px!important;grid-template-columns:minmax(0,1.65fr) repeat(4,minmax(0,1fr))!important}
+ .actions>.lang-btn svg{width:19px;height:19px}
+ .actions>.course-btn{font-size:12px!important}
+ .actions .course-caret{width:11px!important;height:11px!important}
+}
+#languageOverlay[hidden]{display:none!important}
+#languageOverlay{position:fixed;inset:0;z-index:62;background:rgba(2,8,22,.82);display:flex;align-items:center;justify-content:center;padding:calc(env(safe-area-inset-top,0px) + 14px) 14px calc(env(safe-area-inset-bottom,0px) + 14px);overscroll-behavior:contain}
+#languageOverlay .language-panel{width:min(430px,100%);max-height:90dvh;overflow:auto;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:20px;padding:17px;box-shadow:0 18px 55px #0009}
+#languageOverlay .language-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px}
+#languageOverlay .language-head h2{font-size:19px;font-weight:800;margin:0}
+#languageOverlay .language-head button{border:1px solid var(--border);background:var(--surface-alt);color:var(--text);border-radius:12px;width:39px;height:39px;font-size:23px}
+#languageOverlay .language-options{display:grid;gap:7px}
+#languageOverlay .lang-choice{width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:46px;text-align:left;border:1px solid var(--border);border-radius:12px;padding:9px 14px;background:var(--surface-alt);font-size:16px;font-weight:650;color:var(--text);cursor:pointer}
+#languageOverlay .lang-choice.active{border-color:var(--accent);background:var(--shade);color:var(--accent)}
+#languageOverlay .lang-choice .lang-mark{font-size:19px;font-weight:900;min-width:18px;text-align:right}
+
 </style>
 </head>
 <body class="theme-blue">
 <div class="app">
- <div class="school-brand" aria-label="Colegio Chesterton Pilar"><div class="school-brand-card"><img class="school-brand-logo" src="./chesterton-banner.png?v=1.4.42" alt="Colegio Chesterton Pilar" width="2508" height="836" decoding="async"></div></div>
+ <div class="school-brand" aria-label="Colegio Chesterton Pilar"><div class="school-brand-card"><img class="school-brand-logo" src="./chesterton-banner.png?v=1.4.43" alt="Colegio Chesterton Pilar" width="2508" height="836" decoding="async"></div></div>
  <header class="header">
   <div class="header-text"><h1 id="titleMain">Horario Escolar</h1><span id="headerYear" class="header-year" aria-label="Ciclo lectivo 2026">2026</span></div>
   <div class="actions" role="group" aria-label="Controles principales">
    <button id="courseBtn" class="square course-btn" type="button" aria-label="Elegir año y división" title="Elegir año y división" aria-expanded="false" aria-controls="selectorOverlay"><span class="course-label">3.º A</span><svg class="course-caret" viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 7 5 6 5-6"/></svg></button>
+   <button id="langBtn" class="square lang-btn" type="button" aria-label="Seleccionar idioma" aria-haspopup="dialog" aria-expanded="false" aria-controls="languageOverlay" title="Seleccionar idioma"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-3.1 3.2-3.1 14.8 0 18M12 3c3.1 3.2 3.1 14.8 0 18M5.7 7h12.6M5.7 17h12.6"/></svg></button>
    <button id="shareBtn" class="square more-btn" type="button" aria-label="Compartir por WhatsApp o código QR" title="Compartir"><svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.45 10.58 15.1 6.57 M8.45 13.42 15.1 17.43"/><circle cx="6" cy="12" r="2.65"/><circle cx="18" cy="5" r="2.65"/><circle cx="18" cy="19" r="2.65"/></svg></button>
    <button id="helpBtn" class="square help-btn" type="button" aria-label="Ayuda e instalación" title="Ayuda"><span class="help-glyph" aria-hidden="true">?</span></button>
    <button id="themeBtn" class="square theme-btn" type="button" aria-label="Cambiar tema" title="Cambiar tema"><span class="theme-icon" aria-hidden="true"></span></button>
@@ -948,6 +977,7 @@ body.theme-blue .actions>.theme-btn .theme-icon svg,body.theme-dark .actions>.th
 <details class="day" id="day-3" style="--day-accent:#c9a2ff"><summary class="day-button" aria-label="Ver las materias del Jueves"><div><div class="day-title-row"><div class="day-title">Jueves</div><span class="today-label" hidden>· Hoy</span></div><div class="day-desc">12:50 a 18:20</div><div class="day-preview" aria-hidden="true"><span class="preview-text">Educación Artística · Geografía · Lenguaje · Robótica</span></div></div><div class="day-meta"><span class="day-pill">5 clases</span><span class="chevron" aria-hidden="true">›</span></div></summary><div class="detail"><div class="lesson" style="--materia:#e18d7e"><div class="hours">12:50<br>13:50</div><div class="bar"></div><div class="info"><strong>Educación Artística</strong><small>1.ª hora</small></div></div><div class="lesson" style="--materia:#e18d7e"><div class="hours">13:50<br>14:50</div><div class="bar"></div><div class="info"><strong>Educación Artística</strong><small>2.ª hora</small></div></div><div class="recreo">Recreo · 14:50 a 15:05</div><div class="lesson" style="--materia:#9ccdab"><div class="hours">15:05<br>16:05</div><div class="bar"></div><div class="info"><strong>Geografía</strong><small>3.ª hora</small></div></div><div class="recreo">Recreo · 16:05 a 16:20</div><div class="lesson" style="--materia:#d76be8"><div class="hours">16:20<br>17:20</div><div class="bar"></div><div class="info"><strong>Prácticas del Lenguaje</strong><small>4.ª hora</small></div></div><div class="lesson" style="--materia:#41d5cc"><div class="hours">17:20<br>18:20</div><div class="bar"></div><div class="info"><strong>Robótica</strong><small>5.ª hora</small></div></div></div></details>
 <details class="day" id="day-4" style="--day-accent:#f68bb7"><summary class="day-button" aria-label="Ver las materias del Viernes"><div><div class="day-title-row"><div class="day-title">Viernes</div><span class="today-label" hidden>· Hoy</span></div><div class="day-desc">12:50 a 18:20</div><div class="day-preview" aria-hidden="true"><span class="preview-text">Prácticas del Lenguaje · Biología · Ciudadanía · Matemática</span></div></div><div class="day-meta"><span class="day-pill">5 clases</span><span class="chevron" aria-hidden="true">›</span></div></summary><div class="detail"><div class="lesson" style="--materia:#d76be8"><div class="hours">12:50<br>13:50</div><div class="bar"></div><div class="info"><strong>Prácticas del Lenguaje</strong><small>1.ª hora</small></div></div><div class="lesson" style="--materia:#d76be8"><div class="hours">13:50<br>14:50</div><div class="bar"></div><div class="info"><strong>Prácticas del Lenguaje</strong><small>2.ª hora</small></div></div><div class="recreo">Recreo · 14:50 a 15:05</div><div class="lesson" style="--materia:#22d4d9"><div class="hours">15:05<br>16:05</div><div class="bar"></div><div class="info"><strong>Biología</strong><small>3.ª hora</small></div></div><div class="recreo">Recreo · 16:05 a 16:20</div><div class="lesson" style="--materia:#ef5454"><div class="hours">16:20<br>17:20</div><div class="bar"></div><div class="info"><strong>Construcción de la Ciudadanía</strong><small>4.ª hora</small></div></div><div class="lesson" style="--materia:#efa642"><div class="hours">17:20<br>18:20</div><div class="bar"></div><div class="info"><strong>Matemática</strong><small>5.ª hora</small></div></div></div></details></section>
 </div>
+<div id="languageOverlay" hidden><section class="language-panel" role="dialog" aria-modal="true" aria-labelledby="langTitle"><div class="language-head"><h2 id="langTitle">Seleccionar idioma</h2><button id="closeLanguage" class="close" type="button" aria-label="Cerrar">×</button></div><div class="language-options"><button class="lang-choice" type="button" data-lang="es" aria-pressed="false"><span>🇦🇷 Español</span><span class="lang-mark"></span></button><button class="lang-choice" type="button" data-lang="en" aria-pressed="false"><span>🇬🇧 English</span><span class="lang-mark"></span></button><button class="lang-choice" type="button" data-lang="pt" aria-pressed="false"><span>🇧🇷 Português</span><span class="lang-mark"></span></button><button class="lang-choice" type="button" data-lang="fr" aria-pressed="false"><span>🇫🇷 Français</span><span class="lang-mark"></span></button><button class="lang-choice" type="button" data-lang="de" aria-pressed="false"><span>🇩🇪 Deutsch</span><span class="lang-mark"></span></button><button class="lang-choice" type="button" data-lang="it" aria-pressed="false"><span>🇮🇹 Italiano</span><span class="lang-mark"></span></button></div></section></div>
 <div id="selectorOverlay" class="selector-overlay" hidden>
  <div class="selector-panel" role="dialog" aria-modal="true" aria-labelledby="selectorTitle">
   <div class="selector-head"><div class="selector-title" id="selectorTitle"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="16" rx="3"></rect><path d="M3.5 8.5h17"></path><path d="M8 3.5v4"></path><path d="M16 3.5v4"></path><path d="M8 12h3"></path><path d="M13 12h3"></path><path d="M8 16h3"></path></svg><span>Elegí curso y división</span></div><button id="closeSelector" class="close" type="button" aria-label="Cerrar selección de curso">×</button></div>
@@ -1047,7 +1077,7 @@ const app=document.querySelector('.app');
 const cards=[...document.querySelectorAll('.week > .day')];
 const themes=['theme-blue','theme-light','theme-dark'];
 
-const APP_VERSION='V1.4.42';
+const APP_VERSION='V1.4.43';
 // Actualizar solo al publicar los horarios oficiales del siguiente ciclo lectivo.
 const SCHOOL_CYCLE_YEAR=2026;
 $('helpAppVersion').textContent=APP_VERSION;
@@ -1078,7 +1108,7 @@ function previewFitLabel(el){
   const full=subjects.join(' · ');
   if(fits(full)){el.textContent=full;return;}
   for(let n=subjects.length-1;n>=1;n--){
-    const label=subjects.slice(0,n).join(' · ')+` · +${subjects.length-n} más`;
+    const label=subjects.slice(0,n).join(' · ')+` · +${subjects.length-n} ${I18N_UI[activeLang].more}`;
     if(fits(label)){el.textContent=label;return;}
   }
   // Solo se recorta cuando la primera materia es más ancha que toda la tarjeta.
@@ -1326,7 +1356,7 @@ function queueViewportSync(){
 refreshViewport();
 function cleanView(v){
   const day=Number.isInteger(v?.day)&&v.day>=0&&v.day<5?v.day:-1;
-  const pane=['course','share','help'].includes(v?.pane)?v.pane:null;
+  const pane=['course','share','help','language'].includes(v?.pane)?v.pane:null;
   const scrollY=Number.isFinite(v?.scrollY)&&v.scrollY>=0?v.scrollY:0;
   return {day,pane,scrollY};
 }
@@ -1353,13 +1383,17 @@ function syncView(v,fromHistory=false){
   $('selectorOverlay').hidden=view.pane!=='course';
   $('shareOverlay').hidden=view.pane!=='share';
   $('helpOverlay').hidden=view.pane!=='help';
+  $('languageOverlay').hidden=view.pane!=='language';
+  $('langBtn').setAttribute('aria-expanded',String(view.pane==='language'));
   if(view.pane==='help' && previousPane!=='help') $('helpScroll').scrollTop=0;
   document.body.classList.toggle('modal-open',Boolean(view.pane));
   $('courseBtn').setAttribute('aria-expanded',String(view.pane==='course'));
   if(view.pane==='share')configureShare();
   if(view.pane==='course') $('closeSelector').focus({preventScroll:true});
+  else if(view.pane==='language') $('closeLanguage').focus({preventScroll:true});
   else if(view.pane==='help') $('closeHelp').focus({preventScroll:true});
   else if(view.pane==='share') $('closeShare').focus({preventScroll:true});
+  else if(previousPane==='language') $('langBtn').focus({preventScroll:true});
   else if(previousPane==='course') $('courseBtn').focus({preventScroll:true});
   else if(previousPane==='help') $('helpBtn').focus({preventScroll:true});
   else if(previousPane==='share') $('shareBtn').focus({preventScroll:true});
@@ -1400,6 +1434,152 @@ window.addEventListener('popstate',evt=>{
   // When leaving the first PWA entry, normal browser/OS history behavior applies.
 });
 // Setup baseline only once; keep the current state when the browser restores this page.
+/* MARK-TECH SOFTWARE · Traducciones integradas de Horario Escolar (6 idiomas). */
+const SCHOOL_NAME="Colegio Chesterton Pilar";
+const SCHOOL_DEMO=false;
+const LANGUAGE_KEY="horario-escolar-language";
+const I18N_UI={"es":{"title":"Horario Escolar","morning":"Turno mañana","afternoon":"Turno tarde","pending":"Horario pendiente","fixed":"HORARIO FIJO","unloaded":"SIN CARGAR","demo":"MODO DEMO","demoBanner":"DEMO NO OFICIAL · HORARIOS FICTICIOS","demoBannerCommercial":"DEMO COMERCIAL · NO OFICIAL · HORARIOS FICTICIOS","hint":"Tocá un día y deslizá para ver todas las materias","today":"Hoy","class":"clase","classes":"clases","more":"más","break":"Recreo","inProgress":"EN CURSO","breakNow":"RECREO AHORA","minutesRemaining":"min restantes","courseSelect":"Elegí curso y división","year":"año","shareTitle":"Compartir Horario Escolar","shareDescription":"Mandalo por WhatsApp o mostrá el código QR para abrir la app.","share":"Compartir","help":"Ayuda · Horario Escolar","version":"Versión","pwaFor":"PWA para Android y iPhone","updateTitle":"Nueva actualización disponible","updateReady":"Hay una nueva versión de Horario Escolar lista para instalar.","updateDetail":"Hay una nueva versión disponible ({version}). Volvé a cargar la app para instalarla.","later":"Ahora no","update":"Actualizar","qrOnline":"Escaneá el QR para abrir la app publicada.","qrOffline":"Código de ejemplo: publicá la PWA para compartir el enlace real.","qrError":"Sin conexión para generar el QR: este código es solo ilustrativo.","courseNoticeDemo":"Demostración comercial independiente: todos los horarios y materias son inventados y varían según el curso. No representan los horarios oficiales del colegio.","courseNoticeReal":"Por ahora, solo están cargadas las materias y los horarios de 3.º A. Los demás cursos figuran como pendientes hasta recibir la información correspondiente.","noSubjects":"Materias y horarios aún no cargados","pendingNotice":"Todavía no se cargaron las materias de este curso. Se incorporarán cuando estén disponibles los datos oficiales del colegio.","illustrative":"Horarios ilustrativos. No son horarios oficiales.","sampleData":"datos inventados","unofficial":"DEMO NO OFICIAL","breaks":"Recreos","courseAria":"Elegir año y división","langAria":"Seleccionar idioma","close":"Cerrar","themeAria":"Cambiar tema","shareAria":"Compartir por WhatsApp o código QR","helpAria":"Ayuda e instalación","qrAria":"Código QR para escanear","weekAria":"Horario de lunes a viernes"},"en":{"title":"School Timetable","morning":"Morning shift","afternoon":"Afternoon shift","pending":"Timetable pending","fixed":"CONFIRMED TIMETABLE","unloaded":"NOT AVAILABLE","demo":"DEMO MODE","demoBanner":"UNOFFICIAL DEMO · SAMPLE TIMETABLES","demoBannerCommercial":"COMMERCIAL DEMO · UNOFFICIAL · SAMPLE TIMETABLES","hint":"Tap a day and scroll to see all subjects","today":"Today","class":"class","classes":"classes","more":"more","break":"Break","inProgress":"IN PROGRESS","breakNow":"BREAK NOW","minutesRemaining":"min remaining","courseSelect":"Choose grade and section","year":"grade","shareTitle":"Share School Timetable","shareDescription":"Send it via WhatsApp or show the QR code to open the app.","share":"Share","help":"Help · School Timetable","version":"Version","pwaFor":"PWA for Android and iPhone","updateTitle":"New update available","updateReady":"A new School Timetable version is ready to install.","updateDetail":"A new version ({version}) is available. Reload the app to install it.","later":"Not now","update":"Update","qrOnline":"Scan the QR to open the published app.","qrOffline":"Sample QR: publish the PWA to share a real link.","qrError":"QR could not be generated offline: this code is illustrative only.","courseNoticeDemo":"Independent commercial demo: all subjects and timetables are fictional and vary by grade. They are not official school schedules.","courseNoticeReal":"Only 3rd year A has confirmed subjects and times. Other classes are pending until their information is supplied.","noSubjects":"Subjects and times not yet available","pendingNotice":"Subjects for this class have not been entered yet. They will be added when official school data becomes available.","illustrative":"Illustrative timetables. These are not official schedules.","sampleData":"fictional data","unofficial":"UNOFFICIAL DEMO","breaks":"Breaks","courseAria":"Choose grade and section","langAria":"Select language","close":"Close","themeAria":"Change theme","shareAria":"Share via WhatsApp or QR code","helpAria":"Help and installation","qrAria":"QR code to scan","weekAria":"Monday to Friday timetable"},"pt":{"title":"Horário Escolar","morning":"Turno da manhã","afternoon":"Turno da tarde","pending":"Horário pendente","fixed":"HORÁRIO FIXO","unloaded":"NÃO CARREGADO","demo":"MODO DEMO","demoBanner":"DEMO NÃO OFICIAL · HORÁRIOS FICTÍCIOS","demoBannerCommercial":"DEMO COMERCIAL · NÃO OFICIAL · HORÁRIOS FICTÍCIOS","hint":"Toque em um dia e deslize para ver todas as matérias","today":"Hoje","class":"aula","classes":"aulas","more":"mais","break":"Intervalo","inProgress":"EM ANDAMENTO","breakNow":"INTERVALO AGORA","minutesRemaining":"min restantes","courseSelect":"Escolha o ano e a turma","year":"ano","shareTitle":"Compartilhar Horário Escolar","shareDescription":"Envie pelo WhatsApp ou mostre o código QR para abrir o aplicativo.","share":"Compartilhar","help":"Ajuda · Horário Escolar","version":"Versão","pwaFor":"PWA para Android e iPhone","updateTitle":"Nova atualização disponível","updateReady":"Uma nova versão do Horário Escolar está pronta para instalar.","updateDetail":"Uma nova versão ({version}) está disponível. Recarregue o aplicativo para instalá-la.","later":"Agora não","update":"Atualizar","qrOnline":"Leia o QR para abrir o aplicativo publicado.","qrOffline":"QR ilustrativo: publique a PWA para compartilhar o link real.","qrError":"Sem conexão para gerar o QR: este código é apenas ilustrativo.","courseNoticeDemo":"Demonstração comercial independente: matérias e horários são fictícios e variam por turma. Não são horários oficiais da escola.","courseNoticeReal":"Por enquanto, apenas o 3.º A tem matérias e horários confirmados. As demais turmas aguardam os dados.","noSubjects":"Matérias e horários ainda não disponíveis","pendingNotice":"As matérias desta turma ainda não foram cadastradas. Serão incluídas quando os dados oficiais estiverem disponíveis.","illustrative":"Horários ilustrativos. Não são horários oficiais.","sampleData":"dados fictícios","unofficial":"DEMO NÃO OFICIAL","breaks":"Intervalos","courseAria":"Escolher ano e turma","langAria":"Selecionar idioma","close":"Fechar","themeAria":"Alterar tema","shareAria":"Compartilhar por WhatsApp ou QR","helpAria":"Ajuda e instalação","qrAria":"Código QR para leitura","weekAria":"Horário de segunda a sexta"},"fr":{"title":"Emploi du temps","morning":"Cours du matin","afternoon":"Cours de l’après-midi","pending":"Emploi du temps en attente","fixed":"EMPLOI DU TEMPS FIXE","unloaded":"NON RENSEIGNÉ","demo":"MODE DÉMO","demoBanner":"DÉMO NON OFFICIELLE · HORAIRES FICTIFS","demoBannerCommercial":"DÉMO COMMERCIALE · NON OFFICIELLE · HORAIRES FICTIFS","hint":"Touchez un jour et faites défiler les matières","today":"Aujourd’hui","class":"cours","classes":"cours","more":"autres","break":"Récréation","inProgress":"EN COURS","breakNow":"RÉCRÉATION EN COURS","minutesRemaining":"min restantes","courseSelect":"Choisissez la classe et la division","year":"année","shareTitle":"Partager l’emploi du temps","shareDescription":"Envoyez-le sur WhatsApp ou affichez le QR code pour ouvrir l’application.","share":"Partager","help":"Aide · Emploi du temps","version":"Version","pwaFor":"PWA pour Android et iPhone","updateTitle":"Nouvelle mise à jour disponible","updateReady":"Une nouvelle version de l’emploi du temps est prête à être installée.","updateDetail":"Une nouvelle version ({version}) est disponible. Rechargez l’application pour l’installer.","later":"Plus tard","update":"Mettre à jour","qrOnline":"Scannez le QR code pour ouvrir l’application publiée.","qrOffline":"QR de démonstration : publiez la PWA pour partager le vrai lien.","qrError":"QR indisponible hors ligne : ce code est uniquement illustratif.","courseNoticeDemo":"Démonstration commerciale indépendante : matières et horaires fictifs, variables selon la classe, non officiels.","courseNoticeReal":"Seule la classe de 3e A possède des matières et horaires confirmés. Les autres classes sont en attente.","noSubjects":"Matières et horaires non encore disponibles","pendingNotice":"Les matières de cette classe ne sont pas encore disponibles. Elles seront ajoutées dès réception des données officielles.","illustrative":"Horaires illustratifs. Ce ne sont pas des horaires officiels.","sampleData":"données fictives","unofficial":"DÉMO NON OFFICIELLE","breaks":"Récréations","courseAria":"Choisir la classe et la division","langAria":"Choisir la langue","close":"Fermer","themeAria":"Changer le thème","shareAria":"Partager via WhatsApp ou QR","helpAria":"Aide et installation","qrAria":"QR code à scanner","weekAria":"Emploi du temps du lundi au vendredi"},"de":{"title":"Stundenplan","morning":"Vormittagsunterricht","afternoon":"Nachmittagsunterricht","pending":"Stundenplan ausstehend","fixed":"FESTER STUNDENPLAN","unloaded":"NOCH NICHT VERFÜGBAR","demo":"DEMO-MODUS","demoBanner":"INOFFIZIELLE DEMO · FIKTIVE STUNDENPLÄNE","demoBannerCommercial":"KOMMERZIELLE DEMO · INOFFIZIELL · FIKTIVE STUNDENPLÄNE","hint":"Tag wählen und scrollen, um alle Fächer zu sehen","today":"Heute","class":"Stunde","classes":"Stunden","more":"mehr","break":"Pause","inProgress":"LÄUFT","breakNow":"JETZT PAUSE","minutesRemaining":"Min. übrig","courseSelect":"Jahrgang und Klasse wählen","year":"Klasse","shareTitle":"Stundenplan teilen","shareDescription":"Per WhatsApp senden oder QR-Code zum Öffnen der App zeigen.","share":"Teilen","help":"Hilfe · Stundenplan","version":"Version","pwaFor":"PWA für Android und iPhone","updateTitle":"Neues Update verfügbar","updateReady":"Eine neue Stundenplan-Version kann installiert werden.","updateDetail":"Eine neue Version ({version}) ist verfügbar. App zum Installieren neu laden.","later":"Nicht jetzt","update":"Aktualisieren","qrOnline":"QR-Code scannen, um die veröffentlichte App zu öffnen.","qrOffline":"Beispiel-QR: PWA veröffentlichen, um einen echten Link zu teilen.","qrError":"Offline kein QR erstellbar: Dieser Code dient nur zur Illustration.","courseNoticeDemo":"Unabhängige kommerzielle Demo: Fächer und Stundenpläne sind erfunden, je Klasse verschieden und nicht offiziell.","courseNoticeReal":"Nur Klasse 3 A hat bestätigte Fächer und Zeiten. Die übrigen Klassen warten auf ihre Daten.","noSubjects":"Fächer und Zeiten noch nicht verfügbar","pendingNotice":"Die Fächer dieser Klasse sind noch nicht hinterlegt. Sie werden mit den offiziellen Daten ergänzt.","illustrative":"Beispielstundenpläne. Keine offiziellen Zeiten.","sampleData":"fiktive Daten","unofficial":"INOFFIZIELLE DEMO","breaks":"Pausen","courseAria":"Jahrgang und Klasse wählen","langAria":"Sprache wählen","close":"Schließen","themeAria":"Design ändern","shareAria":"Per WhatsApp oder QR-Code teilen","helpAria":"Hilfe und Installation","qrAria":"QR-Code zum Scannen","weekAria":"Stundenplan Montag bis Freitag"},"it":{"title":"Orario scolastico","morning":"Turno mattutino","afternoon":"Turno pomeridiano","pending":"Orario in attesa","fixed":"ORARIO FISSO","unloaded":"NON DISPONIBILE","demo":"MODALITÀ DEMO","demoBanner":"DEMO NON UFFICIALE · ORARI FITTIZI","demoBannerCommercial":"DEMO COMMERCIALE · NON UFFICIALE · ORARI FITTIZI","hint":"Tocca un giorno e scorri per vedere tutte le materie","today":"Oggi","class":"lezione","classes":"lezioni","more":"altre","break":"Intervallo","inProgress":"IN CORSO","breakNow":"INTERVALLO IN CORSO","minutesRemaining":"min rimanenti","courseSelect":"Scegli anno e sezione","year":"anno","shareTitle":"Condividi orario scolastico","shareDescription":"Invialo su WhatsApp o mostra il codice QR per aprire l’app.","share":"Condividi","help":"Aiuto · Orario scolastico","version":"Versione","pwaFor":"PWA per Android e iPhone","updateTitle":"Nuovo aggiornamento disponibile","updateReady":"Una nuova versione di Orario scolastico è pronta per l’installazione.","updateDetail":"È disponibile una nuova versione ({version}). Ricarica l’app per installarla.","later":"Non ora","update":"Aggiorna","qrOnline":"Scansiona il QR per aprire l’app pubblicata.","qrOffline":"QR dimostrativo: pubblica la PWA per condividere il link reale.","qrError":"QR non generabile offline: questo codice è solo illustrativo.","courseNoticeDemo":"Demo commerciale indipendente: materie e orari sono inventati e variano per classe. Non sono gli orari ufficiali della scuola.","courseNoticeReal":"Solo la classe 3ª A dispone di materie e orari confermati. Le altre classi sono in attesa dei dati.","noSubjects":"Materie e orari non ancora disponibili","pendingNotice":"Le materie di questa classe non sono ancora state caricate. Saranno aggiunte quando saranno disponibili i dati ufficiali.","illustrative":"Orari illustrativi. Non sono orari ufficiali.","sampleData":"dati inventati","unofficial":"DEMO NON UFFICIALE","breaks":"Intervalli","courseAria":"Scegli anno e sezione","langAria":"Seleziona lingua","close":"Chiudi","themeAria":"Cambia tema","shareAria":"Condividi via WhatsApp o QR","helpAria":"Aiuto e installazione","qrAria":"Codice QR da scansionare","weekAria":"Orario da lunedì a venerdì"}};
+const I18N_DAYS={"es":["Lunes","Martes","Miércoles","Jueves","Viernes"],"en":["Monday","Tuesday","Wednesday","Thursday","Friday"],"pt":["Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira"],"fr":["Lundi","Mardi","Mercredi","Jeudi","Vendredi"],"de":["Montag","Dienstag","Mittwoch","Donnerstag","Freitag"],"it":["Lunedì","Martedì","Mercoledì","Giovedì","Venerdì"]};
+const I18N_SUBJECTS={"es":{"Biología":"Biología","Construcción de la Ciudadanía":"Construcción de la Ciudadanía","Educación Artística":"Educación Artística","Educación Física":"Educación Física","Físico Química":"Físico Química","Geografía":"Geografía","Historia":"Historia","Inglés":"Inglés","Matemática":"Matemática","Prácticas del Lenguaje":"Prácticas del Lenguaje","Robótica":"Robótica","Artes Visuales":"Artes Visuales","Ciencias Naturales":"Ciencias Naturales","Ciudadanía":"Ciudadanía","Comunicación":"Comunicación","Derecho":"Derecho","Economía":"Economía","Filosofía":"Filosofía","Física":"Física","Informática":"Informática","Lengua y Literatura":"Lengua y Literatura","Literatura":"Literatura","Matemática Aplicada":"Matemática Aplicada","Música":"Música","Proyecto de Investigación":"Proyecto de Investigación","Química":"Química","Tecnología":"Tecnología"},"en":{"Biología":"Biology","Construcción de la Ciudadanía":"Citizenship Education","Educación Artística":"Arts Education","Educación Física":"Physical Education","Físico Química":"Physics and Chemistry","Geografía":"Geography","Historia":"History","Inglés":"English","Matemática":"Mathematics","Prácticas del Lenguaje":"Language Studies","Robótica":"Robotics","Artes Visuales":"Visual Arts","Ciencias Naturales":"Natural Sciences","Ciudadanía":"Citizenship","Comunicación":"Communication","Derecho":"Law","Economía":"Economics","Filosofía":"Philosophy","Física":"Physics","Informática":"Computer Science","Lengua y Literatura":"Language and Literature","Literatura":"Literature","Matemática Aplicada":"Applied Mathematics","Música":"Music","Proyecto de Investigación":"Research Project","Química":"Chemistry","Tecnología":"Technology"},"pt":{"Biología":"Biologia","Construcción de la Ciudadanía":"Formação para a Cidadania","Educación Artística":"Educação Artística","Educación Física":"Educação Física","Físico Química":"Físico-Química","Geografía":"Geografia","Historia":"História","Inglés":"Inglês","Matemática":"Matemática","Prácticas del Lenguaje":"Práticas da Linguagem","Robótica":"Robótica","Artes Visuales":"Artes Visuais","Ciencias Naturales":"Ciências Naturais","Ciudadanía":"Cidadania","Comunicación":"Comunicação","Derecho":"Direito","Economía":"Economia","Filosofía":"Filosofia","Física":"Física","Informática":"Informática","Lengua y Literatura":"Língua e Literatura","Literatura":"Literatura","Matemática Aplicada":"Matemática Aplicada","Música":"Música","Proyecto de Investigación":"Projeto de Pesquisa","Química":"Química","Tecnología":"Tecnologia"},"fr":{"Biología":"Biologie","Construcción de la Ciudadanía":"Éducation à la citoyenneté","Educación Artística":"Éducation artistique","Educación Física":"Éducation physique","Físico Química":"Physique-chimie","Geografía":"Géographie","Historia":"Histoire","Inglés":"Anglais","Matemática":"Mathématiques","Prácticas del Lenguaje":"Pratiques langagières","Robótica":"Robotique","Artes Visuales":"Arts plastiques","Ciencias Naturales":"Sciences naturelles","Ciudadanía":"Citoyenneté","Comunicación":"Communication","Derecho":"Droit","Economía":"Économie","Filosofía":"Philosophie","Física":"Physique","Informática":"Informatique","Lengua y Literatura":"Langue et littérature","Literatura":"Littérature","Matemática Aplicada":"Mathématiques appliquées","Música":"Musique","Proyecto de Investigación":"Projet de recherche","Química":"Chimie","Tecnología":"Technologie"},"de":{"Biología":"Biologie","Construcción de la Ciudadanía":"Politische Bildung","Educación Artística":"Kunstunterricht","Educación Física":"Sport","Físico Química":"Physik und Chemie","Geografía":"Geografie","Historia":"Geschichte","Inglés":"Englisch","Matemática":"Mathematik","Prácticas del Lenguaje":"Sprachpraxis","Robótica":"Robotik","Artes Visuales":"Bildende Kunst","Ciencias Naturales":"Naturwissenschaften","Ciudadanía":"Bürgerkunde","Comunicación":"Kommunikation","Derecho":"Recht","Economía":"Wirtschaft","Filosofía":"Philosophie","Física":"Physik","Informática":"Informatik","Lengua y Literatura":"Sprache und Literatur","Literatura":"Literatur","Matemática Aplicada":"Angewandte Mathematik","Música":"Musik","Proyecto de Investigación":"Forschungsprojekt","Química":"Chemie","Tecnología":"Technologie"},"it":{"Biología":"Biologia","Construcción de la Ciudadanía":"Educazione alla cittadinanza","Educación Artística":"Educazione artistica","Educación Física":"Educazione fisica","Físico Química":"Fisica e chimica","Geografía":"Geografia","Historia":"Storia","Inglés":"Inglese","Matemática":"Matematica","Prácticas del Lenguaje":"Pratiche linguistiche","Robótica":"Robotica","Artes Visuales":"Arti visive","Ciencias Naturales":"Scienze naturali","Ciudadanía":"Cittadinanza","Comunicación":"Comunicazione","Derecho":"Diritto","Economía":"Economia","Filosofía":"Filosofia","Física":"Fisica","Informática":"Informatica","Lengua y Literatura":"Lingua e letteratura","Literatura":"Letteratura","Matemática Aplicada":"Matematica applicata","Música":"Musica","Proyecto de Investigación":"Progetto di ricerca","Química":"Chimica","Tecnología":"Tecnologia"}};
+const I18N_HELP={"es":{"usage":"Cómo usar la aplicación","usageText":"Elegí el curso y la división, tocá un día para desplegar sus materias y horarios, y deslizá para ver las clases y los recreos. El globo permite cambiar de idioma y la luna o el sol cambia el tema. El botón compartir ofrece WhatsApp y un código QR.","install":"Instalar la aplicación","android":"Instalar en Android con Google Chrome","androidSteps":["Abrí el sitio de la PWA con Chrome.","Tocá el menú de tres puntos (⋮).","Elegí «Instalar aplicación» o «Agregar a pantalla principal».","Confirmá la instalación para acceder desde el ícono del teléfono."],"ios":"Instalar en iPhone con Safari","iosSteps":["Abrí el sitio de la PWA con Safari.","Tocá el botón Compartir.","Elegí «Añadir a pantalla de inicio» y confirmá.","Si está disponible, activá «Abrir como app web»."],"offline":"Actualizaciones y uso sin conexión","offlineText":"Conectate a Internet para recibir las actualizaciones. Es posible que necesites cerrar y volver a abrir la app. Una vez que se cargue correctamente, los horarios podrán consultarse sin conexión.","live":"Clases y recreos en tiempo real","liveText":"Al abrir el día actual, la clase activa se resalta en verde y el recreo activo en amarillo, con los minutos restantes. El indicador usa la hora local del teléfono.","privacy":"Seguridad: no se necesitan usuario ni contraseña para consultar horarios.","credits":"Autoría y condiciones","realText":"Aplicación independiente de consulta de horarios reales de 3.º A. Los demás cursos continúan pendientes de carga. No es un canal oficial del colegio.","demoText":"Demostración comercial independiente y no oficial. Todos los cursos, las materias y los horarios son ficticios. No deben interpretarse como información oficial del colegio.","copyright":"Desarrollado por Marcelo Rodriguez · MARK-TECH SOFTWARE. Todos los derechos reservados."},"en":{"usage":"How to use the app","usageText":"Choose a grade and section, tap a day to open its subjects and timetable, and scroll through lessons and breaks. Use the globe to choose a language and the moon or sun to change the theme. The share button offers WhatsApp and a QR code.","install":"Install the app","android":"Install on Android with Google Chrome","androidSteps":["Open the PWA website in Chrome.","Tap the three-dot menu (⋮).","Choose “Install app” or “Add to Home screen”.","Confirm to access the app using its home-screen icon."],"ios":"Install on iPhone with Safari","iosSteps":["Open the PWA website in Safari.","Tap Share.","Choose “Add to Home Screen” and confirm.","If offered, enable “Open as Web App”."],"offline":"Updates and offline access","offlineText":"Connect to the Internet to receive updates. You may need to close and reopen the app. Once loaded, timetables remain available offline.","live":"Live lessons and breaks","liveText":"When you open today’s timetable, the current lesson is highlighted in green and an active break in yellow, with minutes remaining. The indicator uses your phone’s local time.","privacy":"Security: no account or password is needed to view timetables.","credits":"Credits and conditions","realText":"Independent app showing confirmed timetables for 3rd year A. Other classes are not yet available. This is not an official school channel.","demoText":"Independent, unofficial commercial demo. All grades, subjects and timetables are fictional and must not be treated as official school information.","copyright":"Developed by Marcelo Rodriguez · MARK-TECH SOFTWARE. All rights reserved."},"pt":{"usage":"Como usar o aplicativo","usageText":"Escolha o ano e a turma, toque em um dia para abrir matérias e horários e deslize para ver aulas e intervalos. Use o globo para mudar o idioma e a lua ou o sol para mudar o tema. O botão de compartilhamento oferece WhatsApp e código QR.","install":"Instalar o aplicativo","android":"Instalar no Android com Google Chrome","androidSteps":["Abra o site da PWA no Chrome.","Toque no menu de três pontos (⋮).","Escolha “Instalar aplicativo” ou “Adicionar à tela inicial”.","Confirme para acessar o aplicativo pelo ícone na tela inicial."],"ios":"Instalar no iPhone com Safari","iosSteps":["Abra o site da PWA no Safari.","Toque em Compartilhar.","Escolha “Adicionar à Tela de Início” e confirme.","Se disponível, ative “Abrir como aplicativo web”."],"offline":"Atualizações e uso offline","offlineText":"Conecte-se à Internet para receber atualizações. Pode ser necessário fechar e reabrir o aplicativo. Depois de carregado, os horários ficam disponíveis offline.","live":"Aulas e intervalos em tempo real","liveText":"Ao abrir o dia atual, a aula em andamento aparece em verde e o intervalo ativo em amarelo, com os minutos restantes. O indicador usa a hora local do celular.","privacy":"Segurança: não é preciso usuário nem senha para consultar os horários.","credits":"Autoria e condições","realText":"Aplicativo independente com horários reais confirmados do 3.º A. As demais turmas ainda aguardam dados. Não é um canal oficial da escola.","demoText":"Demonstração comercial independente e não oficial. Todos os anos, matérias e horários são fictícios e não representam dados oficiais da escola.","copyright":"Desenvolvido por Marcelo Rodriguez · MARK-TECH SOFTWARE. Todos os direitos reservados."},"fr":{"usage":"Comment utiliser l’application","usageText":"Choisissez la classe et la division, touchez un jour pour voir les matières et les horaires, puis faites défiler les cours et les récréations. Le globe change la langue, la lune ou le soleil change le thème. Le partage propose WhatsApp et un QR code.","install":"Installer l’application","android":"Installation sur Android avec Google Chrome","androidSteps":["Ouvrez le site de la PWA dans Chrome.","Ouvrez le menu à trois points (⋮).","Choisissez « Installer l’application » ou « Ajouter à l’écran d’accueil ».","Confirmez pour retrouver l’icône sur l’écran d’accueil."],"ios":"Installation sur iPhone avec Safari","iosSteps":["Ouvrez le site de la PWA dans Safari.","Touchez Partager.","Choisissez « Sur l’écran d’accueil » et confirmez.","Si proposé, activez « Ouvrir comme app web »."],"offline":"Mises à jour et accès hors ligne","offlineText":"Connectez-vous à Internet pour recevoir les mises à jour. Il peut être nécessaire de fermer puis de rouvrir l’application. Les horaires chargés restent accessibles hors ligne.","live":"Cours et récréations en temps réel","liveText":"Dans le jour actuel, le cours en cours est surligné en vert et la récréation en jaune, avec les minutes restantes. L’heure locale du téléphone est utilisée.","privacy":"Sécurité : aucun compte ni mot de passe n’est nécessaire pour consulter les horaires.","credits":"Crédits et conditions","realText":"Application indépendante affichant les horaires réels confirmés de la classe de 3e A. Les autres classes sont en attente. Ce n’est pas un canal officiel de l’établissement.","demoText":"Démonstration commerciale indépendante et non officielle. Toutes les classes, matières et horaires sont fictifs et ne constituent pas des données officielles de l’établissement.","copyright":"Développé par Marcelo Rodriguez · MARK-TECH SOFTWARE. Tous droits réservés."},"de":{"usage":"So funktioniert die App","usageText":"Jahrgang und Klasse auswählen, einen Tag öffnen und durch Fächer, Unterrichtsstunden und Pausen scrollen. Mit dem Globus die Sprache und mit Mond oder Sonne das Design ändern. Über Teilen stehen WhatsApp und QR-Code bereit.","install":"App installieren","android":"Installation auf Android mit Google Chrome","androidSteps":["PWA-Webseite in Chrome öffnen.","Das Drei-Punkte-Menü (⋮) öffnen.","„App installieren“ oder „Zum Startbildschirm hinzufügen“ wählen.","Bestätigen, um die App über ihr Symbol zu öffnen."],"ios":"Installation auf dem iPhone mit Safari","iosSteps":["PWA-Webseite in Safari öffnen.","Auf „Teilen“ tippen.","„Zum Home-Bildschirm“ wählen und bestätigen.","Falls verfügbar „Als Web-App öffnen“ aktivieren."],"offline":"Updates und Offline-Nutzung","offlineText":"Für Updates mit dem Internet verbinden. Gegebenenfalls die App schließen und erneut öffnen. Geladene Stundenpläne bleiben offline verfügbar.","live":"Unterricht und Pausen in Echtzeit","liveText":"Beim Öffnen des heutigen Tages wird die aktuelle Stunde grün und eine aktive Pause gelb markiert. Die verbleibenden Minuten richten sich nach der Ortszeit des Telefons.","privacy":"Sicherheit: Zum Ansehen des Stundenplans sind kein Benutzerkonto und kein Passwort erforderlich.","credits":"Urheberschaft und Bedingungen","realText":"Unabhängige App mit bestätigten echten Stundenplänen der Klasse 3 A. Andere Klassen sind noch nicht verfügbar. Kein offizieller Schulkanal.","demoText":"Unabhängige, inoffizielle kommerzielle Demo. Alle Klassen, Fächer und Zeiten sind fiktiv und keine offiziellen Schuldaten.","copyright":"Entwickelt von Marcelo Rodriguez · MARK-TECH SOFTWARE. Alle Rechte vorbehalten."},"it":{"usage":"Come usare l’app","usageText":"Scegli anno e sezione, tocca un giorno per aprire materie e orari e scorri per vedere lezioni e intervalli. Il globo cambia la lingua, la luna o il sole cambia il tema. Il pulsante di condivisione offre WhatsApp e codice QR.","install":"Installare l’app","android":"Installazione su Android con Google Chrome","androidSteps":["Apri il sito della PWA con Chrome.","Tocca il menu con tre punti (⋮).","Seleziona «Installa app» o «Aggiungi alla schermata Home».","Conferma per aprire l’app dalla sua icona."],"ios":"Installazione su iPhone con Safari","iosSteps":["Apri il sito della PWA con Safari.","Tocca Condividi.","Seleziona «Aggiungi alla schermata Home» e conferma.","Se disponibile, attiva «Apri come app web»."],"offline":"Aggiornamenti e utilizzo offline","offlineText":"Collegati a Internet per ricevere gli aggiornamenti. Potrebbe essere necessario chiudere e riaprire l’app. Dopo il caricamento, gli orari restano disponibili offline.","live":"Lezioni e intervalli in tempo reale","liveText":"Aprendo il giorno corrente, la lezione in corso viene evidenziata in verde e un intervallo attivo in giallo, con i minuti rimanenti. Viene usata l’ora locale del telefono.","privacy":"Sicurezza: non servono account né password per consultare gli orari.","credits":"Autore e condizioni","realText":"App indipendente con orari reali confermati della classe 3ª A. Le altre classi sono in attesa dei dati. Non è un canale ufficiale della scuola.","demoText":"Demo commerciale indipendente e non ufficiale. Classi, materie e orari sono fittizi e non rappresentano informazioni ufficiali della scuola.","copyright":"Sviluppato da Marcelo Rodriguez · MARK-TECH SOFTWARE. Tutti i diritti riservati."}};
+const I18N_META={"es":["🇦🇷","Español","es-AR"],"en":["🇬🇧","English","en"],"pt":["🇧🇷","Português","pt-BR"],"fr":["🇫🇷","Français","fr"],"de":["🇩🇪","Deutsch","de"],"it":["🇮🇹","Italiano","it"]};
+let activeLang='es';
+try{const saved=localStorage.getItem(LANGUAGE_KEY);if(I18N_UI[saved])activeLang=saved;}catch(_){ }
+const originalHelpHTML=$('helpScroll').innerHTML;
+const timeJoin={'es':'a','en':'to','pt':'às','fr':'à','de':'bis','it':'alle'};
+const ordinalWord={'es':n=>`${n}.ª clase`,'en':n=>`Lesson ${n}`,'pt':n=>`${n}ª aula`,'fr':n=>`Cours ${n}`,'de':n=>`${n}. Stunde`,'it':n=>`${n}ª lezione`};
+const localeText=()=>I18N_UI[activeLang];
+const tSubject=spanish=>I18N_SUBJECTS[activeLang][spanish]||spanish;
+const escapeI18n=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const tCourse=()=>`${selectedYear} ${localeText().year} ${selectedSection}`;
+function translateSchedule(){
+ const t=localeText();
+ const heading=`📚 ${t.title} · ${SCHOOL_NAME} · ${tCourse()}`;
+ if(!S.length)return heading+'\n'+t.pending+'.';
+ const lines=S.map(([day,classes],index)=>{
+   const translated=I18N_DAYS[activeLang][index] || day;
+   return translated+': '+classes.map(([h,subject])=>h+' '+tSubject(subject)).join(' / ');
+ });
+ if(!SCHOOL_DEMO)return heading+'\n'+lines.join('\n')+'\n'+t.breaks+': 14:50 '+timeJoin[activeLang]+' 15:05, 16:05 '+timeJoin[activeLang]+' 16:20.';
+ return '📚 '+t.title+' · '+t.unofficial+' · '+SCHOOL_NAME+' · '+tCourse()+' ('+t.sampleData+')\n'+lines.join('\n')+'\n'+t.illustrative;
+}
+scheduleText=function(){return translateSchedule();};
+shareText=function(){const url=publishedUrl();return translateSchedule()+(url?'\n'+url:'');};
+
+function updateHelpLocalized(){
+ const t=localeText(),h=I18N_HELP[activeLang];
+ $('helpTitle').textContent=t.help;
+ const versionContainer=document.querySelector('#helpOverlay .help-version');
+ versionContainer.innerHTML=escapeI18n(t.version)+' · <span id="helpAppVersion">'+escapeI18n(APP_VERSION)+'</span> · '+escapeI18n(t.pwaFor);
+ if(activeLang==='es'){$('helpScroll').innerHTML=originalHelpHTML+'<section class="help-section"><h3>🌐 Idiomas</h3><p>El botón del globo permite elegir Español, English, Português, Français, Deutsch o Italiano. El idioma, el curso y el tema se conservan al volver a abrir la aplicación.</p></section>';return;}
+ const section=(title,text)=>`<section class="help-section"><h3>${escapeI18n(title)}</h3><p>${escapeI18n(text)}</p></section>`;
+ const list=(title,steps,tag)=>`<article class="install-guide"><div class="install-guide-title"><span class="install-os-tag">${tag}</span><h4>${escapeI18n(title)}</h4></div><ol>${steps.map(s=>'<li>'+escapeI18n(s)+'</li>').join('')}</ol></article>`;
+ $('helpScroll').innerHTML=`<p class="help-lead"><strong>${escapeI18n(SCHOOL_NAME)}</strong>. ${escapeI18n(SCHOOL_DEMO?h.demoText:h.realText)}</p>`+
+ section('📚 '+h.usage,h.usageText)+`<section class="help-section"><h3>📱 ${escapeI18n(h.install)}</h3></section>`+
+ list(h.android,h.androidSteps,'ANDROID')+list(h.ios,h.iosSteps,'IPHONE')+
+ section('🔄 '+h.offline,h.offlineText)+section('⏱️ '+h.live,h.liveText)+
+ `<p class="help-tip">${escapeI18n(h.privacy)}</p>`+
+ section('🛡️ '+h.credits,h.copyright);
+}
+
+function localizeBadges(){
+ const t=localeText();
+ document.querySelectorAll('.detail .live-badge').forEach(b=>{
+  const match=b.textContent.match(/(?:RECREO AHORA|EN CURSO|BREAK NOW|IN PROGRESS|INTERVALO AGORA|EM ANDAMENTO|RÉCRÉATION EN COURS|EN COURS|JETZT PAUSE|LÄUFT|INTERVALLO IN CORSO|IN CORSO)\s*·\s*(\d+)\s*(?:min restantes|min remaining|Min\. übrig|min rimanenti)/);
+  if(!match)return;
+  const span=b.closest('.recreo');
+  b.textContent=(span?t.breakNow:t.inProgress)+' · '+match[1]+' '+t.minutesRemaining;
+ });
+}
+function localizeUI(){
+ const t=localeText();
+ document.documentElement.lang=I18N_META[activeLang][2];
+ document.documentElement.setAttribute('translate','no');
+ document.querySelector('#titleMain').textContent=t.title;
+ $('courseBtn').setAttribute('aria-label',t.courseAria);
+ $('courseBtn').title=t.courseAria;
+ $('langBtn').setAttribute('aria-label',t.langAria+' · '+I18N_META[activeLang][1]);
+ $('langBtn').title=t.langAria+' · '+I18N_META[activeLang][1];
+ $('themeBtn').setAttribute('aria-label',t.themeAria+' · '+themeNames[theme]);
+ $('themeBtn').title=t.themeAria+' · '+themeNames[theme];
+ $('shareBtn').setAttribute('aria-label',t.shareAria);$('shareBtn').title=t.share;
+ $('helpBtn').setAttribute('aria-label',t.helpAria);$('helpBtn').title=t.helpAria;
+ $('headerYear').setAttribute('aria-label',t.title+' '+SCHOOL_CYCLE_YEAR);
+ const turno= $('titleSub');
+ turno.textContent=!SCHOOL_DEMO && !isLoadedCourse()?t.pending:(SCHOOL_DEMO?(selectedSection==='A'?t.morning:t.afternoon):t.afternoon);
+ $('scheduleStatus').textContent=SCHOOL_DEMO?t.demo:(isLoadedCourse()?t.fixed:t.unloaded);
+ const hint=document.querySelector('.hint span');if(hint)hint.textContent=t.hint;
+ const noticeBanner=document.querySelector('.school-ident small');
+ if(noticeBanner)noticeBanner.textContent=(SCHOOL_NAME==='Colegio del Pilar'?t.demoBannerCommercial:t.demoBanner);
+ cards.forEach((card,i)=>{
+  const name=I18N_DAYS[activeLang][i];
+  const title=card.querySelector('.day-title');if(title)title.textContent=name;
+  const today=card.querySelector('.today-label');if(today)today.textContent='· '+t.today;
+  card.querySelector('summary')?.setAttribute('aria-label',name+' · '+t.title);
+  const desc=card.querySelector('.day-desc');
+  if(desc){
+   const m=desc.textContent.match(/^(\d\d?:\d\d)\s+a\s+(\d\d?:\d\d)$/);
+   if(m)desc.textContent=m[1]+' – '+m[2];
+   else if(!SCHOOL_DEMO)desc.textContent=t.pending;
+  }
+  const pill=card.querySelector('.day-pill');
+  if(pill){const m=pill.textContent.match(/^(\d+)\s+clases$/);pill.textContent=m?m[1]+' '+t.classes:t.pending;}
+  const preview=card.querySelector('.preview-text');
+  if(preview){
+   if(preview.dataset.previewSubjects){
+    let original=[];try{original=JSON.parse(preview.dataset.previewSubjects);}catch(_){ }
+    preview.dataset.previewSubjects=JSON.stringify(original.map(tSubject));
+    preview.title=original.map(tSubject).join(' · ');
+    previewFitLabel(preview);
+   }else{preview.textContent=t.noSubjects;preview.title=t.noSubjects;}
+  }
+  card.querySelectorAll('.detail .lesson .info strong').forEach(strong=>{strong.textContent=tSubject(strong.textContent);});
+  card.querySelectorAll('.detail .lesson .info small').forEach((small,i)=>{small.textContent=ordinalWord[activeLang](i+1);});
+  card.querySelectorAll('.detail .recreo').forEach(el=>{
+   const m=el.textContent.match(/(\d\d?:\d\d)\s+a\s+(\d\d?:\d\d)/);
+   if(m)el.textContent=t.break+' · '+m[1]+' '+timeJoin[activeLang]+' '+m[2];
+  });
+  const pending=card.querySelector('.pending-notice');
+  if(pending)pending.innerHTML='<strong>'+escapeI18n(t.pending)+'</strong> · '+escapeI18n(t.pendingNotice);
+ });
+ const selectorTitle=$('selectorTitle')?.querySelector('span');if(selectorTitle)selectorTitle.textContent=t.courseSelect;
+ document.querySelectorAll('.year-chip').forEach(btn=>{btn.textContent=btn.dataset.year+' '+t.year;});
+ const selectorNotice=document.querySelector('.selector-notice');
+ if(selectorNotice)selectorNotice.textContent=SCHOOL_DEMO?t.courseNoticeDemo+' '+SCHOOL_NAME+'.':t.courseNoticeReal;
+ $('shareTitle').textContent=t.shareTitle;
+ const shareIntro=document.querySelector('#shareOverlay .share-head p');if(shareIntro)shareIntro.textContent=t.shareDescription;
+ $('nativeShare').textContent=t.share;
+ $('qrImage').alt=t.qrAria;
+ $('updateBanner').querySelector('strong').textContent=t.updateTitle;
+ $('dismissUpdate').textContent=t.later;$('applyUpdate').textContent=t.update;
+ $('updateText').textContent=pendingVersion&&pendingVersion!==APP_VERSION?t.updateDetail.replace('{version}',pendingVersion):t.updateReady;
+ $('week').setAttribute('aria-label',t.weekAria);
+ updateHelpLocalized();
+ document.querySelectorAll('#selectorOverlay .close,#shareOverlay .close,#helpOverlay .close,#languageOverlay .close').forEach(c=>c.setAttribute('aria-label',t.close));
+ document.title=t.title+' · '+SCHOOL_NAME+(SCHOOL_DEMO?' · '+t.unofficial:'')+' · '+tCourse();
+ const desc=document.querySelector('meta[name="description"]');if(desc)desc.content=t.title+' · '+SCHOOL_NAME+' · '+tCourse()+' · '+(SCHOOL_DEMO?t.illustrative:(!isLoadedCourse()?t.pending:t.fixed));
+ const navLangTitle=$('langTitle');if(navLangTitle)navLangTitle.textContent=t.langAria;
+ document.querySelectorAll('.lang-choice').forEach(btn=>{
+   const lang=btn.dataset.lang;
+   btn.innerHTML='<span>'+I18N_META[lang][0]+' '+I18N_META[lang][1]+'</span><span class="lang-mark">'+(lang===activeLang?'✓':'')+'</span>';
+   btn.setAttribute('aria-pressed',String(lang===activeLang));
+   btn.classList.toggle('active',lang===activeLang);
+ });
+ localizeBadges();
+}
+
+// Las funciones originales siguen siendo la fuente de verdad de materias, horas, cursos y tema.
+const originalApplyCourse=applyCourse;
+applyCourse=function(){originalApplyCourse();localizeUI();};
+const originalApplyTheme=applyTheme;
+applyTheme=function(){originalApplyTheme();const t=localeText();$('themeBtn').setAttribute('aria-label',t.themeAria+' · '+themeNames[theme]);$('themeBtn').title=t.themeAria+' · '+themeNames[theme];};
+const originalLiveUpdate=updateLiveSchedule;
+updateLiveSchedule=function(now){originalLiveUpdate(now);localizeBadges();};
+const originalConfigureShare=configureShare;
+configureShare=function(){originalConfigureShare();const t=localeText();$('qrNote').textContent=publishedUrl()?t.qrOnline:t.qrOffline;};
+const originalShowUpdate=showUpdateBanner;
+showUpdateBanner=function(ver){originalShowUpdate(ver);const t=localeText();$('updateText').textContent=ver&&ver!==APP_VERSION?t.updateDetail.replace('{version}',ver):t.updateReady;};
+
 const initial=getStoredView()||BASE_VIEW;
 writeCurrent(initial,true);
 applyTheme();applyCourse();syncView(initial,true);
@@ -1470,8 +1650,21 @@ $('applyUpdate').addEventListener('click',async()=>{
   }catch(_){ }
   location.reload();
 });
+
+// Navegación integrada con el botón Atrás de Android/iPhone y el historial.
+$('langBtn').addEventListener('click',()=>navigate({day:view.day,pane:'language'}));
+$('closeLanguage').addEventListener('click',goPrevious);
+$('languageOverlay').addEventListener('click',e=>{if(e.target===$('languageOverlay'))goPrevious();});
+document.querySelectorAll('.lang-choice').forEach(btn=>btn.addEventListener('click',()=>{
+  activeLang=btn.dataset.lang;
+  try{localStorage.setItem(LANGUAGE_KEY,activeLang);}catch(_){ }
+  applyCourse();
+  updateLiveSchedule();
+  goPrevious();
+}));
+
 $('nativeShare').addEventListener('click',async()=>{
-  if(navigator.share){try{await navigator.share({title:'Horario Escolar · '+courseLabelLong(),text:shareText(),url:publishedUrl()||undefined});}catch(_){}}
+  if(navigator.share){try{await navigator.share({title:localeText().title+' · '+tCourse(),text:shareText(),url:publishedUrl()||undefined});}catch(_){}}
   else{window.open($('waBtn').href,'_blank','noopener');}
 });
 if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){

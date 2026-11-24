@@ -1,8 +1,8 @@
 {
   "app": "Horario Escolar · Colegio Chesterton Pilar",
-  "version": "V1.4.42",
+  "version": "V1.4.43",
   "release_date": "2026-11-23",
-  "status": "prueba",
+  "status": "PRUEBA",
   "base_estable": "V1.4.40",
   "changes": [
     "Se elimina únicamente el escudo pequeño duplicado junto a Horario Escolar; no cambia el banner ni el ícono instalado.",
@@ -13,5 +13,7 @@
     "Se mantienen sin cambios los horarios reales, materias, previews, y preferencias almacenadas."
   ],
   "notice": "V1.4.42 DE PRUEBA; no publicar hasta aprobación del usuario.",
-  "based_on": "V1.4.40"
+  "based_on": "V1.4.40",
+  "updated": "2026-11-23",
+  "notes": "Selector de idiomas ES/EN/PT/FR/DE/IT, traducción de materias y navegación, ayuda localizada. No publicar hasta aprobación."
 }
