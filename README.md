@@ -1,11 +1,9 @@
-# Colegio Chesterton Pilar · Horario Escolar V1.4.43 DE PRUEBA
+# Colegio Chesterton Pilar · Horario Escolar V1.4.44 PRUEBA 1
 
-Base: V1.4.42. Se conservaron logotipo, íconos, cursos, materias, horarios y año lectivo.
+Base estable oficial: V1.4.43.
 
-**IDIOMAS:** Español, English, Português, Français, Deutsch e Italiano.
+Corrección exclusiva de tarjetas cuando Android/Chrome usa texto ampliado: no comprimir contenido; permitir desplazamiento vertical de los días si es necesario.
 
-**Publicación:** extraer el ZIP en la RAÍZ del repositorio GitHub Pages correspondiente, reemplazando los archivos existentes, conservando la URL del proyecto. No publicar hasta revisar la PWA en un móvil.
+Las materias, recreos, horarios, cursos, idiomas, temas, manifest e imágenes originales no fueron modificados.
 
-**Pruebas:** ver INFORME_PRUEBAS.txt.
-
-**Versión:** V1.4.43 PRUEBA.
+No publicar en GitHub hasta probar en el Motorola Edge 20 Pro y aprobar esta prueba.

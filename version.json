@@ -1,19 +1,16 @@
 {
   "app": "Horario Escolar · Colegio Chesterton Pilar",
-  "version": "V1.4.43",
-  "release_date": "2026-11-23",
+  "version": "V1.4.44",
+  "release_date": "2026-11-26",
   "status": "PRUEBA",
-  "base_estable": "V1.4.40",
+  "base_estable": "V1.4.43",
   "changes": [
-    "Se elimina únicamente el escudo pequeño duplicado junto a Horario Escolar; no cambia el banner ni el ícono instalado.",
-    "Título y año lectivo 2026 alineados a los extremos; tipografía y contraste revisados.",
-    "Lunas de Dark y Dark Blue con mayor grosor y contraste; conserva orden de temas y sol original.",
-    "Barra inferior sin repetición de curso; Turno tarde solo para 3.º A cargado.",
-    "Hoy visible junto al día; bordes dinámicos, contadores de clases y actualización al reanudar y después de medianoche.",
-    "Se mantienen sin cambios los horarios reales, materias, previews, y preferencias almacenadas."
+    "Corrección de las tarjetas de lunes a viernes en Chrome Android cuando el tamaño de letra del dispositivo es grande.",
+    "Se elimina la compresión forzada de las filas; cuando falta altura, se habilita desplazamiento vertical de los cinco días.",
+    "Se conservan sin cambios los horarios, materias, diseño general, curso, tema, selector de idiomas, QR y ayuda."
   ],
-  "notice": "V1.4.42 DE PRUEBA; no publicar hasta aprobación del usuario.",
-  "based_on": "V1.4.40",
-  "updated": "2026-11-23",
-  "notes": "Selector de idiomas ES/EN/PT/FR/DE/IT, traducción de materias y navegación, ayuda localizada. No publicar hasta aprobación."
+  "notice": "V1.4.44 PRUEBA 1. No publicar hasta validar en el Motorola Edge 20 Pro.",
+  "based_on": "V1.4.43 ESTABLE OFICIAL",
+  "updated": "2026-11-26",
+  "notes": "Ajuste responsive exclusivo; no se cambia el ciclo lectivo ni se alteran los horarios."
 }

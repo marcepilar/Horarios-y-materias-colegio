@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-title" content="Horario Escolar">
 <link rel="icon" type="image/png" href="./icon-192-v1.4.37.png">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png?v=1.4.37">
-<link rel="manifest" href="./manifest.webmanifest?v=1.4.43">
+<link rel="manifest" href="./manifest.webmanifest?v=1.4.44">
 <title>Horario Escolar · Colegio Chesterton Pilar</title>
 <style>
 :root{--bg:#0b101c;--surface:#171d2a;--surface-alt:#1e2636;--border:#313b4e;--text:#f7f9fd;--muted:#acb9cc;--accent:#78b6ff;--shade:#27354b;--shadow:0 6px 22px #0003;--selector-shadow:0 20px 60px rgba(0,0,0,.45);color-scheme:dark}
@@ -953,11 +953,29 @@ body.theme-blue .actions>.theme-btn .theme-icon svg,body.theme-dark .actions>.th
 #languageOverlay .lang-choice.active{border-color:var(--accent);background:var(--shade);color:var(--accent)}
 #languageOverlay .lang-choice .lang-mark{font-size:19px;font-weight:900;min-width:18px;text-align:right}
 
+
+/* V1.4.44 PRUEBA 1 — Tarjetas adaptables a texto grande (Android / Chrome).
+   Evita que el grid fuerce títulos, horarios y vistas previas fuera de cada tarjeta.
+   El panel se desplaza solo si no caben los cinco días, sin alterar la vista expandida. */
+.week:not(.expanded){
+  grid-template-rows:repeat(5,minmax(max-content,1fr)) !important;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-y:contain;
+  scrollbar-width:thin;
+  scrollbar-color:var(--border) transparent;
+  align-content:start;
+}
+.week:not(.expanded)>.day{min-height:0!important;}
+/* Los bloques de texto conservan su altura natural también con fuentes ampliadas. */
+.week:not(.expanded) .day-button>div:first-child{flex-shrink:1;}
+
 </style>
 </head>
 <body class="theme-blue">
 <div class="app">
- <div class="school-brand" aria-label="Colegio Chesterton Pilar"><div class="school-brand-card"><img class="school-brand-logo" src="./chesterton-banner.png?v=1.4.43" alt="Colegio Chesterton Pilar" width="2508" height="836" decoding="async"></div></div>
+ <div class="school-brand" aria-label="Colegio Chesterton Pilar"><div class="school-brand-card"><img class="school-brand-logo" src="./chesterton-banner.png?v=1.4.44" alt="Colegio Chesterton Pilar" width="2508" height="836" decoding="async"></div></div>
  <header class="header">
   <div class="header-text"><h1 id="titleMain">Horario Escolar</h1><span id="headerYear" class="header-year" aria-label="Ciclo lectivo 2026">2026</span></div>
   <div class="actions" role="group" aria-label="Controles principales">
@@ -1077,7 +1095,7 @@ const app=document.querySelector('.app');
 const cards=[...document.querySelectorAll('.week > .day')];
 const themes=['theme-blue','theme-light','theme-dark'];
 
-const APP_VERSION='V1.4.43';
+const APP_VERSION='V1.4.44';
 // Actualizar solo al publicar los horarios oficiales del siguiente ciclo lectivo.
 const SCHOOL_CYCLE_YEAR=2026;
 $('helpAppVersion').textContent=APP_VERSION;

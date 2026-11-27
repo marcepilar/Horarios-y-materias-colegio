@@ -1,16 +1,6 @@
-AUDITORÍA · Colegio Chesterton Pilar V1.4.43 DE PRUEBA
+V1.4.44 PRUEBA 1 — REVISIÓN RESPONSIVE
 
-Origen: V1.4.42. Banner, escudo, iconos, manifest y materias/horarios conservados (comparación de bytes/datos).
-Idiomas: Español, English, Português, Français, Deutsch, Italiano.
-Pruebas Chromium a 360 px: 6/6 idiomas, selector con ✓, días y materias traducidos, recreos,
-5 controles en una sola fila, sin desplazamiento horizontal.
-Indicadores clase/recreo en curso: ambos comprobados en los 6 idiomas con reloj simulado.
-Estado, curso, idioma, tema: comprobados con almacenamiento simulado dentro del navegador.
-No se verificó la actualización de service worker desde la versión ya publicada ni en un dispositivo físico.
-No se modificó ningún otro proyecto ni se publicó este paquete en GitHub.
-
-Para publicar tras aprobar en el teléfono:
-1) Extraer todos los archivos del ZIP.
-2) Reemplazar los archivos en la raíz del repositorio GitHub Pages de este colegio.
-3) Mantener el nombre del repositorio y la URL; NO subir el ZIP como un solo archivo.
-4) Confirmar la versión y el funcionamiento en móvil, y verificar la actualización de la caché.
+Causa observada: la grilla obliga a cinco tarjetas de altura fraccionaria aun cuando el texto necesita más altura. Las tarjetas ocultan contenido desbordado.
+Corrección: filas con mínimo max-content, deslizamiento vertical solo en la lista cerrada.
+El selector de idiomas, temas y horarios permanecen sin alteraciones.
+No equivale a validación en teléfono físico; no publicado.
